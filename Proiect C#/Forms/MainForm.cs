@@ -36,5 +36,15 @@ namespace Proiect_C_
             LogInForm.ShowDialog();
             this.Show();
         }
+
+        private void bgTimer_Tick(object sender, EventArgs e)
+        {
+            bgBox.Invalidate();
+        }
+
+        private void bgBox_Paint(object sender, PaintEventArgs e)
+        {
+            ImageAnimator.UpdateFrames(global::Proiect_C_.Properties.Resources.hotel);
+        }
     }
 }

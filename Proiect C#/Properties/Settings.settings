@@ -9,5 +9,17 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Server=localhost\SQLEXPRESS;Database=bookify;Trusted_Connection=True;</Value>
     </Setting>
+    <Setting Name="SmtpAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">smtp.hostinger.com</Value>
+    </Setting>
+    <Setting Name="SmtpPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">465</Value>
+    </Setting>
+    <Setting Name="Email" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">verification@zethenterprises.com</Value>
+    </Setting>
+    <Setting Name="Password" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Verificati0n!</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

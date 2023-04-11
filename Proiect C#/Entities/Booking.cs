@@ -18,5 +18,9 @@ namespace Proiect_C_.Entities
         {
             Id = Guid.NewGuid();
         }
+        public Booking(Client client):this()
+        {
+            ClientId = client.Id;
+        }
     }
 }

@@ -31,10 +31,25 @@ namespace Proiect_C_
 
         private void logInBtn_Click(object sender, EventArgs e)
         {
-            var LogInForm = new LogInForm();
+            var LogInForm = new LogInForm
+            {
+                StartPosition = FormStartPosition.CenterScreen
+            };
             this.Hide();
             LogInForm.ShowDialog();
-            this.Show();
+            if(LogInForm.DialogResult!=DialogResult.OK)
+            {
+                this.Show();
+            }
+            else
+            {
+                var personalForm = new PersonalPageForm(LogInForm);
+                personalForm.ShowDialog();
+                if (personalForm.DialogResult == DialogResult.Cancel)
+                    LogInForm.ShowDialog();
+                if (LogInForm.DialogResult == DialogResult.Cancel)
+                    this.Show();
+            }
         }
 
         private void bgTimer_Tick(object sender, EventArgs e)

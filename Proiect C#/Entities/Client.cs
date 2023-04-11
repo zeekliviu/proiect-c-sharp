@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Proiect_C_.Entities
 {
-    internal class Client
+    public class Client
     {
         public Guid Id { get; }
         public string FirstName { get; set; }
@@ -14,10 +15,21 @@ namespace Proiect_C_.Entities
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Password { get; set; }
+        public byte[] ProfilePicture { get; set; }
         
         public Client()
         {
             Id = Guid.NewGuid();
+        }
+        public Client(string firstName, string lastName, byte[] photo, string email, string phone, string password): this()
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            ProfilePicture = new byte[photo.Length];
+            System.Array.Copy(photo, ProfilePicture, photo.Length);
+            Email = email;
+            Phone = phone;
+            Password = password;
         }
 
     }

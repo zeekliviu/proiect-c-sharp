@@ -1,4 +1,7 @@
 ﻿using Proiect_C_.Properties;
+using System.Drawing.Drawing2D;
+using System.Drawing;
+using Proiect_C_.Custom_Controls;
 
 namespace Proiect_C_.Forms
 {
@@ -30,43 +33,41 @@ namespace Proiect_C_.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.Icon = Resources.icon;
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.nameLabel = new System.Windows.Forms.Label();
-            this.nameTxtBox = new System.Windows.Forms.TextBox();
+            this.components = new System.ComponentModel.Container();
+            this.emailLabel = new System.Windows.Forms.Label();
+            this.emailTxtBox = new System.Windows.Forms.TextBox();
             this.passwordLabel = new System.Windows.Forms.Label();
             this.pwdTxtBox = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.logoBox = new System.Windows.Forms.PictureBox();
+            this.welcomeLabel = new System.Windows.Forms.Label();
+            this.logInBtn = new Proiect_C_.Custom_Controls.CustomButton();
+            this.backBtn = new Proiect_C_.Custom_Controls.CustomButton();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // emailLabel
             // 
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 23);
-            this.label1.TabIndex = 0;
+            this.emailLabel.AutoSize = true;
+            this.emailLabel.Location = new System.Drawing.Point(60, 214);
+            this.emailLabel.Name = "emailLabel";
+            this.emailLabel.Size = new System.Drawing.Size(32, 13);
+            this.emailLabel.TabIndex = 1;
+            this.emailLabel.Text = "Email";
             // 
-            // nameLabel
+            // emailTxtBox
             // 
-            this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(39, 214);
-            this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(35, 13);
-            this.nameLabel.TabIndex = 1;
-            this.nameLabel.Text = "Name";
-            // 
-            // nameTxtBox
-            // 
-            this.nameTxtBox.Location = new System.Drawing.Point(106, 211);
-            this.nameTxtBox.Name = "nameTxtBox";
-            this.nameTxtBox.Size = new System.Drawing.Size(278, 20);
-            this.nameTxtBox.TabIndex = 2;
+            this.emailTxtBox.Location = new System.Drawing.Point(106, 211);
+            this.emailTxtBox.Name = "emailTxtBox";
+            this.emailTxtBox.Size = new System.Drawing.Size(278, 20);
+            this.emailTxtBox.TabIndex = 2;
+            this.emailTxtBox.Validating += new System.ComponentModel.CancelEventHandler(this.emailTxtBox_Validating);
             // 
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(39, 279);
+            this.passwordLabel.Location = new System.Drawing.Point(39, 249);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(53, 13);
             this.passwordLabel.TabIndex = 3;
@@ -74,40 +75,107 @@ namespace Proiect_C_.Forms
             // 
             // pwdTxtBox
             // 
-            this.pwdTxtBox.Location = new System.Drawing.Point(106, 276);
+            this.pwdTxtBox.Location = new System.Drawing.Point(106, 246);
             this.pwdTxtBox.Name = "pwdTxtBox";
             this.pwdTxtBox.PasswordChar = '*';
             this.pwdTxtBox.Size = new System.Drawing.Size(278, 20);
             this.pwdTxtBox.TabIndex = 4;
+            // 
+            // logoBox
+            // 
+            this.logoBox.Image = global::Proiect_C_.Properties.Resources.logo1;
+            this.logoBox.Location = new System.Drawing.Point(152, 12);
+            this.logoBox.Name = "logoBox";
+            this.logoBox.Size = new System.Drawing.Size(151, 150);
+            this.logoBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.logoBox.TabIndex = 5;
+            this.logoBox.TabStop = false;
+            // 
+            // welcomeLabel
+            // 
+            this.welcomeLabel.AutoSize = true;
+            this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.welcomeLabel.Location = new System.Drawing.Point(110, 165);
+            this.welcomeLabel.Name = "welcomeLabel";
+            this.welcomeLabel.Size = new System.Drawing.Size(249, 37);
+            this.welcomeLabel.TabIndex = 6;
+            this.welcomeLabel.Text = "Welcome back!";
+            // 
+            // logInBtn
+            // 
+            this.logInBtn.BackColor = System.Drawing.Color.DodgerBlue;
+            this.logInBtn.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.logInBtn.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.logInBtn.BorderRadius = 20;
+            this.logInBtn.BorderSize = 0;
+            this.logInBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logInBtn.ForeColor = System.Drawing.Color.White;
+            this.logInBtn.Location = new System.Drawing.Point(273, 296);
+            this.logInBtn.Name = "logInBtn";
+            this.logInBtn.Size = new System.Drawing.Size(111, 32);
+            this.logInBtn.TabIndex = 7;
+            this.logInBtn.Text = "Log In";
+            this.logInBtn.TextColor = System.Drawing.Color.White;
+            this.logInBtn.UseVisualStyleBackColor = false;
+            this.logInBtn.Click += new System.EventHandler(this.logInBtn_Click);
+            // 
+            // backBtn
+            // 
+            this.backBtn.BackColor = System.Drawing.Color.DodgerBlue;
+            this.backBtn.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.backBtn.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.backBtn.BorderRadius = 20;
+            this.backBtn.BorderSize = 0;
+            this.backBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backBtn.ForeColor = System.Drawing.Color.White;
+            this.backBtn.Location = new System.Drawing.Point(42, 296);
+            this.backBtn.Name = "backBtn";
+            this.backBtn.Size = new System.Drawing.Size(111, 32);
+            this.backBtn.TabIndex = 8;
+            this.backBtn.Text = "Back";
+            this.backBtn.TextColor = System.Drawing.Color.White;
+            this.backBtn.UseVisualStyleBackColor = false;
+            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // LogInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(447, 349);
+            this.ControlBox = false;
+            this.Controls.Add(this.backBtn);
+            this.Controls.Add(this.logInBtn);
+            this.Controls.Add(this.welcomeLabel);
+            this.Controls.Add(this.logoBox);
             this.Controls.Add(this.pwdTxtBox);
             this.Controls.Add(this.passwordLabel);
-            this.Controls.Add(this.nameTxtBox);
-            this.Controls.Add(this.nameLabel);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.emailTxtBox);
+            this.Controls.Add(this.emailLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = global::Proiect_C_.Properties.Resources.icon;
             this.MaximizeBox = false;
             this.Name = "LogInForm";
-            this.Text = "LogInForm";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Text = "Log In";
+            ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label nameLabel;
-        private System.Windows.Forms.TextBox nameTxtBox;
+        private System.Windows.Forms.Label emailLabel;
+        private System.Windows.Forms.TextBox emailTxtBox;
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.TextBox pwdTxtBox;
+        private System.Windows.Forms.PictureBox logoBox;
+        private System.Windows.Forms.Label welcomeLabel;
+        private CustomButton logInBtn;
+        private CustomButton backBtn;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

@@ -1,4 +1,5 @@
-﻿using Proiect_C_.Properties;
+﻿using Proiect_C_.Custom_Controls;
+using Proiect_C_.Properties;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -49,12 +50,17 @@ namespace Proiect_C_.Forms
             this.lastNameTxtBox = new System.Windows.Forms.TextBox();
             this.phoneTxtBox = new System.Windows.Forms.TextBox();
             this.logoBox = new System.Windows.Forms.PictureBox();
-            this.submitBtn = new System.Windows.Forms.Button();
-            this.backBtn = new System.Windows.Forms.Button();
+            this.submitBtn = new Proiect_C_.Custom_Controls.CustomButton();
+            this.backBtn = new Proiect_C_.Custom_Controls.CustomButton();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.showPwdChkBox = new System.Windows.Forms.CheckBox();
+            this.photoLabel = new System.Windows.Forms.Label();
+            this.openImage = new System.Windows.Forms.OpenFileDialog();
+            this.selectImageBtn = new System.Windows.Forms.Button();
+            this.imageBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBox)).BeginInit();
             this.SuspendLayout();
             // 
             // welcomeLabel
@@ -62,7 +68,7 @@ namespace Proiect_C_.Forms
             this.welcomeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.welcomeLabel.BackColor = System.Drawing.Color.Transparent;
             this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.welcomeLabel.Location = new System.Drawing.Point(40, 9);
+            this.welcomeLabel.Location = new System.Drawing.Point(40, 19);
             this.welcomeLabel.Name = "welcomeLabel";
             this.welcomeLabel.Size = new System.Drawing.Size(176, 56);
             this.welcomeLabel.TabIndex = 0;
@@ -189,30 +195,43 @@ namespace Proiect_C_.Forms
             this.logoBox.Name = "logoBox";
             this.logoBox.Size = new System.Drawing.Size(100, 75);
             this.logoBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            GraphicsPath path = new GraphicsPath();
-            path.AddEllipse(0, 0, logoBox.Width, logoBox.Height);
-            logoBox.Region = new Region(path);
             this.logoBox.TabIndex = 14;
             this.logoBox.TabStop = false;
             // 
             // submitBtn
             // 
+            this.submitBtn.BackColor = System.Drawing.Color.DodgerBlue;
+            this.submitBtn.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.submitBtn.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.submitBtn.BorderRadius = 20;
+            this.submitBtn.BorderSize = 0;
+            this.submitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.submitBtn.ForeColor = System.Drawing.Color.White;
             this.submitBtn.Location = new System.Drawing.Point(324, 206);
             this.submitBtn.Name = "submitBtn";
             this.submitBtn.Size = new System.Drawing.Size(58, 96);
             this.submitBtn.TabIndex = 15;
             this.submitBtn.Text = "Submit";
-            this.submitBtn.UseVisualStyleBackColor = true;
+            this.submitBtn.TextColor = System.Drawing.Color.White;
+            this.submitBtn.UseVisualStyleBackColor = false;
             this.submitBtn.Click += new System.EventHandler(this.submitBtn_Click);
             // 
             // backBtn
             // 
+            this.backBtn.BackColor = System.Drawing.Color.DodgerBlue;
+            this.backBtn.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.backBtn.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.backBtn.BorderRadius = 20;
+            this.backBtn.BorderSize = 0;
+            this.backBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backBtn.ForeColor = System.Drawing.Color.White;
             this.backBtn.Location = new System.Drawing.Point(324, 105);
             this.backBtn.Name = "backBtn";
             this.backBtn.Size = new System.Drawing.Size(58, 96);
             this.backBtn.TabIndex = 16;
             this.backBtn.Text = "Back";
-            this.backBtn.UseVisualStyleBackColor = true;
+            this.backBtn.TextColor = System.Drawing.Color.White;
+            this.backBtn.UseVisualStyleBackColor = false;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
             // errorProvider
@@ -230,11 +249,47 @@ namespace Proiect_C_.Forms
             this.showPwdChkBox.UseVisualStyleBackColor = true;
             this.showPwdChkBox.CheckedChanged += new System.EventHandler(this.showPwdChkBox_CheckedChanged);
             // 
+            // photoLabel
+            // 
+            this.photoLabel.AutoSize = true;
+            this.photoLabel.Location = new System.Drawing.Point(20, 308);
+            this.photoLabel.Name = "photoLabel";
+            this.photoLabel.Size = new System.Drawing.Size(84, 13);
+            this.photoLabel.TabIndex = 18;
+            this.photoLabel.Text = "Photo (optional):";
+            // 
+            // openImage
+            // 
+            this.openImage.FileName = "openFileDialog1";
+            // 
+            // selectImageBtn
+            // 
+            this.selectImageBtn.Location = new System.Drawing.Point(110, 303);
+            this.selectImageBtn.Name = "selectImageBtn";
+            this.selectImageBtn.Size = new System.Drawing.Size(75, 23);
+            this.selectImageBtn.TabIndex = 19;
+            this.selectImageBtn.Text = "Upload...";
+            this.selectImageBtn.UseVisualStyleBackColor = true;
+            this.selectImageBtn.Click += new System.EventHandler(this.selectImageBtn_Click);
+            // 
+            // imageBox
+            // 
+            this.imageBox.Image = global::Proiect_C_.Properties.Resources.default_avatar;
+            this.imageBox.Location = new System.Drawing.Point(4, 78);
+            this.imageBox.Name = "imageBox";
+            this.imageBox.Size = new System.Drawing.Size(100, 50);
+            this.imageBox.TabIndex = 20;
+            this.imageBox.TabStop = false;
+            this.imageBox.Visible = false;
+            // 
             // SignUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 325);
+            this.ClientSize = new System.Drawing.Size(383, 345);
+            this.Controls.Add(this.imageBox);
+            this.Controls.Add(this.selectImageBtn);
+            this.Controls.Add(this.photoLabel);
             this.Controls.Add(this.showPwdChkBox);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.submitBtn);
@@ -260,6 +315,7 @@ namespace Proiect_C_.Forms
             this.Text = "Join us!";
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -282,9 +338,13 @@ namespace Proiect_C_.Forms
         private System.Windows.Forms.TextBox lastNameTxtBox;
         private System.Windows.Forms.TextBox phoneTxtBox;
         private System.Windows.Forms.PictureBox logoBox;
-        private System.Windows.Forms.Button submitBtn;
-        private System.Windows.Forms.Button backBtn;
+        private CustomButton submitBtn;
+        private CustomButton backBtn;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.CheckBox showPwdChkBox;
+        private System.Windows.Forms.Button selectImageBtn;
+        private System.Windows.Forms.Label photoLabel;
+        private System.Windows.Forms.OpenFileDialog openImage;
+        private System.Windows.Forms.PictureBox imageBox;
     }
 }

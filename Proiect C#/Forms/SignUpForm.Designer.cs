@@ -41,7 +41,7 @@ namespace Proiect_C_.Forms
             this.FirstPwdLabel = new System.Windows.Forms.Label();
             this.EmailLabel = new System.Windows.Forms.Label();
             this.LastNameLabel = new System.Windows.Forms.Label();
-            this.NameLabel = new System.Windows.Forms.Label();
+            this.RetypePwdLabel = new System.Windows.Forms.Label();
             this.PhoneLabel = new System.Windows.Forms.Label();
             this.emailTxtBox = new System.Windows.Forms.TextBox();
             this.firstPwdTxtBox = new System.Windows.Forms.TextBox();
@@ -58,82 +58,99 @@ namespace Proiect_C_.Forms
             this.openImage = new System.Windows.Forms.OpenFileDialog();
             this.selectImageBtn = new System.Windows.Forms.Button();
             this.imageBox = new System.Windows.Forms.PictureBox();
+            this.bgBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bgBox)).BeginInit();
             this.SuspendLayout();
             // 
             // welcomeLabel
             // 
             this.welcomeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.welcomeLabel.BackColor = System.Drawing.Color.Transparent;
-            this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.welcomeLabel.Font = new System.Drawing.Font("Impact", 26.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.welcomeLabel.ForeColor = System.Drawing.Color.Lime;
             this.welcomeLabel.Location = new System.Drawing.Point(40, 19);
             this.welcomeLabel.Name = "welcomeLabel";
-            this.welcomeLabel.Size = new System.Drawing.Size(176, 56);
+            this.welcomeLabel.Size = new System.Drawing.Size(189, 56);
             this.welcomeLabel.TabIndex = 0;
             this.welcomeLabel.Text = "Welcome!";
             // 
             // reqLabel
             // 
             this.reqLabel.AutoSize = true;
-            this.reqLabel.Location = new System.Drawing.Point(43, 52);
+            this.reqLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reqLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.reqLabel.Location = new System.Drawing.Point(20, 75);
             this.reqLabel.Name = "reqLabel";
-            this.reqLabel.Size = new System.Drawing.Size(186, 13);
+            this.reqLabel.Size = new System.Drawing.Size(228, 13);
             this.reqLabel.TabIndex = 1;
             this.reqLabel.Text = "Please fill in the following informations:";
             // 
             // FirstNameLabel
             // 
             this.FirstNameLabel.AutoSize = true;
-            this.FirstNameLabel.Location = new System.Drawing.Point(44, 211);
+            this.FirstNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FirstNameLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.FirstNameLabel.Location = new System.Drawing.Point(36, 211);
             this.FirstNameLabel.Name = "FirstNameLabel";
-            this.FirstNameLabel.Size = new System.Drawing.Size(60, 13);
+            this.FirstNameLabel.Size = new System.Drawing.Size(71, 13);
             this.FirstNameLabel.TabIndex = 2;
             this.FirstNameLabel.Text = "First Name:";
             // 
             // FirstPwdLabel
             // 
             this.FirstPwdLabel.AutoSize = true;
-            this.FirstPwdLabel.Location = new System.Drawing.Point(48, 142);
+            this.FirstPwdLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FirstPwdLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.FirstPwdLabel.Location = new System.Drawing.Point(39, 142);
             this.FirstPwdLabel.Name = "FirstPwdLabel";
-            this.FirstPwdLabel.Size = new System.Drawing.Size(56, 13);
+            this.FirstPwdLabel.Size = new System.Drawing.Size(65, 13);
             this.FirstPwdLabel.TabIndex = 3;
             this.FirstPwdLabel.Text = "Password:";
             // 
             // EmailLabel
             // 
             this.EmailLabel.AutoSize = true;
-            this.EmailLabel.Location = new System.Drawing.Point(69, 108);
+            this.EmailLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmailLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.EmailLabel.Location = new System.Drawing.Point(63, 108);
             this.EmailLabel.Name = "EmailLabel";
-            this.EmailLabel.Size = new System.Drawing.Size(35, 13);
+            this.EmailLabel.Size = new System.Drawing.Size(41, 13);
             this.EmailLabel.TabIndex = 4;
             this.EmailLabel.Text = "Email:";
             // 
             // LastNameLabel
             // 
             this.LastNameLabel.AutoSize = true;
-            this.LastNameLabel.Location = new System.Drawing.Point(43, 248);
+            this.LastNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LastNameLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.LastNameLabel.Location = new System.Drawing.Point(36, 248);
             this.LastNameLabel.Name = "LastNameLabel";
-            this.LastNameLabel.Size = new System.Drawing.Size(61, 13);
+            this.LastNameLabel.Size = new System.Drawing.Size(71, 13);
             this.LastNameLabel.TabIndex = 5;
             this.LastNameLabel.Text = "Last Name:";
             // 
-            // NameLabel
+            // RetypePwdLabel
             // 
-            this.NameLabel.AutoSize = true;
-            this.NameLabel.Location = new System.Drawing.Point(8, 177);
-            this.NameLabel.Name = "NameLabel";
-            this.NameLabel.Size = new System.Drawing.Size(96, 13);
-            this.NameLabel.TabIndex = 6;
-            this.NameLabel.Text = "Re-type Password:";
+            this.RetypePwdLabel.AutoSize = true;
+            this.RetypePwdLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RetypePwdLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.RetypePwdLabel.Location = new System.Drawing.Point(-1, 177);
+            this.RetypePwdLabel.Name = "RetypePwdLabel";
+            this.RetypePwdLabel.Size = new System.Drawing.Size(113, 13);
+            this.RetypePwdLabel.TabIndex = 6;
+            this.RetypePwdLabel.Text = "Re-type Password:";
             // 
             // PhoneLabel
             // 
             this.PhoneLabel.AutoSize = true;
-            this.PhoneLabel.Location = new System.Drawing.Point(63, 282);
+            this.PhoneLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PhoneLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.PhoneLabel.Location = new System.Drawing.Point(57, 282);
             this.PhoneLabel.Name = "PhoneLabel";
-            this.PhoneLabel.Size = new System.Drawing.Size(41, 13);
+            this.PhoneLabel.Size = new System.Drawing.Size(47, 13);
             this.PhoneLabel.TabIndex = 7;
             this.PhoneLabel.Text = "Phone:";
             // 
@@ -241,9 +258,11 @@ namespace Proiect_C_.Forms
             // showPwdChkBox
             // 
             this.showPwdChkBox.AutoSize = true;
+            this.showPwdChkBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showPwdChkBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.showPwdChkBox.Location = new System.Drawing.Point(2, 158);
             this.showPwdChkBox.Name = "showPwdChkBox";
-            this.showPwdChkBox.Size = new System.Drawing.Size(102, 17);
+            this.showPwdChkBox.Size = new System.Drawing.Size(105, 16);
             this.showPwdChkBox.TabIndex = 17;
             this.showPwdChkBox.Text = "Show Password";
             this.showPwdChkBox.UseVisualStyleBackColor = true;
@@ -252,9 +271,11 @@ namespace Proiect_C_.Forms
             // photoLabel
             // 
             this.photoLabel.AutoSize = true;
-            this.photoLabel.Location = new System.Drawing.Point(20, 308);
+            this.photoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.photoLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.photoLabel.Location = new System.Drawing.Point(12, 308);
             this.photoLabel.Name = "photoLabel";
-            this.photoLabel.Size = new System.Drawing.Size(84, 13);
+            this.photoLabel.Size = new System.Drawing.Size(101, 13);
             this.photoLabel.TabIndex = 18;
             this.photoLabel.Text = "Photo (optional):";
             // 
@@ -275,18 +296,31 @@ namespace Proiect_C_.Forms
             // imageBox
             // 
             this.imageBox.Image = global::Proiect_C_.Properties.Resources.default_avatar;
-            this.imageBox.Location = new System.Drawing.Point(4, 78);
+            this.imageBox.Location = new System.Drawing.Point(254, 308);
             this.imageBox.Name = "imageBox";
-            this.imageBox.Size = new System.Drawing.Size(100, 50);
+            this.imageBox.Size = new System.Drawing.Size(79, 37);
             this.imageBox.TabIndex = 20;
             this.imageBox.TabStop = false;
             this.imageBox.Visible = false;
+            // 
+            // bgBox
+            // 
+            this.bgBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bgBox.Image = global::Proiect_C_.Properties.Resources.sign_up;
+            this.bgBox.Location = new System.Drawing.Point(0, 0);
+            this.bgBox.Name = "bgBox";
+            this.bgBox.Size = new System.Drawing.Size(383, 345);
+            this.bgBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.bgBox.TabIndex = 21;
+            this.bgBox.TabStop = false;
             // 
             // SignUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(383, 345);
+            this.ControlBox = false;
+            this.Controls.Add(this.reqLabel);
             this.Controls.Add(this.imageBox);
             this.Controls.Add(this.selectImageBtn);
             this.Controls.Add(this.photoLabel);
@@ -301,21 +335,23 @@ namespace Proiect_C_.Forms
             this.Controls.Add(this.firstPwdTxtBox);
             this.Controls.Add(this.emailTxtBox);
             this.Controls.Add(this.PhoneLabel);
-            this.Controls.Add(this.NameLabel);
+            this.Controls.Add(this.RetypePwdLabel);
             this.Controls.Add(this.LastNameLabel);
             this.Controls.Add(this.EmailLabel);
             this.Controls.Add(this.FirstPwdLabel);
             this.Controls.Add(this.FirstNameLabel);
-            this.Controls.Add(this.reqLabel);
             this.Controls.Add(this.welcomeLabel);
+            this.Controls.Add(this.bgBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "SignUpForm";
             this.Text = "Join us!";
+            this.Load += new System.EventHandler(this.SignUpForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bgBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -329,7 +365,7 @@ namespace Proiect_C_.Forms
         private System.Windows.Forms.Label FirstPwdLabel;
         private System.Windows.Forms.Label EmailLabel;
         private System.Windows.Forms.Label LastNameLabel;
-        private System.Windows.Forms.Label NameLabel;
+        private System.Windows.Forms.Label RetypePwdLabel;
         private System.Windows.Forms.Label PhoneLabel;
         private System.Windows.Forms.TextBox emailTxtBox;
         private System.Windows.Forms.TextBox firstPwdTxtBox;
@@ -346,5 +382,6 @@ namespace Proiect_C_.Forms
         private System.Windows.Forms.Label photoLabel;
         private System.Windows.Forms.OpenFileDialog openImage;
         private System.Windows.Forms.PictureBox imageBox;
+        private System.Windows.Forms.PictureBox bgBox;
     }
 }

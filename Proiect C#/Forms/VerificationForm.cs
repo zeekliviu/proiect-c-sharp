@@ -37,5 +37,11 @@ namespace Proiect_C_.Forms
                 MessageBox.Show("Wrong code!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
+
+        private void VerificationForm_Load(object sender, EventArgs e)
+        {
+            this.verifyLabel.Parent = this.bgBox;
+            this.verifyLabel.BackColor = Color.Transparent;
+        }
     }
 }

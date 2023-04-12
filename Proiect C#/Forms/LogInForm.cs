@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -21,6 +22,9 @@ namespace Proiect_C_.Forms
         public LogInForm()
         {
             InitializeComponent();
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(0, 0, logoBox.Width, logoBox.Height);
+            logoBox.Region = new Region(path);
         }
 
         private void emailTxtBox_Validating(object sender, CancelEventArgs e)
@@ -104,6 +108,16 @@ namespace Proiect_C_.Forms
         {
             this.errorProvider.Clear();
             this.Close();
+        }
+
+        private void LogInForm_Load(object sender, EventArgs e)
+        {
+            this.welcomeLabel.Parent = this.bgBox;
+            this.emailLabel.Parent = this.bgBox;
+            this.passwordLabel.Parent = this.bgBox;
+            this.welcomeLabel.BackColor = Color.Transparent;
+            this.emailLabel.BackColor = Color.Transparent;
+            this.passwordLabel.BackColor = Color.Transparent;
         }
     }
 }

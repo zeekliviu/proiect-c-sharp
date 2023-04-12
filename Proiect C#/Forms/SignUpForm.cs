@@ -9,6 +9,7 @@ using MailKit.Net.Smtp;
 using System.Drawing;
 using System.Data;
 using System.IO;
+using System.Drawing.Drawing2D;
 
 namespace Proiect_C_.Forms
 {
@@ -17,6 +18,9 @@ namespace Proiect_C_.Forms
         public SignUpForm()
         {
             InitializeComponent();
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(0, 0, logoBox.Width, logoBox.Height);
+            logoBox.Region = new Region(path);
         }
 
         private void backBtn_Click(object sender, EventArgs e)
@@ -332,6 +336,30 @@ namespace Proiect_C_.Forms
                 var img = Image.FromFile(image_path);
                 this.imageBox.Image = img;
             }
+        }
+
+        private void SignUpForm_Load(object sender, EventArgs e)
+        {
+            welcomeLabel.Parent = bgBox;
+            reqLabel.Parent = bgBox;
+            FirstNameLabel.Parent = bgBox;
+            LastNameLabel.Parent = bgBox;
+            EmailLabel.Parent = bgBox;
+            FirstPwdLabel.Parent = bgBox;
+            RetypePwdLabel.Parent = bgBox;
+            PhoneLabel.Parent = bgBox;
+            photoLabel.Parent = bgBox;
+            showPwdChkBox.Parent = bgBox;
+            welcomeLabel.BackColor = Color.Transparent;
+            reqLabel.BackColor = Color.Transparent;
+            FirstNameLabel.BackColor = Color.Transparent;
+            LastNameLabel.BackColor = Color.Transparent;
+            EmailLabel.BackColor = Color.Transparent;
+            FirstPwdLabel.BackColor = Color.Transparent;
+            RetypePwdLabel.BackColor = Color.Transparent;
+            PhoneLabel.BackColor = Color.Transparent;
+            photoLabel.BackColor = Color.Transparent;
+            showPwdChkBox.BackColor = Color.Transparent;
         }
     }
 }

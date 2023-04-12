@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,9 @@ namespace Proiect_C_
         public MainForm()
         {
             InitializeComponent();
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(0, 0, logoBox.Width, logoBox.Height);
+            logoBox.Region = new Region(path);
         }
 
         private void signUpBtn_Click(object sender, EventArgs e)

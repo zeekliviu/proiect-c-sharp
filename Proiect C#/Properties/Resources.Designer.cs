@@ -91,6 +91,16 @@ namespace Proiect_C_.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] final {
+            get {
+                object obj = ResourceManager.GetObject("final", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap hotel {
@@ -113,6 +123,16 @@ namespace Proiect_C_.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap log_in {
+            get {
+                object obj = ResourceManager.GetObject("log_in", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap log_out {
             get {
                 object obj = ResourceManager.GetObject("log_out", resourceCulture);
@@ -126,6 +146,26 @@ namespace Proiect_C_.Properties {
         internal static System.Drawing.Bitmap logo1 {
             get {
                 object obj = ResourceManager.GetObject("logo1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sign_up {
+            get {
+                object obj = ResourceManager.GetObject("sign_up", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap verify {
+            get {
+                object obj = ResourceManager.GetObject("verify", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

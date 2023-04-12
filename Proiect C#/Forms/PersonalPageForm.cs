@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,17 +23,6 @@ namespace Proiect_C_.Forms
             if (lf.Client.ProfilePicture != null)
             {
                 using (var ms = new System.IO.MemoryStream(lf.Client.ProfilePicture))
-                {
-                    photoBox.Image = Image.FromStream(ms);
-                }
-            }
-        }
-        public PersonalPageForm(string FirstName, string LastName, byte[] Photo): this()
-        {
-            welcomeLabel.Text = "Welcome, " + FirstName + " " + LastName + "!";
-            if (Photo != null)
-            {
-                using (var ms = new System.IO.MemoryStream(Photo))
                 {
                     photoBox.Image = Image.FromStream(ms);
                 }

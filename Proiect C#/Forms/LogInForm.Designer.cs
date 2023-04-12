@@ -43,16 +43,20 @@ namespace Proiect_C_.Forms
             this.logInBtn = new Proiect_C_.Custom_Controls.CustomButton();
             this.backBtn = new Proiect_C_.Custom_Controls.CustomButton();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.bgBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bgBox)).BeginInit();
             this.SuspendLayout();
             // 
             // emailLabel
             // 
             this.emailLabel.AutoSize = true;
-            this.emailLabel.Location = new System.Drawing.Point(60, 214);
+            this.emailLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emailLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.emailLabel.Location = new System.Drawing.Point(46, 212);
             this.emailLabel.Name = "emailLabel";
-            this.emailLabel.Size = new System.Drawing.Size(32, 13);
+            this.emailLabel.Size = new System.Drawing.Size(46, 16);
             this.emailLabel.TabIndex = 1;
             this.emailLabel.Text = "Email";
             // 
@@ -67,9 +71,11 @@ namespace Proiect_C_.Forms
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(39, 249);
+            this.passwordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.passwordLabel.Location = new System.Drawing.Point(25, 247);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(53, 13);
+            this.passwordLabel.Size = new System.Drawing.Size(75, 16);
             this.passwordLabel.TabIndex = 3;
             this.passwordLabel.Text = "Password";
             // 
@@ -94,10 +100,12 @@ namespace Proiect_C_.Forms
             // welcomeLabel
             // 
             this.welcomeLabel.AutoSize = true;
-            this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.welcomeLabel.Location = new System.Drawing.Point(110, 165);
+            this.welcomeLabel.Font = new System.Drawing.Font("Impact", 24F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
+                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.welcomeLabel.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.welcomeLabel.Location = new System.Drawing.Point(125, 165);
             this.welcomeLabel.Name = "welcomeLabel";
-            this.welcomeLabel.Size = new System.Drawing.Size(249, 37);
+            this.welcomeLabel.Size = new System.Drawing.Size(232, 39);
             this.welcomeLabel.TabIndex = 6;
             this.welcomeLabel.Text = "Welcome back!";
             // 
@@ -141,6 +149,17 @@ namespace Proiect_C_.Forms
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // bgBox
+            // 
+            this.bgBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bgBox.Image = global::Proiect_C_.Properties.Resources.log_in;
+            this.bgBox.Location = new System.Drawing.Point(0, 0);
+            this.bgBox.Name = "bgBox";
+            this.bgBox.Size = new System.Drawing.Size(447, 349);
+            this.bgBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.bgBox.TabIndex = 9;
+            this.bgBox.TabStop = false;
+            // 
             // LogInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -155,13 +174,16 @@ namespace Proiect_C_.Forms
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.emailTxtBox);
             this.Controls.Add(this.emailLabel);
+            this.Controls.Add(this.bgBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = global::Proiect_C_.Properties.Resources.icon;
             this.MaximizeBox = false;
             this.Name = "LogInForm";
             this.Text = "Log In";
+            this.Load += new System.EventHandler(this.LogInForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bgBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,5 +199,6 @@ namespace Proiect_C_.Forms
         private CustomButton logInBtn;
         private CustomButton backBtn;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.PictureBox bgBox;
     }
 }

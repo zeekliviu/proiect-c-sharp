@@ -17,7 +17,7 @@ namespace Proiect_C_.Custom_Controls
         private int borderRadius = 20;
         private Color borderColor = Color.PaleVioletRed;
         //Properties
-        [Category("RJ Code Advance")]
+        [Category("Custom Settings")]
         public int BorderSize
         {
             get { return borderSize; }
@@ -28,7 +28,7 @@ namespace Proiect_C_.Custom_Controls
             }
         }
 
-        [Category("RJ Code Advance")]
+        [Category("Custom Settings")]
         public int BorderRadius
         {
             get { return borderRadius; }
@@ -39,7 +39,7 @@ namespace Proiect_C_.Custom_Controls
             }
         }
 
-        [Category("RJ Code Advance")]
+        [Category("Custom Settings")]
         public Color BorderColor
         {
             get { return borderColor; }
@@ -49,14 +49,14 @@ namespace Proiect_C_.Custom_Controls
                 this.Invalidate();
             }
         }
-        [Category("RJ Code Advance")]
+        [Category("Custom Settings")]
         public Color BackgroundColor
         {
             get { return this.BackColor; }
             set { this.BackColor = value; }
         }
 
-        [Category("RJ Code Advance")]
+        [Category("Custom Settings")]
         public Color TextColor
         {
             get { return this.ForeColor; }

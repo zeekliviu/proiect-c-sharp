@@ -279,7 +279,7 @@ namespace Proiect_C_.Forms
                         if (result == DialogResult.OK)
                         {
                             // if the email doesn't exist, then add it to the database
-                            query = "INSERT INTO Users (Email, Password, FirstName, LastName, Phone, Photo) VALUES (@Email, @Password, @FirstName, @LastName, @Phone, @Photo)";
+                            query = "INSERT INTO Users (Email, Password, FirstName, LastName, Phone, Photo, ID) VALUES (@Email, @Password, @FirstName, @LastName, @Phone, @Photo, NEXT VALUE FOR MySeq)";
                             using (SqlCommand command = new SqlCommand(query, connection))
                             {
                                 command.Parameters.AddWithValue("@Email", emailTxtBox.Text);

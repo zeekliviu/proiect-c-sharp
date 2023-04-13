@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_C_.Entities
 {
-    internal class Room
+    public class Room
     {
         public Guid Id { get; set; }
         public int Number { get; set; }
@@ -17,6 +17,14 @@ namespace Proiect_C_.Entities
         public Room()
         {
             Id = Guid.NewGuid();
+        }
+        public Room(int number, RoomType type, decimal pricePerNight, int floor, bool hasBalcony):this()
+        {
+            Number = number;
+            Type = type;
+            PricePerNight = pricePerNight;
+            Floor = floor;
+            HasBalcony = hasBalcony;
         }
     }
 }

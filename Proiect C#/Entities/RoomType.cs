@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_C_.Entities
 {
-    enum RoomType
+    public enum RoomType
     {
         Single,
         Double,

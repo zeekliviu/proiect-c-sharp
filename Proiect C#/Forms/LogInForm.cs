@@ -88,7 +88,7 @@ namespace Proiect_C_.Forms
                                 }
                                 //MessageBox.Show("Welcome!"); // TODO: open the next form
                                 this.DialogResult = DialogResult.OK;
-                                this.Client = new Client(reader["FirstName"].ToString(), reader["LastName"].ToString(), (byte[])reader["Photo"], reader["Email"].ToString(), reader["Phone"].ToString(), reader["Password"].ToString());
+                                this.Client = new Client(reader["FirstName"].ToString(), reader["LastName"].ToString(), (byte[])reader["Photo"], reader["Email"].ToString(), reader["Phone"].ToString(), reader["Password"].ToString(), (int)reader["ID"]);
                             }
                             else
                             {
@@ -96,6 +96,7 @@ namespace Proiect_C_.Forms
                             }
                         }
                     }
+                    connection.Close();
                 }
             }
             else

@@ -40,20 +40,16 @@ namespace Proiect_C_
                 StartPosition = FormStartPosition.CenterScreen
             };
             this.Hide();
-            LogInForm.ShowDialog();
-            if(LogInForm.DialogResult!=DialogResult.OK)
-            {
-                this.Show();
-            }
-            else
+            while(LogInForm.ShowDialog() == DialogResult.OK)
             {
                 var personalForm = new PersonalPageForm(LogInForm);
-                personalForm.ShowDialog();
-                if (personalForm.DialogResult == DialogResult.Cancel)
-                    LogInForm.ShowDialog();
-                if (LogInForm.DialogResult == DialogResult.Cancel)
-                    this.Show();
+                while(personalForm.ShowDialog() != DialogResult.Abort)
+                {
+                    var bookForm = new BookForm(personalForm);
+                    bookForm.ShowDialog();
+                }
             }
+            this.Show();
         }
 
         private void bgTimer_Tick(object sender, EventArgs e)

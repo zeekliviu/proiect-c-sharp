@@ -16,20 +16,22 @@ namespace Proiect_C_.Entities
         public string Phone { get; set; }
         public string Password { get; set; }
         public byte[] ProfilePicture { get; set; }
+        public int BDId { get; set; }
         
         public Client()
         {
             Id = Guid.NewGuid();
         }
-        public Client(string firstName, string lastName, byte[] photo, string email, string phone, string password): this()
+        public Client(string firstName, string lastName, byte[] photo, string email, string phone, string password, int bdId): this()
         {
             FirstName = firstName;
             LastName = lastName;
             ProfilePicture = new byte[photo.Length];
-            System.Array.Copy(photo, ProfilePicture, photo.Length);
+            Array.Copy(photo, ProfilePicture, photo.Length);
             Email = email;
             Phone = phone;
             Password = password;
+            BDId = bdId;
         }
 
     }

@@ -82,6 +82,9 @@
     <Compile Include="Custom Controls\CustomButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Custom Controls\CustomDatePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Room.cs" />
     <Compile Include="Entities\Booking.cs" />
@@ -122,6 +125,12 @@
     <Compile Include="Forms\VerificationForm.Designer.cs">
       <DependentUpon>VerificationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\YourBookings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\YourBookings.Designer.cs">
+      <DependentUpon>YourBookings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\BookForm.resx">
@@ -141,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\VerificationForm.resx">
       <DependentUpon>VerificationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\YourBookings.resx">
+      <DependentUpon>YourBookings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -214,6 +226,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\default_avatar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendarDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendarWhite.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

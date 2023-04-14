@@ -186,7 +186,7 @@
             // 
             this.yourCartLbl.AutoSize = true;
             this.yourCartLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.yourCartLbl.Location = new System.Drawing.Point(676, 63);
+            this.yourCartLbl.Location = new System.Drawing.Point(709, 64);
             this.yourCartLbl.Name = "yourCartLbl";
             this.yourCartLbl.Size = new System.Drawing.Size(123, 29);
             this.yourCartLbl.TabIndex = 14;

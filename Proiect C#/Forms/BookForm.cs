@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using Proiect_C_.Entities;
+using Proiect_C_.Properties;
 
 namespace Proiect_C_.Forms
 {

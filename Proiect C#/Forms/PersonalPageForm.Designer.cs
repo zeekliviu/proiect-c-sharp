@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PersonalPageForm));
             this.profileMenuStrip = new System.Windows.Forms.MenuStrip();
             this.yourBookingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -35,9 +36,12 @@
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.photoBox = new System.Windows.Forms.PictureBox();
             this.welcomeLabel = new System.Windows.Forms.Label();
-            this.editBtn = new Proiect_C_.Custom_Controls.CustomButton();
+            this.photoChangeContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.changePhotoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removePhotosetToDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.profileMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.photoBox)).BeginInit();
+            this.photoChangeContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // profileMenuStrip
@@ -91,6 +95,7 @@
             // 
             // photoBox
             // 
+            this.photoBox.ContextMenuStrip = this.photoChangeContextMenuStrip;
             this.photoBox.Location = new System.Drawing.Point(149, 12);
             this.photoBox.Name = "photoBox";
             this.photoBox.Size = new System.Drawing.Size(287, 166);
@@ -108,23 +113,27 @@
             this.welcomeLabel.TabIndex = 2;
             this.welcomeLabel.Text = "label1";
             // 
-            // editBtn
+            // photoChangeContextMenuStrip
             // 
-            this.editBtn.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.editBtn.BackgroundColor = System.Drawing.Color.MediumSlateBlue;
-            this.editBtn.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.editBtn.BorderRadius = 10;
-            this.editBtn.BorderSize = 0;
-            this.editBtn.FlatAppearance.BorderSize = 0;
-            this.editBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.editBtn.ForeColor = System.Drawing.Color.White;
-            this.editBtn.Location = new System.Drawing.Point(213, 256);
-            this.editBtn.Name = "editBtn";
-            this.editBtn.Size = new System.Drawing.Size(146, 37);
-            this.editBtn.TabIndex = 3;
-            this.editBtn.Text = "Edit your profile";
-            this.editBtn.TextColor = System.Drawing.Color.White;
-            this.editBtn.UseVisualStyleBackColor = false;
+            this.photoChangeContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changePhotoToolStripMenuItem,
+            this.removePhotosetToDefaultToolStripMenuItem});
+            this.photoChangeContextMenuStrip.Name = "photoChangeContextMenuStrip";
+            this.photoChangeContextMenuStrip.Size = new System.Drawing.Size(233, 70);
+            // 
+            // changePhotoToolStripMenuItem
+            // 
+            this.changePhotoToolStripMenuItem.Name = "changePhotoToolStripMenuItem";
+            this.changePhotoToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.changePhotoToolStripMenuItem.Text = "Change Photo...";
+            this.changePhotoToolStripMenuItem.Click += new System.EventHandler(this.changePhotoToolStripMenuItem_Click);
+            // 
+            // removePhotosetToDefaultToolStripMenuItem
+            // 
+            this.removePhotosetToDefaultToolStripMenuItem.Name = "removePhotosetToDefaultToolStripMenuItem";
+            this.removePhotosetToDefaultToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.removePhotosetToDefaultToolStripMenuItem.Text = "Remove Photo (set to default)";
+            this.removePhotosetToDefaultToolStripMenuItem.Click += new System.EventHandler(this.removePhotosetToDefaultToolStripMenuItem_Click);
             // 
             // PersonalPageForm
             // 
@@ -132,7 +141,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(483, 305);
             this.ControlBox = false;
-            this.Controls.Add(this.editBtn);
             this.Controls.Add(this.welcomeLabel);
             this.Controls.Add(this.photoBox);
             this.Controls.Add(this.profileMenuStrip);
@@ -145,6 +153,7 @@
             this.profileMenuStrip.ResumeLayout(false);
             this.profileMenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.photoBox)).EndInit();
+            this.photoChangeContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,6 +167,8 @@
         private System.Windows.Forms.ToolStripMenuItem logOutToolStripMenuItem;
         private System.Windows.Forms.PictureBox photoBox;
         private System.Windows.Forms.Label welcomeLabel;
-        private Custom_Controls.CustomButton editBtn;
+        private System.Windows.Forms.ContextMenuStrip photoChangeContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem changePhotoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removePhotosetToDefaultToolStripMenuItem;
     }
 }

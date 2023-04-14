@@ -64,14 +64,62 @@ namespace Proiect_C_.Forms
                             Bookings = new List<Booking>();
                             while(reader.Read())
                                 Bookings.Add(new Booking(Client, DateTime.Parse(reader["CheckIn"].ToString()), DateTime.Parse(reader["CheckOut"].ToString()), new Room(int.Parse(reader["RoomNumber"].ToString()), (RoomType)Enum.Parse(typeof(RoomType), reader["RoomType"].ToString()), decimal.Parse(reader["PricePerNight"].ToString()), int.Parse(reader["Floor"].ToString()), int.Parse(reader["HasBalcony"].ToString()) == 1 ? true : false), reader["Location"].ToString(), reader["Place"].ToString(), reader["Building"].ToString()));
-                            var yourBookings = new YourBookings(Bookings);
-                            yourBookings.Show();
+                            var yourBookings = new YourBookings(Bookings, Client);
+                            while (yourBookings.ShowDialog() != DialogResult.Cancel)
+                                continue;
                         }
                         else
                         {
                             MessageBox.Show("You don't have any bookings!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                         }
                     }
+                }
+            }
+        }
+
+        private void changePhotoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                photoBox.Image = new Bitmap(openFileDialog.FileName);
+                using (var ms = new System.IO.MemoryStream())
+                {
+                    photoBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    Client.ProfilePicture = ms.ToArray();
+                }
+                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.DbConnection))
+                {
+                    string query = "UPDATE Users SET Photo = @ProfilePicture WHERE ID = @BDId";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@ProfilePicture", Client.ProfilePicture);
+                        command.Parameters.AddWithValue("@BDId", Client.BDId);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
+        private void removePhotosetToDefaultToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            photoBox.Image = Properties.Resources.default_avatar;
+            using (var ms = new System.IO.MemoryStream())
+            {
+                photoBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                Client.ProfilePicture = ms.ToArray();
+            }
+            using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.DbConnection))
+            {
+                string query = "UPDATE Users SET Photo = @ProfilePicture WHERE ID = @BDId";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ProfilePicture", Client.ProfilePicture);
+                    command.Parameters.AddWithValue("@BDId", Client.BDId);
+                    connection.Open();
+                    command.ExecuteNonQuery();
                 }
             }
         }

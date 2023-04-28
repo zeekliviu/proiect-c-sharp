@@ -19,6 +19,7 @@ namespace Proiect_C_.Forms
     public partial class LogInForm : Form
     {
         public Client Client { get; set; }
+        public string pwd;
         public LogInForm()
         {
             InitializeComponent();
@@ -26,7 +27,10 @@ namespace Proiect_C_.Forms
             path.AddEllipse(0, 0, logoBox.Width, logoBox.Height);
             logoBox.Region = new Region(path);
         }
-
+        public LogInForm(string pwd):this()
+        {
+            this.pwd = pwd;
+        }
         private void emailTxtBox_Validating(object sender, CancelEventArgs e)
         {
             string errorMsg;

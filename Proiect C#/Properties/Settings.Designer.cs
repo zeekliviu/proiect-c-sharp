@@ -53,7 +53,7 @@ namespace Proiect_C_.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("verification@zethenterprises.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("ToFhmvuiSDY+5htHFCoqWldR2Q7x25ZTtQxHKF3GjfIvRp0t2dmvYxTUXrwQnxmA")]
         public string Email {
             get {
                 return ((string)(this["Email"]));
@@ -62,10 +62,20 @@ namespace Proiect_C_.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Verificati0n!")]
+        [global::System.Configuration.DefaultSettingValueAttribute("DL6wsuOhCYRswEEVDz3KPA==")]
         public string Password {
             get {
                 return ((string)(this["Password"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("AA2KYt8Izaw)PsH7jFssI7C.!FupQskv(+MuYdxFTmFMY)ZYhB+bWIfuFfr5xY9951/mXpxN#Rav7jnlZ" +
+            "QD2rYxT05t3LSVhySKd1pYOM0hA57*furxV5v?BLIDFGFm5")]
+        public string Salt {
+            get {
+                return ((string)(this["Salt"]));
             }
         }
     }

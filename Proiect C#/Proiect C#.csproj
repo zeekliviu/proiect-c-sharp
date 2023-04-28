@@ -94,10 +94,17 @@
     <Compile Include="Custom Controls\CustomDatePicker.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Encryption\EncryptionUtils.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Room.cs" />
     <Compile Include="Entities\Booking.cs" />
     <Compile Include="Entities\RoomType.cs" />
+    <Compile Include="Forms\AdminLogOn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminLogOn.Designer.cs">
+      <DependentUpon>AdminLogOn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\BookForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +149,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\AdminLogOn.resx">
+      <DependentUpon>AdminLogOn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\BookForm.resx">
       <DependentUpon>BookForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -15,6 +15,7 @@ namespace Proiect_C_.Forms
 {
     public partial class SignUpForm : Form
     {
+        public string pwd;
         public SignUpForm()
         {
             InitializeComponent();
@@ -22,7 +23,10 @@ namespace Proiect_C_.Forms
             path.AddEllipse(0, 0, logoBox.Width, logoBox.Height);
             logoBox.Region = new Region(path);
         }
-
+        public SignUpForm(string pwd):this()
+        {
+            this.pwd = pwd;
+        }
         private void backBtn_Click(object sender, EventArgs e)
         {
             this.errorProvider.Clear();
@@ -257,7 +261,7 @@ namespace Proiect_C_.Forms
                         string subject = "Verify your email";
                         string body = "Hello! 😉\n\nYour verification code is: " + code.ToString();
                         var msg = new MimeMessage();
-                        msg.From.Add(new MailboxAddress("Verification Service", Properties.Settings.Default.Email));
+                        msg.From.Add(new MailboxAddress("Verification Service", Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.Email, pwd)));
                         msg.To.Add(new MailboxAddress(firstNameTxtBox.Text + " " + lastNameTxtBox.Text, email));
                         msg.Subject = subject;
                         msg.Body = new TextPart("plain")
@@ -266,8 +270,10 @@ namespace Proiect_C_.Forms
                         };
                         using (var client = new SmtpClient())
                         {
+                            var mail = Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.Email, pwd);
+                            var password = Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.Password, pwd);
                             client.Connect(Properties.Settings.Default.SmtpAddress, Properties.Settings.Default.SmtpPort, true);
-                            client.Authenticate(Properties.Settings.Default.Email, Properties.Settings.Default.Password);
+                            client.Authenticate(mail, password);
                             client.Send(msg);
                             client.Disconnect(true);
                         }

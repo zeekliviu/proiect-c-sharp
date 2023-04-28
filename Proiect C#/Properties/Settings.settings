@@ -16,10 +16,13 @@
       <Value Profile="(Default)">465</Value>
     </Setting>
     <Setting Name="Email" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">verification@zethenterprises.com</Value>
+      <Value Profile="(Default)">ToFhmvuiSDY+5htHFCoqWldR2Q7x25ZTtQxHKF3GjfIvRp0t2dmvYxTUXrwQnxmA</Value>
     </Setting>
     <Setting Name="Password" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Verificati0n!</Value>
+      <Value Profile="(Default)">DL6wsuOhCYRswEEVDz3KPA==</Value>
+    </Setting>
+    <Setting Name="Salt" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">AA2KYt8Izaw)PsH7jFssI7C.!FupQskv(+MuYdxFTmFMY)ZYhB+bWIfuFfr5xY9951/mXpxN#Rav7jnlZQD2rYxT05t3LSVhySKd1pYOM0hA57*furxV5v?BLIDFGFm5</Value>
     </Setting>
   </Settings>
 </SettingsFile>

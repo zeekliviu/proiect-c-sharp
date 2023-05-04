@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
+using Oracle.ManagedDataAccess.Client;
 using Proiect_C_.Entities;
 using Proiect_C_.Properties;
 
@@ -36,6 +37,25 @@ namespace Proiect_C_.Forms
         public BookForm(PersonalPageForm ppf): this()
         {
             personalPageForm = ppf;
+            if (ppf.bookFormBookings.Length > 0)
+            {
+                listViewHeadersSet = true;
+                foreach (var prop in typeof(Room).GetProperties())
+                    yourCartListView.Columns.Add(prop.Name);
+                yourCartListView.Columns.Add("Days");
+                yourCartListView.Columns.Add("Price");
+                foreach (var booking in ppf.bookFormBookings)
+                {
+                    var room = new Room(booking.RoomNumber, booking.RoomType, booking.PricePerNight, booking.Floor, booking.HasBalcony);
+                    var days = (int)Math.Round((booking.CheckOut - booking.CheckIn).TotalDays);
+                    var price = days * room.PricePerNight;
+                    var item = new ListViewItem(new string[] { booking.RoomNumber.ToString(), booking.RoomType.ToString(), booking.PricePerNight.ToString("C", new CultureInfo("ro-RO")), booking.Floor.ToString(), booking.HasBalcony == true ? "Yes" : "No", days.ToString(), price.ToString("C", new CultureInfo("ro-RO")) });
+                    yourCartListView.Items.Add(item);
+                    Array.Resize(ref bookings, bookings.Length+1);
+                    bookings[bookings.Length - 1] = booking;
+                }
+                yourCartListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            }
         }
         private void bgTimer_Tick(object sender, EventArgs e)
         {
@@ -43,7 +63,7 @@ namespace Proiect_C_.Forms
         }
         private void bgBox_Paint(object sender, PaintEventArgs e)
         {
-            ImageAnimator.UpdateFrames(global::Proiect_C_.Properties.Resources.book_room);
+            ImageAnimator.UpdateFrames(Resources.book_room);
         }
 
         private void BookForm_Load(object sender, EventArgs e)
@@ -71,11 +91,6 @@ namespace Proiect_C_.Forms
                 locationComboBox.Items.Add(item.Key);
         }
 
-        private void locationComboBox_TextUpdate(object sender, EventArgs e)
-        {
-            if (!json.ContainsKey(locationComboBox.Text))
-                locationComboBox.Text = string.Empty;
-        }
         private void locationComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             placeComboBox.Text = string.Empty;
@@ -84,11 +99,6 @@ namespace Proiect_C_.Forms
             var places = new JObject(json[locationComboBox.Text].Children());
             foreach (var item in places)
                 placeComboBox.Items.Add(item.Key);
-        }
-        private void placeComboBox_TextUpdate(object sender, EventArgs e)
-        {
-            if (!json[locationComboBox.Text].Children().Any(x => x.Path == placeComboBox.Text))
-                placeComboBox.Text = string.Empty;
         }
         private void placeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -119,17 +129,12 @@ namespace Proiect_C_.Forms
             else
             { roomComboBox.Items.Clear(); }
         }
-
-        private void buildingComboBox_TextUpdate(object sender, EventArgs e)
-        {
-            buildingComboBox.Text = string.Empty;
-        }
-
         private void emptyCartBtn_Click(object sender, EventArgs e)
         {
             try
             {
-                yourCartListView.Items.Clear();
+                yourCartListView.Clear();
+                listViewHeadersSet = false;
                 bookings = new Booking[0];
             }
             catch { }
@@ -142,6 +147,11 @@ namespace Proiect_C_.Forms
                 MessageBox.Show("Please select a location, place, building and room type first!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            else if (endDatePicker.Value == startDatePicker.Value)
+            {
+                MessageBox.Show("Please select at least a night to spend!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             else if (endDatePicker.Value < startDatePicker.Value)
             {
                 MessageBox.Show("Please select a valid date interval!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -152,7 +162,6 @@ namespace Proiect_C_.Forms
                 if (!listViewHeadersSet)
                 {
                     foreach (var prop in typeof(Room).GetProperties())
-                        if (prop.Name != "Id")
                             yourCartListView.Columns.Add(prop.Name);
                     yourCartListView.Columns.Add("Days");
                     yourCartListView.Columns.Add("Price");
@@ -191,8 +200,8 @@ namespace Proiect_C_.Forms
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
 
         private void checkoutBtn_Click(object sender, EventArgs e)
@@ -204,32 +213,64 @@ namespace Proiect_C_.Forms
             }
             else
             {
-                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.DbConnection))
+                using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection, personalPageForm.pwd)))
                 {
                     connection.Open();
                     for (int i = 0; i < bookings.Length; i++)
                     {
-                        string query = "INSERT INTO Bookings (BookingID, ClientID, CheckIn, CheckOut, RoomNumber, TotalCost, Location, Place, Building, RoomType, Floor, HasBalcony, PricePerNight) VALUES (NEXT VALUE FOR MySeq2, @ClientID, @StartDate, @EndDate, @RoomNumber, @TotalCost, @Location, @Place, @Building, @RoomType, @Floor, @HasBalcony, @PricePerNight)";
-                        using (SqlCommand command = new SqlCommand(query, connection))
+                        string query = "INSERT INTO Bookings (CheckIn, CheckOut, RoomNumber, TotalCost, ClientEmail, Location, Place, Building, RoomType, Floor, HasBalcony, PricePerNight) VALUES (:StartDate, :EndDate, :RoomNumber, :TotalCost, :ClientEmail, :Location, :Place, :Building, :RoomType, :Floor, :HasBalcony, :PricePerNight)";
+                        using (OracleCommand command = new OracleCommand(query, connection))
                         {
-                            command.Parameters.AddWithValue("@ClientID", bookings[i].BDId);
-                            command.Parameters.AddWithValue("@StartDate", bookings[i].CheckIn);
-                            command.Parameters.AddWithValue("@EndDate", bookings[i].CheckOut);
-                            command.Parameters.AddWithValue("@RoomNumber", bookings[i].RoomNumber);
-                            command.Parameters.AddWithValue("@TotalCost", decimal.Round(bookings[i].TotalCost, 2));
-                            command.Parameters.AddWithValue("@Location", bookings[i].Location);
-                            command.Parameters.AddWithValue("@Place", bookings[i].Place);
-                            command.Parameters.AddWithValue("@Building", bookings[i].Building);
-                            command.Parameters.AddWithValue("@RoomType", Enum.GetName(typeof(RoomType),bookings[i].RoomType));
-                            command.Parameters.AddWithValue("@Floor", bookings[i].Floor);
-                            command.Parameters.AddWithValue("@HasBalcony", Convert.ToInt32(bookings[i].HasBalcony));
-                            command.Parameters.AddWithValue("@PricePerNight", decimal.Round(bookings[i].PricePerNight, 2));
+                            command.Parameters.Add(":StartDate", bookings[i].CheckIn);
+                            command.Parameters.Add(":EndDate", bookings[i].CheckOut);
+                            command.Parameters.Add(":RoomNumber", bookings[i].RoomNumber);
+                            command.Parameters.Add(":TotalCost", decimal.Round(bookings[i].TotalCost, 2));
+                            command.Parameters.Add(":ClientEmail", bookings[i].EmailOfClient);
+                            command.Parameters.Add(":Location", bookings[i].Location);
+                            command.Parameters.Add(":Place", bookings[i].Place);
+                            command.Parameters.Add(":Building", bookings[i].Building);
+                            command.Parameters.Add(":RoomType", Enum.GetName(typeof(RoomType), bookings[i].RoomType));
+                            command.Parameters.Add(":Floor", bookings[i].Floor);
+                            command.Parameters.Add(":HasBalcony", Convert.ToInt32(bookings[i].HasBalcony));
+                            command.Parameters.Add(":PricePerNight", decimal.Round(bookings[i].PricePerNight, 2));
                             command.ExecuteNonQuery();
                         }
                     }
                 }
                 MessageBox.Show("Your booking was successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
+            }
+        }
+
+        private void yourCartListView_MouseDown(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+                var item = yourCartListView.HitTest(e.X, e.Y).Item;
+                if(item != null)
+                {
+                    ContextMenu m = new ContextMenu();
+                    m.MenuItems.Add(new MenuItem("Remove", new EventHandler((s, ev) =>
+                    {
+                        yourCartListView.Items.Remove(item);
+                        // remove the bookings from the array by swapping it with the last element and then resizing the array
+                        for (int i = 0; i < bookings.Length; i++)
+                        {
+                            if (bookings[i].RoomNumber == int.Parse(item.SubItems[0].Text))
+                            {
+                                bookings[i] = bookings[bookings.Length - 1];
+                                Array.Resize(ref bookings, bookings.Length - 1);
+                                if (bookings.Length == 0)
+                                {
+                                    yourCartListView.Clear();
+                                    listViewHeadersSet = false;
+                                }
+                                break;
+                            }
+                        }
+                    })));
+                    m.Show(yourCartListView, new Point(e.X, e.Y));
+                }
             }
         }
     }

@@ -95,14 +95,17 @@
             // 
             // locationComboBox
             // 
+            this.locationComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.locationComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.locationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.locationComboBox.FormattingEnabled = true;
             this.locationComboBox.IntegralHeight = false;
             this.locationComboBox.Location = new System.Drawing.Point(123, 102);
             this.locationComboBox.Name = "locationComboBox";
             this.locationComboBox.Size = new System.Drawing.Size(304, 21);
+            this.locationComboBox.Sorted = true;
             this.locationComboBox.TabIndex = 4;
             this.locationComboBox.SelectedIndexChanged += new System.EventHandler(this.locationComboBox_SelectedIndexChanged);
-            this.locationComboBox.TextUpdate += new System.EventHandler(this.locationComboBox_TextUpdate);
             // 
             // locationLbl
             // 
@@ -116,13 +119,16 @@
             // 
             // placeComboBox
             // 
+            this.placeComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.placeComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.placeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.placeComboBox.FormattingEnabled = true;
             this.placeComboBox.Location = new System.Drawing.Point(123, 149);
             this.placeComboBox.Name = "placeComboBox";
             this.placeComboBox.Size = new System.Drawing.Size(304, 21);
+            this.placeComboBox.Sorted = true;
             this.placeComboBox.TabIndex = 6;
             this.placeComboBox.SelectedIndexChanged += new System.EventHandler(this.placeComboBox_SelectedIndexChanged);
-            this.placeComboBox.TextUpdate += new System.EventHandler(this.placeComboBox_TextUpdate);
             // 
             // placeLbl
             // 
@@ -136,12 +142,15 @@
             // 
             // buildingComboBox
             // 
+            this.buildingComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.buildingComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.buildingComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.buildingComboBox.FormattingEnabled = true;
             this.buildingComboBox.Location = new System.Drawing.Point(123, 196);
             this.buildingComboBox.Name = "buildingComboBox";
             this.buildingComboBox.Size = new System.Drawing.Size(304, 21);
+            this.buildingComboBox.Sorted = true;
             this.buildingComboBox.TabIndex = 8;
-            this.buildingComboBox.TextUpdate += new System.EventHandler(this.buildingComboBox_TextUpdate);
             // 
             // buildingLbl
             // 
@@ -165,10 +174,14 @@
             // 
             // roomComboBox
             // 
+            this.roomComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.roomComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.roomComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.roomComboBox.FormattingEnabled = true;
             this.roomComboBox.Location = new System.Drawing.Point(123, 237);
             this.roomComboBox.Name = "roomComboBox";
             this.roomComboBox.Size = new System.Drawing.Size(304, 21);
+            this.roomComboBox.Sorted = true;
             this.roomComboBox.TabIndex = 11;
             // 
             // yourCartListView
@@ -181,6 +194,7 @@
             this.yourCartListView.TabIndex = 13;
             this.yourCartListView.UseCompatibleStateImageBehavior = false;
             this.yourCartListView.View = System.Windows.Forms.View.Details;
+            this.yourCartListView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.yourCartListView_MouseDown);
             // 
             // yourCartLbl
             // 
@@ -350,7 +364,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BookForm";
-            this.Text = "BookForm";
+            this.Text = "Book Now!";
             this.Load += new System.EventHandler(this.BookForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bgBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();

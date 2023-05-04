@@ -8,7 +8,6 @@ namespace Proiect_C_.Entities
 {
     public class Room
     {
-        public Guid Id { get; set; }
         public int Number { get; set; }
         public RoomType Type { get; set; }
         public decimal PricePerNight { get; set; }
@@ -16,7 +15,6 @@ namespace Proiect_C_.Entities
         public bool HasBalcony { get; set; }
         public Room()
         {
-            Id = Guid.NewGuid();
         }
         public Room(int number, RoomType type, decimal pricePerNight, int floor, bool hasBalcony):this()
         {

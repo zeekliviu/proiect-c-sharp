@@ -25,17 +25,7 @@ namespace Proiect_C_.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=localhost\\SQLEXPRESS;Database=bookify;Trusted_Connection=True;")]
-        public string DbConnection {
-            get {
-                return ((string)(this["DbConnection"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("smtp.hostinger.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("MzF2ORknrQTynfUaS6fZjEId9Eel7DqRluS66jYA5gA=")]
         public string SmtpAddress {
             get {
                 return ((string)(this["SmtpAddress"]));
@@ -44,16 +34,16 @@ namespace Proiect_C_.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("465")]
-        public int SmtpPort {
+        [global::System.Configuration.DefaultSettingValueAttribute("xjpY4MevzVMeqFqNVLQeNQ==")]
+        public string SmtpPort {
             get {
-                return ((int)(this["SmtpPort"]));
+                return ((string)(this["SmtpPort"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ToFhmvuiSDY+5htHFCoqWldR2Q7x25ZTtQxHKF3GjfIvRp0t2dmvYxTUXrwQnxmA")]
+        [global::System.Configuration.DefaultSettingValueAttribute("tQlU4b0Q8Dm1aDYk/iUbREUnbN35RGGwijFgJE2bVyMarCARWaCghlvzY4Bh7yef")]
         public string Email {
             get {
                 return ((string)(this["Email"]));
@@ -62,7 +52,7 @@ namespace Proiect_C_.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("DL6wsuOhCYRswEEVDz3KPA==")]
+        [global::System.Configuration.DefaultSettingValueAttribute("acbDwS3nJckvtd4I8iNVqQ==")]
         public string Password {
             get {
                 return ((string)(this["Password"]));
@@ -76,6 +66,18 @@ namespace Proiect_C_.Properties {
         public string Salt {
             get {
                 return ((string)(this["Salt"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("y5TnSORBOih1Mw0frWgvAOF1VmIIW+8VsmT0TbINJyRCj6gW4pa7GQ3ID0564HIZ5Yc4IkNLtF/SLKgJ1" +
+            "b50GIE5xCic/2gMgUAt37FmQa9DlsChPsES3Y2hs2jsfbhVZ0Dsedr4kkCQxGsTaQK64ZcT1my8envZw" +
+            "P6a8WtmpeeJaNxaHbMZOUUD+Atb5LP9hu++lEzB1DsFG7kh3SkRDKm0auUBZu02WXAmFOapruw=")]
+        public string DbConnection {
+            get {
+                return ((string)(this["DbConnection"]));
             }
         }
     }

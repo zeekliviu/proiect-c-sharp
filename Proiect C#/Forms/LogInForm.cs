@@ -13,6 +13,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Proiect_C_.Forms
 {
@@ -65,34 +66,35 @@ namespace Proiect_C_.Forms
                     { MessageBox.Show("Enter a password first!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); return; }
             if(this.errorProvider.GetError(emailTxtBox)=="")
             {
-                string connectionString = Properties.Settings.Default.DbConnection;
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                string connectionString = Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd);
+                using (OracleConnection connection = new OracleConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT * FROM Users WHERE Email = @Email";
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    string query = "SELECT * FROM Users WHERE Email = :Email";
+                    using (OracleCommand command = new OracleCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@Email", emailTxtBox.Text);
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        command.Parameters.Add(":Email", emailTxtBox.Text);
+                        using (OracleDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
                             {
                                 byte[] hashBytes = Convert.FromBase64String(reader["Password"].ToString());
                                 byte[] salt = new byte[16];
                                 Array.Copy(hashBytes, 0, salt, 0, 16);
-                                var pbkdf2 = new Rfc2898DeriveBytes(pwdTxtBox.Text, salt, 10000);
+                                var pbkdf2 = new Rfc2898DeriveBytes(pwdTxtBox.Text, salt, 10000, HashAlgorithmName.MD5);
                                 byte[] hash = pbkdf2.GetBytes(20);
                                 for (int i = 0; i < 20; i++)
                                 {
                                     if (hashBytes[i + 16] != hash[i])
                                     {
-                                        MessageBox.Show("The password is not matching the Email you have typed!","Wrong password!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        MessageBox.Show("The password is not matching the one saved in the database!","Wrong password!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         return;
                                     }
                                 }
-                                //MessageBox.Show("Welcome!"); // TODO: open the next form
                                 this.DialogResult = DialogResult.OK;
-                                this.Client = new Client(reader["FirstName"].ToString(), reader["LastName"].ToString(), (byte[])reader["Photo"], reader["Email"].ToString(), reader["Phone"].ToString(), reader["Password"].ToString(), (int)reader["ID"]);
+                                this.emailTxtBox.Text = "";
+                                this.pwdTxtBox.Text = "";
+                                this.Client = new Client(reader["FirstName"].ToString(), reader["LastName"].ToString(), (byte[])reader["Photo"], reader["Email"].ToString(), reader["Phone"].ToString(), reader["Password"].ToString());
                             }
                             else
                             {

@@ -1,4 +1,5 @@
-﻿using Proiect_C_.Entities;
+﻿using Oracle.ManagedDataAccess.Client;
+using Proiect_C_.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,10 +18,14 @@ namespace Proiect_C_.Forms
     {
         public Client Client;
         public List<Booking> Bookings;
+        public Booking[] bookFormBookings;
+        public string pwd;
+
         public PersonalPageForm()
         {
             InitializeComponent();
         }
+
         public PersonalPageForm(LogInForm lf) : this()
         {
             welcomeLabel.Text = "Welcome, " + lf.Client.FirstName + " " + lf.Client.LastName + "!";
@@ -32,7 +37,10 @@ namespace Proiect_C_.Forms
                 }
             }
             Client = lf.Client;
+            pwd = lf.pwd;
+            bookFormBookings = new Booking[0];
         }
+
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Abort;
@@ -41,30 +49,26 @@ namespace Proiect_C_.Forms
 
         private void bookToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var bookForm = new BookForm(this)
-            {
-                StartPosition = FormStartPosition.CenterScreen
-            };
             this.Close();
         }
 
         private void yourBookingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.DbConnection))
+            using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection, pwd)))
             {
-                string query = "SELECT * FROM Bookings WHERE ClientId = @ClientId";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = "SELECT * FROM Bookings WHERE ClientEmail = :ClientEmail";
+                using (OracleCommand command = new OracleCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@ClientId", Client.BDId);
+                    command.Parameters.Add(":ClientEmail", Client.Email);
                     connection.Open();
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (OracleDataReader reader = command.ExecuteReader())
                     {
                         if (reader.HasRows)
                         {
                             Bookings = new List<Booking>();
-                            while(reader.Read())
+                            while (reader.Read())
                                 Bookings.Add(new Booking(Client, DateTime.Parse(reader["CheckIn"].ToString()), DateTime.Parse(reader["CheckOut"].ToString()), new Room(int.Parse(reader["RoomNumber"].ToString()), (RoomType)Enum.Parse(typeof(RoomType), reader["RoomType"].ToString()), decimal.Parse(reader["PricePerNight"].ToString()), int.Parse(reader["Floor"].ToString()), int.Parse(reader["HasBalcony"].ToString()) == 1 ? true : false), reader["Location"].ToString(), reader["Place"].ToString(), reader["Building"].ToString()));
-                            var yourBookings = new YourBookings(Bookings, Client);
+                            var yourBookings = new YourBookings(Bookings, Client, pwd);
                             while (yourBookings.ShowDialog() != DialogResult.Cancel)
                                 continue;
                         }
@@ -89,13 +93,13 @@ namespace Proiect_C_.Forms
                     photoBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                     Client.ProfilePicture = ms.ToArray();
                 }
-                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.DbConnection))
+                using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection, pwd)))
                 {
-                    string query = "UPDATE Users SET Photo = @ProfilePicture WHERE ID = @BDId";
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    string query = "UPDATE Users SET Photo = :ProfilePicture WHERE Email = :EmailClient";
+                    using (OracleCommand command = new OracleCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@ProfilePicture", Client.ProfilePicture);
-                        command.Parameters.AddWithValue("@BDId", Client.BDId);
+                        command.Parameters.Add(":ProfilePicture", Client.ProfilePicture);
+                        command.Parameters.Add(":EmailClient", Client.Email);
                         connection.Open();
                         command.ExecuteNonQuery();
                     }
@@ -111,17 +115,29 @@ namespace Proiect_C_.Forms
                 photoBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                 Client.ProfilePicture = ms.ToArray();
             }
-            using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.DbConnection))
+            using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection,pwd)))
             {
-                string query = "UPDATE Users SET Photo = @ProfilePicture WHERE ID = @BDId";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = "UPDATE Users SET Photo = :ProfilePicture WHERE Email = :EmailClient";
+                using (OracleCommand command = new OracleCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@ProfilePicture", Client.ProfilePicture);
-                    command.Parameters.AddWithValue("@BDId", Client.BDId);
+                    command.Parameters.Add(":ProfilePicture", Client.ProfilePicture);
+                    command.Parameters.Add(":EmailClient", Client.Email);
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
             }
+        }
+
+        private void changeEmailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var changeMail = new ChangeMail(Client, pwd);
+            changeMail.ShowDialog();
+        }
+
+        private void changeNameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ChangeName(Client, pwd).ShowDialog();
+            welcomeLabel.Text = "Welcome, " + Client.FirstName + " " + Client.LastName + "!";
         }
     }
 }

@@ -9,20 +9,17 @@ namespace Proiect_C_.Entities
 {
     public class Client
     {
-        public Guid Id { get; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Password { get; set; }
         public byte[] ProfilePicture { get; set; }
-        public int BDId { get; set; }
         
         public Client()
         {
-            Id = Guid.NewGuid();
         }
-        public Client(string firstName, string lastName, byte[] photo, string email, string phone, string password, int bdId): this()
+        public Client(string firstName, string lastName, byte[] photo, string email, string phone, string password): this()
         {
             FirstName = firstName;
             LastName = lastName;
@@ -31,7 +28,6 @@ namespace Proiect_C_.Entities
             Email = email;
             Phone = phone;
             Password = password;
-            BDId = bdId;
         }
 
     }

@@ -54,7 +54,11 @@ namespace Proiect_C_
                 while(personalForm.ShowDialog() != DialogResult.Abort)
                 {
                     var bookForm = new BookForm(personalForm);
-                    bookForm.ShowDialog();
+                    if(bookForm.ShowDialog() == DialogResult.Cancel)
+                    {
+                        personalForm.bookFormBookings = bookForm.bookings;
+                    }
+                    else personalForm.bookFormBookings = new Entities.Booking[0];
                 }
             }
             this.Show();

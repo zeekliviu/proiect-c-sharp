@@ -35,10 +35,12 @@
             this.bookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.photoBox = new System.Windows.Forms.PictureBox();
-            this.welcomeLabel = new System.Windows.Forms.Label();
             this.photoChangeContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.changePhotoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removePhotosetToDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.welcomeLabel = new System.Windows.Forms.Label();
+            this.changeEmailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.profileMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.photoBox)).BeginInit();
             this.photoChangeContextMenuStrip.SuspendLayout();
@@ -103,23 +105,15 @@
             this.photoBox.TabIndex = 1;
             this.photoBox.TabStop = false;
             // 
-            // welcomeLabel
-            // 
-            this.welcomeLabel.AutoSize = true;
-            this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.welcomeLabel.Location = new System.Drawing.Point(162, 205);
-            this.welcomeLabel.Name = "welcomeLabel";
-            this.welcomeLabel.Size = new System.Drawing.Size(85, 29);
-            this.welcomeLabel.TabIndex = 2;
-            this.welcomeLabel.Text = "label1";
-            // 
             // photoChangeContextMenuStrip
             // 
             this.photoChangeContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.changePhotoToolStripMenuItem,
-            this.removePhotosetToDefaultToolStripMenuItem});
+            this.removePhotosetToDefaultToolStripMenuItem,
+            this.changeEmailToolStripMenuItem,
+            this.changeNameToolStripMenuItem});
             this.photoChangeContextMenuStrip.Name = "photoChangeContextMenuStrip";
-            this.photoChangeContextMenuStrip.Size = new System.Drawing.Size(233, 70);
+            this.photoChangeContextMenuStrip.Size = new System.Drawing.Size(233, 114);
             // 
             // changePhotoToolStripMenuItem
             // 
@@ -134,6 +128,30 @@
             this.removePhotosetToDefaultToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.removePhotosetToDefaultToolStripMenuItem.Text = "Remove Photo (set to default)";
             this.removePhotosetToDefaultToolStripMenuItem.Click += new System.EventHandler(this.removePhotosetToDefaultToolStripMenuItem_Click);
+            // 
+            // welcomeLabel
+            // 
+            this.welcomeLabel.AutoSize = true;
+            this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.welcomeLabel.Location = new System.Drawing.Point(144, 213);
+            this.welcomeLabel.Name = "welcomeLabel";
+            this.welcomeLabel.Size = new System.Drawing.Size(85, 29);
+            this.welcomeLabel.TabIndex = 2;
+            this.welcomeLabel.Text = "label1";
+            // 
+            // changeEmailToolStripMenuItem
+            // 
+            this.changeEmailToolStripMenuItem.Name = "changeEmailToolStripMenuItem";
+            this.changeEmailToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.changeEmailToolStripMenuItem.Text = "Change Email...";
+            this.changeEmailToolStripMenuItem.Click += new System.EventHandler(this.changeEmailToolStripMenuItem_Click);
+            // 
+            // changeNameToolStripMenuItem
+            // 
+            this.changeNameToolStripMenuItem.Name = "changeNameToolStripMenuItem";
+            this.changeNameToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.changeNameToolStripMenuItem.Text = "Change Name...";
+            this.changeNameToolStripMenuItem.Click += new System.EventHandler(this.changeNameToolStripMenuItem_Click);
             // 
             // PersonalPageForm
             // 
@@ -170,5 +188,7 @@
         private System.Windows.Forms.ContextMenuStrip photoChangeContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem changePhotoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removePhotosetToDefaultToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeEmailToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeNameToolStripMenuItem;
     }
 }

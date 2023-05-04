@@ -34,16 +34,17 @@
             this.toolStripExportToCSVBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripExportToTXTBtn = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripPageSetUpBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripPrintPreview = new System.Windows.Forms.ToolStripButton();
             this.backToolStripBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.printBtn = new System.Windows.Forms.ToolStripButton();
             this.exportingStatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusStripExportingStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.pageSetupDialog = new System.Windows.Forms.PageSetupDialog();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+            this.printDialog = new System.Windows.Forms.PrintDialog();
             this.exportingToolStrip.SuspendLayout();
             this.exportingStatusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -65,16 +66,15 @@
             this.toolStripExportToCSVBtn,
             this.toolStripSeparator1,
             this.toolStripExportToTXTBtn,
-            this.toolStripSeparator2,
-            this.toolStripPageSetUpBtn,
             this.toolStripSeparator3,
             this.toolStripPrintPreview,
-            this.backToolStripBtn});
+            this.backToolStripBtn,
+            this.toolStripSeparator2,
+            this.printBtn});
             this.exportingToolStrip.Location = new System.Drawing.Point(0, 0);
             this.exportingToolStrip.Name = "exportingToolStrip";
             this.exportingToolStrip.Size = new System.Drawing.Size(800, 25);
             this.exportingToolStrip.TabIndex = 1;
-            this.exportingToolStrip.Text = "toolStrip1";
             // 
             // toolStripExportToCSVBtn
             // 
@@ -98,20 +98,6 @@
             this.toolStripExportToTXTBtn.Size = new System.Drawing.Size(147, 22);
             this.toolStripExportToTXTBtn.Text = "Export to TXT (ALT + T)";
             this.toolStripExportToTXTBtn.Click += new System.EventHandler(this.toolStripExportToTXTBtn_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripPageSetUpBtn
-            // 
-            this.toolStripPageSetUpBtn.Image = global::Proiect_C_.Properties.Resources.page_layout;
-            this.toolStripPageSetUpBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripPageSetUpBtn.Name = "toolStripPageSetUpBtn";
-            this.toolStripPageSetUpBtn.Size = new System.Drawing.Size(86, 22);
-            this.toolStripPageSetUpBtn.Text = "Page Setup";
-            this.toolStripPageSetUpBtn.Click += new System.EventHandler(this.toolStripPageSetUpBtn_Click);
             // 
             // toolStripSeparator3
             // 
@@ -137,6 +123,20 @@
             this.backToolStripBtn.Text = "Back";
             this.backToolStripBtn.Click += new System.EventHandler(this.backToolStripBtn_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // printBtn
+            // 
+            this.printBtn.Image = global::Proiect_C_.Properties.Resources.pdf_printer_icon;
+            this.printBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.printBtn.Name = "printBtn";
+            this.printBtn.Size = new System.Drawing.Size(91, 22);
+            this.printBtn.Text = "Print To PDF";
+            this.printBtn.Click += new System.EventHandler(this.printBtn_Click);
+            // 
             // exportingStatusStrip
             // 
             this.exportingStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -155,7 +155,6 @@
             // 
             // printDocument
             // 
-            this.printDocument.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.printDocument_BeginPrint);
             this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
             // 
             // pageSetupDialog
@@ -167,10 +166,17 @@
             this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
             this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
             this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog.Document = this.printDocument;
             this.printPreviewDialog.Enabled = true;
             this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
             this.printPreviewDialog.Name = "printPreviewDialog";
             this.printPreviewDialog.Visible = false;
+            // 
+            // printDialog
+            // 
+            this.printDialog.Document = this.printDocument;
+            this.printDialog.PrintToFile = true;
+            this.printDialog.UseEXDialog = true;
             // 
             // YourBookings
             // 
@@ -186,7 +192,7 @@
             this.KeyPreview = true;
             this.Name = "YourBookings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "YourBookings";
+            this.Text = "Your Bookings";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.YourBookings_KeyDown);
             this.exportingToolStrip.ResumeLayout(false);
             this.exportingToolStrip.PerformLayout();
@@ -207,12 +213,13 @@
         private System.Windows.Forms.StatusStrip exportingStatusStrip;
         private System.Windows.Forms.ToolStripStatusLabel statusStripExportingStatus;
         private System.Windows.Forms.ToolStripButton backToolStripBtn;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton toolStripPageSetUpBtn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Drawing.Printing.PrintDocument printDocument;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog;
         private System.Windows.Forms.ToolStripButton toolStripPrintPreview;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton printBtn;
+        private System.Windows.Forms.PrintDialog printDialog;
     }
 }

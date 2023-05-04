@@ -10,12 +10,14 @@ using System.Drawing;
 using System.Data;
 using System.IO;
 using System.Drawing.Drawing2D;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Proiect_C_.Forms
 {
     public partial class SignUpForm : Form
     {
         public string pwd;
+
         public SignUpForm()
         {
             InitializeComponent();
@@ -230,38 +232,36 @@ namespace Proiect_C_.Forms
         {
             if (this.errorProvider.GetError(emailTxtBox)=="" && this.errorProvider.GetError(firstPwdTxtBox) == "" && this.errorProvider.GetError(secondPwdTxtBox) == "" && this.errorProvider.GetError(firstNameTxtBox) == "" && this.errorProvider.GetError(lastNameTxtBox) == "" && this.errorProvider.GetError(phoneTxtBox) == "")
             {
-                // try creating a database with just a table: email and unique code to be sent to mail; if it already exists, then just add a new entry to the table and send it to mail
                 try
                 {
-                    string connectionString = Properties.Settings.Default.DbConnection;
-                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    string connectionString = Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection, pwd);
+                    using (OracleConnection connection = new OracleConnection(connectionString))
                     {
                         connection.Open();
                         // check if the email already exists
-                        string query = "SELECT * FROM Users WHERE Email = @Email";
-                        using (SqlCommand command = new SqlCommand(query, connection))
+                        string query = "SELECT * FROM Users WHERE Email = :Email";
+                        using (OracleCommand command = new OracleCommand(query, connection))
+                        using (OracleParameter parameter = new OracleParameter(":Email", emailTxtBox.Text))
                         {
-                            command.Parameters.AddWithValue("@Email", emailTxtBox.Text);
-                            using (SqlDataReader reader = command.ExecuteReader())
                             {
-                                if (reader.HasRows)
+                                command.Parameters.Add(parameter);
+                                using (OracleDataReader reader = command.ExecuteReader())
                                 {
-                                    MessageBox.Show("This email already exists!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    return;
+                                    if (reader.HasRows)
+                                    {
+                                        MessageBox.Show("This email already exists!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        return;
+                                    }
                                 }
                             }
                         }
-                        // verify the email by sending a code to it; the code will be a GUID and it will be sent to the user's email
-                        // a new form will be opened with a textbox and a button; the user will have to enter the code and click the button to verify the email
-                        // if the code is correct, then the user will be redirected to the login form
-                        // if the code is incorrect, then the user will be redirected to the register form and it will be asked to enter the email again
-
+                        // verification code generation + email sending
                         string code = new Random().Next(0, 1000000).ToString("D6");
                         string email = emailTxtBox.Text;
-                        string subject = "Verify your email";
-                        string body = "Hello! 😉\n\nYour verification code is: " + code.ToString();
+                        string subject = "Verify your email @ Bookify™ 📓";
+                        string body = $"Hello, {firstNameTxtBox.Text}! 😉\n\nYour verification code is: " + code.ToString();
                         var msg = new MimeMessage();
-                        msg.From.Add(new MailboxAddress("Verification Service", Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.Email, pwd)));
+                        msg.From.Add(new MailboxAddress("Bookify Verification Service", Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.Email, pwd)));
                         msg.To.Add(new MailboxAddress(firstNameTxtBox.Text + " " + lastNameTxtBox.Text, email));
                         msg.Subject = subject;
                         msg.Body = new TextPart("plain")
@@ -272,7 +272,9 @@ namespace Proiect_C_.Forms
                         {
                             var mail = Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.Email, pwd);
                             var password = Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.Password, pwd);
-                            client.Connect(Properties.Settings.Default.SmtpAddress, Properties.Settings.Default.SmtpPort, true);
+                            var smtpaddr = Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.SmtpAddress, pwd);
+                            var smtpport = int.Parse(Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.SmtpPort, pwd));
+                            client.Connect(smtpaddr, smtpport, true);
                             client.Authenticate(mail, password);
                             client.Send(msg);
                             client.Disconnect(true);
@@ -285,31 +287,31 @@ namespace Proiect_C_.Forms
                         if (result == DialogResult.OK)
                         {
                             // if the email doesn't exist, then add it to the database
-                            query = "INSERT INTO Users (Email, Password, FirstName, LastName, Phone, Photo, ID) VALUES (@Email, @Password, @FirstName, @LastName, @Phone, @Photo, NEXT VALUE FOR MySeq)";
-                            using (SqlCommand command = new SqlCommand(query, connection))
+                            query = "INSERT INTO Users (Email, Password, FirstName, LastName, Phone, Photo) VALUES (:Email, :Password, :FirstName, :LastName, :Phone, :Photo)"; // cand se foloseste SQL Oracle, nu se folosesc parametrii cu @, ci cu :, la SQL Server se folosesc parametrii cu @
+                            using (OracleCommand command = new OracleCommand(query, connection))
                             {
-                                command.Parameters.AddWithValue("@Email", emailTxtBox.Text);
-                                // the password should be hashed
+                                command.Parameters.Add(":Email", emailTxtBox.Text);
+                                // the password should be hashed; I chose MD5 because it's faster than SHA1 and SHA256
                                 byte[] salt;
                                 new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
-                                var pbkdf2 = new Rfc2898DeriveBytes(firstPwdTxtBox.Text, salt, 10000);
+                                var pbkdf2 = new Rfc2898DeriveBytes(firstPwdTxtBox.Text, salt, 10000, HashAlgorithmName.MD5);
                                 byte[] hash = pbkdf2.GetBytes(20);
                                 byte[] hashBytes = new byte[36];
                                 Array.Copy(salt, 0, hashBytes, 0, 16);
                                 Array.Copy(hash, 0, hashBytes, 16, 20);
                                 string savedPasswordHash = Convert.ToBase64String(hashBytes);
                                 // end of hashing
-                                command.Parameters.AddWithValue("@Password", savedPasswordHash);
-                                command.Parameters.AddWithValue("@FirstName", firstNameTxtBox.Text);
-                                command.Parameters.AddWithValue("@LastName", lastNameTxtBox.Text);
-                                command.Parameters.AddWithValue("@Phone", phoneTxtBox.Text);
-                                var param = new SqlParameter("@Photo", SqlDbType.VarBinary);
+                                command.Parameters.Add(":Password", savedPasswordHash);
+                                command.Parameters.Add(":FirstName", firstNameTxtBox.Text);
+                                command.Parameters.Add(":LastName", lastNameTxtBox.Text);
+                                command.Parameters.Add(":Phone", phoneTxtBox.Text);
+                                var photo = new OracleParameter(":Photo", OracleDbType.Blob); // OracleDbType.Blob in Oracle SQL vs SqlDbType.VarBinary in SQL Server; SqlDbType.VarBinary has a maximum capacity of 8000 bytes, while OracleDbType.Blob has a maximum capacity of 4GB
                                 using (MemoryStream ms = new MemoryStream())
                                 {
                                     imageBox.Image.Save(ms, imageBox.Image.RawFormat);
-                                    param.Value = ms.ToArray();
+                                    photo.Value = ms.ToArray();
                                 }
-                                command.Parameters.Add(param);
+                                command.Parameters.Add(photo);
                                 command.ExecuteNonQuery();
                             }
                             MessageBox.Show("Your account has been registered and added to the database!", "Succes!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);

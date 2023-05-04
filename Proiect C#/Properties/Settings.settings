@@ -2,27 +2,27 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Proiect_C_.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="DbConnection" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;ConnectionString&gt;Server=localhost\SQLEXPRESS;Database=bookify;Trusted_Connection=True;&lt;/ConnectionString&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Server=localhost\SQLEXPRESS;Database=bookify;Trusted_Connection=True;</Value>
-    </Setting>
     <Setting Name="SmtpAddress" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">smtp.hostinger.com</Value>
+      <Value Profile="(Default)">MzF2ORknrQTynfUaS6fZjEId9Eel7DqRluS66jYA5gA=</Value>
     </Setting>
-    <Setting Name="SmtpPort" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">465</Value>
+    <Setting Name="SmtpPort" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">xjpY4MevzVMeqFqNVLQeNQ==</Value>
     </Setting>
     <Setting Name="Email" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">ToFhmvuiSDY+5htHFCoqWldR2Q7x25ZTtQxHKF3GjfIvRp0t2dmvYxTUXrwQnxmA</Value>
+      <Value Profile="(Default)">tQlU4b0Q8Dm1aDYk/iUbREUnbN35RGGwijFgJE2bVyMarCARWaCghlvzY4Bh7yef</Value>
     </Setting>
     <Setting Name="Password" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">DL6wsuOhCYRswEEVDz3KPA==</Value>
+      <Value Profile="(Default)">acbDwS3nJckvtd4I8iNVqQ==</Value>
     </Setting>
     <Setting Name="Salt" Type="System.String" Scope="Application">
       <Value Profile="(Default)">AA2KYt8Izaw)PsH7jFssI7C.!FupQskv(+MuYdxFTmFMY)ZYhB+bWIfuFfr5xY9951/mXpxN#Rav7jnlZQD2rYxT05t3LSVhySKd1pYOM0hA57*furxV5v?BLIDFGFm5</Value>
+    </Setting>
+    <Setting Name="DbConnection" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;y5TnSORBOih1Mw0frWgvAOF1VmIIW+8VsmT0TbINJyRCj6gW4pa7GQ3ID0564HIZ5Yc4IkNLtF/SLKgJ1b50GIE5xCic/2gMgUAt37FmQa9DlsChPsES3Y2hs2jsfbhVZ0Dsedr4kkCQxGsTaQK64ZcT1my8envZwP6a8WtmpeeJaNxaHbMZOUUD+Atb5LP9hu++lEzB1DsFG7kh3SkRDKm0auUBZu02WXAmFOapruw=&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">y5TnSORBOih1Mw0frWgvAOF1VmIIW+8VsmT0TbINJyRCj6gW4pa7GQ3ID0564HIZ5Yc4IkNLtF/SLKgJ1b50GIE5xCic/2gMgUAt37FmQa9DlsChPsES3Y2hs2jsfbhVZ0Dsedr4kkCQxGsTaQK64ZcT1my8envZwP6a8WtmpeeJaNxaHbMZOUUD+Atb5LP9hu++lEzB1DsFG7kh3SkRDKm0auUBZu02WXAmFOapruw=</Value>
     </Setting>
   </Settings>
 </SettingsFile>

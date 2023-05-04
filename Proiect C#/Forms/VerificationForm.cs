@@ -14,6 +14,7 @@ namespace Proiect_C_.Forms
     {
         private string code;
         private string email;
+
         public VerificationForm()
         {
             InitializeComponent();

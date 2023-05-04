@@ -22,15 +22,21 @@ namespace Proiect_C_.Forms
             pwd = pwdBox.Text;
             try
             {
-                bool ok = Encryption.EncryptionUtils.DecryptString("ILScx+uhvfmVjejYruQJYg==", pwd) != "Corect!";
+                bool ok = Encryption.EncryptionUtils.DecryptString("+pYSKdAoLqh3ym/mtnyJsg==", pwd) != "Corect!";
             }
             catch
             {
-                MessageBox.Show("Parola este incorecta!", "Eroare!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The password is invalid!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void pwdBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+                submitBtn_Click(sender, e);
         }
     }
 }

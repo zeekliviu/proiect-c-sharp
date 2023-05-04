@@ -1,6 +1,6 @@
 ﻿namespace Proiect_C_.Forms
 {
-    partial class AdminLogOn
+    partial class ChangeName
     {
         /// <summary>
         /// Required designer variable.
@@ -28,29 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminLogOn));
-            this.pwdBox = new System.Windows.Forms.TextBox();
-            this.InputLbl = new System.Windows.Forms.Label();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangeName));
+            this.nameLbl = new System.Windows.Forms.Label();
+            this.newNameTxtBox = new System.Windows.Forms.TextBox();
             this.submitBtn = new Proiect_C_.Custom_Controls.CustomButton();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
-            // pwdBox
+            // nameLbl
             // 
-            this.pwdBox.Location = new System.Drawing.Point(15, 41);
-            this.pwdBox.Name = "pwdBox";
-            this.pwdBox.PasswordChar = '*';
-            this.pwdBox.Size = new System.Drawing.Size(313, 20);
-            this.pwdBox.TabIndex = 0;
-            this.pwdBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pwdBox_KeyDown);
+            this.nameLbl.AutoSize = true;
+            this.nameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameLbl.Location = new System.Drawing.Point(51, 9);
+            this.nameLbl.Name = "nameLbl";
+            this.nameLbl.Size = new System.Drawing.Size(200, 13);
+            this.nameLbl.TabIndex = 0;
+            this.nameLbl.Text = "Enter your name in the box below:";
             // 
-            // InputLbl
+            // newNameTxtBox
             // 
-            this.InputLbl.AutoSize = true;
-            this.InputLbl.Location = new System.Drawing.Point(12, 9);
-            this.InputLbl.Name = "InputLbl";
-            this.InputLbl.Size = new System.Drawing.Size(318, 13);
-            this.InputLbl.TabIndex = 1;
-            this.InputLbl.Text = "Please input the password to decrypt credentials in the box below:";
+            this.newNameTxtBox.Location = new System.Drawing.Point(54, 36);
+            this.newNameTxtBox.Name = "newNameTxtBox";
+            this.newNameTxtBox.Size = new System.Drawing.Size(197, 20);
+            this.newNameTxtBox.TabIndex = 1;
+            this.newNameTxtBox.Validating += new System.ComponentModel.CancelEventHandler(this.newNameTxtBox_Validating);
             // 
             // submitBtn
             // 
@@ -62,29 +65,34 @@
             this.submitBtn.FlatAppearance.BorderSize = 0;
             this.submitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.submitBtn.ForeColor = System.Drawing.Color.White;
-            this.submitBtn.Location = new System.Drawing.Point(90, 67);
+            this.submitBtn.Location = new System.Drawing.Point(81, 62);
             this.submitBtn.Name = "submitBtn";
-            this.submitBtn.Size = new System.Drawing.Size(180, 33);
+            this.submitBtn.Size = new System.Drawing.Size(136, 29);
             this.submitBtn.TabIndex = 2;
             this.submitBtn.Text = "Submit";
             this.submitBtn.TextColor = System.Drawing.Color.White;
             this.submitBtn.UseVisualStyleBackColor = false;
             this.submitBtn.Click += new System.EventHandler(this.submitBtn_Click);
             // 
-            // AdminLogOn
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
+            // ChangeName
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 112);
+            this.ClientSize = new System.Drawing.Size(303, 94);
             this.ControlBox = false;
             this.Controls.Add(this.submitBtn);
-            this.Controls.Add(this.InputLbl);
-            this.Controls.Add(this.pwdBox);
+            this.Controls.Add(this.newNameTxtBox);
+            this.Controls.Add(this.nameLbl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "AdminLogOn";
+            this.Name = "ChangeName";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Enter the password...";
+            this.Text = "Change your name";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -92,8 +100,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox pwdBox;
-        private System.Windows.Forms.Label InputLbl;
+        private System.Windows.Forms.Label nameLbl;
+        private System.Windows.Forms.TextBox newNameTxtBox;
         private Custom_Controls.CustomButton submitBtn;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

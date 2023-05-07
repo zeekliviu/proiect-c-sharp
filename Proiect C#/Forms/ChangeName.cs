@@ -73,6 +73,12 @@ namespace Proiect_C_.Forms
                 errorProvider.SetError(newNameTxtBox, "Please enter a valid name!");
                 return;
             }
+            foreach(var name in names)
+            if(name.Length < 2)
+                {
+                errorProvider.SetError(newNameTxtBox, "Please enter a valid name!");
+                return;
+                }
             string pattern = @"\b([A-Z]{1}[a-z]{1,30}[- ]{0,1}|[A-Z]{1}[- \']{1}[A-Z]{0,1}  
     [a-z]{1,30}[- ]{0,1}|[a-z]{1,2}[ -\']{1}[A-Z]{1}[a-z]{1,30}){2,5}";
             if (!Regex.IsMatch(newNameTxtBox.Text, pattern))

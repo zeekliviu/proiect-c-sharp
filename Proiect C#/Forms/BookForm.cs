@@ -277,6 +277,17 @@ namespace Proiect_C_.Forms
                             }
                         }
                     })));
+                    m.MenuItems.Add(new MenuItem("Details", new EventHandler((s, ev) =>
+                    {
+                        for (int i = 0; i < bookings.Length; i++)
+                        {
+                            if (bookings[i].RoomNumber == int.Parse(item.SubItems[0].Text))
+                            {
+                                MessageBox.Show($"Check-in: {bookings[i].CheckIn.ToString("dd/MM/yyyy")}\nCheck-out: {bookings[i].CheckOut.ToString("dd/MM/yyyy")}\nLocation: {bookings[i].Location}\nPlace: {bookings[i].Place}\nBuilding: {bookings[i].Building}\nRoom type: {bookings[i].RoomType}\nFloor: {bookings[i].Floor}\nHas balcony: {bookings[i].HasBalcony}\nPrice per night: {bookings[i].PricePerNight.ToString("C", new CultureInfo("ro-RO"))}\nTotal cost: {bookings[i].TotalCost.ToString("C", new CultureInfo("ro-RO"))}", "Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                break;
+                            }
+                        }
+                    })));
                     m.Show(yourCartListView, new Point(e.X, e.Y));
                 }
             }

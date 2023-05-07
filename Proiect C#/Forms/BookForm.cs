@@ -283,7 +283,8 @@ namespace Proiect_C_.Forms
                         {
                             if (bookings[i].RoomNumber == int.Parse(item.SubItems[0].Text))
                             {
-                                MessageBox.Show($"Check-in: {bookings[i].CheckIn.ToString("dd/MM/yyyy")}\nCheck-out: {bookings[i].CheckOut.ToString("dd/MM/yyyy")}\nLocation: {bookings[i].Location}\nPlace: {bookings[i].Place}\nBuilding: {bookings[i].Building}\nRoom type: {bookings[i].RoomType}\nFloor: {bookings[i].Floor}\nHas balcony: {bookings[i].HasBalcony}\nPrice per night: {bookings[i].PricePerNight.ToString("C", new CultureInfo("ro-RO"))}\nTotal cost: {bookings[i].TotalCost.ToString("C", new CultureInfo("ro-RO"))}", "Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                var result = bookings[i].HasBalcony ? "Yes" : "No";
+                                MessageBox.Show($"Check-in: {bookings[i].CheckIn.ToString("dd/MM/yyyy")}\nCheck-out: {bookings[i].CheckOut.ToString("dd/MM/yyyy")}\nLocation: {bookings[i].Location}\nPlace: {bookings[i].Place}\nBuilding: {bookings[i].Building}\nRoom type: {bookings[i].RoomType}\nFloor: {bookings[i].Floor}\nHas balcony: {result}\nPrice per night: {bookings[i].PricePerNight.ToString("C", new CultureInfo("ro-RO"))}\nTotal cost: {bookings[i].TotalCost.ToString("C", new CultureInfo("ro-RO"))}", "Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 break;
                             }
                         }

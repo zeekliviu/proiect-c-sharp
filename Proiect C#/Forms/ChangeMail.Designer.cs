@@ -54,6 +54,7 @@
             this.emailTxtBox.Name = "emailTxtBox";
             this.emailTxtBox.Size = new System.Drawing.Size(246, 20);
             this.emailTxtBox.TabIndex = 1;
+            this.emailTxtBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.emailTxtBox_KeyDown);
             this.emailTxtBox.Validating += new System.ComponentModel.CancelEventHandler(this.emailTxtBox_Validating);
             // 
             // errorProvider

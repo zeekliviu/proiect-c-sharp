@@ -53,6 +53,7 @@
             this.newNameTxtBox.Name = "newNameTxtBox";
             this.newNameTxtBox.Size = new System.Drawing.Size(197, 20);
             this.newNameTxtBox.TabIndex = 1;
+            this.newNameTxtBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.newNameTxtBox_KeyDown);
             this.newNameTxtBox.Validating += new System.ComponentModel.CancelEventHandler(this.newNameTxtBox_Validating);
             // 
             // submitBtn

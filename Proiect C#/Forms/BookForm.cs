@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,7 +33,9 @@ namespace Proiect_C_.Forms
             path.AddEllipse(0, 0, logoBox.Width, logoBox.Height);
             logoBox.Region = new Region(path);
             startDatePicker.MinDate = DateTime.Now;
+            startDatePicker.MaxDate = startDatePicker.MinDate.AddMonths(18);
             endDatePicker.MinDate = DateTime.Now.AddDays(1);
+            endDatePicker.MaxDate = startDatePicker.MaxDate.AddMonths(1);
         }
         public BookForm(PersonalPageForm ppf): this()
         {
@@ -157,6 +160,11 @@ namespace Proiect_C_.Forms
                 MessageBox.Show("Please select a valid date interval!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            else if(endDatePicker.Value - startDatePicker.Value > TimeSpan.FromDays(30))
+            {
+                MessageBox.Show("Please select a date interval of maximum 30 days!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             else
             {
                 if (!listViewHeadersSet)
@@ -271,6 +279,37 @@ namespace Proiect_C_.Forms
                     })));
                     m.Show(yourCartListView, new Point(e.X, e.Y));
                 }
+            }
+        }
+
+        private void yourCartListView_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            ListView sortedListView = (ListView)sender;
+            sortedListView.ListViewItemSorter = new ListViewItemComparer(e.Column);
+            sortedListView.Sort();
+        }
+    }
+
+    class ListViewItemComparer : IComparer
+    {
+        private int column;
+        public ListViewItemComparer(int column)
+        {
+            this.column = column; 
+        }
+        public int Compare(object x, object y)
+        {
+            if (column == 0 || column == 3 || column == 5)
+            {
+                return int.Parse(((ListViewItem)x).SubItems[column].Text).CompareTo(int.Parse(((ListViewItem)y).SubItems[column].Text));
+            }
+            else if (column == 2 || column == 6)
+            {
+                return float.Parse(((ListViewItem)x).SubItems[column].Text, NumberStyles.Currency, new CultureInfo("ro-RO")).CompareTo(float.Parse(((ListViewItem)y).SubItems[column].Text, NumberStyles.Currency, new CultureInfo("ro-RO")));
+            }
+            else
+            {
+                return String.Compare(((ListViewItem)x).SubItems[column].Text, ((ListViewItem)y).SubItems[column].Text);
             }
         }
     }

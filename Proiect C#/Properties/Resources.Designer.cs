@@ -111,6 +111,16 @@ namespace Proiect_C_.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] CoffeCake {
+            get {
+                object obj = ResourceManager.GetObject("CoffeCake", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap csv_icon {

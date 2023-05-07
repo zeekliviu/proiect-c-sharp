@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,19 @@ namespace Proiect_C_.Forms
         public PersonalPageForm(LogInForm lf) : this()
         {
             welcomeLabel.Text = "Welcome, " + lf.Client.FirstName + " " + lf.Client.LastName + "!";
+            float fontSize = welcomeLabel.Font.Size;
+            float newWidth = TextRenderer.MeasureText(welcomeLabel.Text, new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style)).Width;
+            while (welcomeLabel.Left + newWidth > welcomeLabel.Parent.Width - 30)
+            {
+                fontSize -= 0.25f;
+                newWidth = TextRenderer.MeasureText(welcomeLabel.Text, new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style)).Width;
+            }
+            while (welcomeLabel.Left + newWidth < welcomeLabel.Parent.Width - 30)
+            {
+                fontSize += 0.25f;
+                newWidth = TextRenderer.MeasureText(welcomeLabel.Text, new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style)).Width;
+            }
+            welcomeLabel.Font = new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style);
             if (lf.Client.ProfilePicture != null)
             {
                 using (var ms = new System.IO.MemoryStream(lf.Client.ProfilePicture))
@@ -138,6 +152,19 @@ namespace Proiect_C_.Forms
         {
             new ChangeName(Client, pwd).ShowDialog();
             welcomeLabel.Text = "Welcome, " + Client.FirstName + " " + Client.LastName + "!";
+            float fontSize = welcomeLabel.Font.Size;
+            float newWidth = TextRenderer.MeasureText(welcomeLabel.Text, new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style)).Width;
+            while(welcomeLabel.Left + newWidth > welcomeLabel.Parent.Width - 30)
+            {
+                fontSize -= 0.25f;
+                newWidth = TextRenderer.MeasureText(welcomeLabel.Text, new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style)).Width;
+            }
+            while(welcomeLabel.Left + newWidth < welcomeLabel.Parent.Width - 30)
+            {
+                fontSize += 0.25f;
+                newWidth = TextRenderer.MeasureText(welcomeLabel.Text, new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style)).Width;
+            }
+            welcomeLabel.Font = new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style);
         }
     }
 }

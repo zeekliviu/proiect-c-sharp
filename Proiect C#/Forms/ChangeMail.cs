@@ -160,5 +160,14 @@ namespace Proiect_C_.Forms
             }
             this.Close();
         }
+
+        private void emailTxtBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                emailTxtBox_Validating(sender, new CancelEventArgs());
+                submitBtn_Click(sender, e);
+            }
+        }
     }
 }

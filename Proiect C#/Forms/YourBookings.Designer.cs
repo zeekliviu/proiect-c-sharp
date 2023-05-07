@@ -45,6 +45,9 @@
             this.pageSetupDialog = new System.Windows.Forms.PageSetupDialog();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.beginDateSplitBtn = new System.Windows.Forms.ToolStripSplitButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.endDateSplitBtn = new System.Windows.Forms.ToolStripSplitButton();
             this.exportingToolStrip.SuspendLayout();
             this.exportingStatusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +62,7 @@
             this.bookingsListView.TabIndex = 0;
             this.bookingsListView.UseCompatibleStateImageBehavior = false;
             this.bookingsListView.View = System.Windows.Forms.View.Details;
+            this.bookingsListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.bookingsListView_ColumnClick);
             // 
             // exportingToolStrip
             // 
@@ -70,6 +74,9 @@
             this.toolStripPrintPreview,
             this.backToolStripBtn,
             this.toolStripSeparator2,
+            this.beginDateSplitBtn,
+            this.toolStripSeparator4,
+            this.endDateSplitBtn,
             this.printBtn});
             this.exportingToolStrip.Location = new System.Drawing.Point(0, 0);
             this.exportingToolStrip.Name = "exportingToolStrip";
@@ -178,6 +185,31 @@
             this.printDialog.PrintToFile = true;
             this.printDialog.UseEXDialog = true;
             // 
+            // beginDateSplitBtn
+            // 
+            this.beginDateSplitBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.beginDateSplitBtn.Image = ((System.Drawing.Image)(resources.GetObject("beginDateSplitBtn.Image")));
+            this.beginDateSplitBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.beginDateSplitBtn.Name = "beginDateSplitBtn";
+            this.beginDateSplitBtn.Size = new System.Drawing.Size(80, 22);
+            this.beginDateSplitBtn.Text = "Begin Date";
+            this.beginDateSplitBtn.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.beginDateSplitBtn_DropDownItemClicked);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // endDateSplitBtn
+            // 
+            this.endDateSplitBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.endDateSplitBtn.Image = ((System.Drawing.Image)(resources.GetObject("endDateSplitBtn.Image")));
+            this.endDateSplitBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.endDateSplitBtn.Name = "endDateSplitBtn";
+            this.endDateSplitBtn.Size = new System.Drawing.Size(70, 22);
+            this.endDateSplitBtn.Text = "End Date";
+            this.endDateSplitBtn.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.endDateSplitBtn_DropDownItemClicked);
+            // 
             // YourBookings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -221,5 +253,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton printBtn;
         private System.Windows.Forms.PrintDialog printDialog;
+        private System.Windows.Forms.ToolStripSplitButton beginDateSplitBtn;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripSplitButton endDateSplitBtn;
     }
 }

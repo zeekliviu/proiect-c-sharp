@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -58,13 +59,37 @@ namespace Proiect_C_.Forms
                 errorProvider.SetError(newNameTxtBox, "Please enter a new name!");
                 return;
             }
-            string pattern = @"(?:[A-Z][a-z]*\.?\s+){1,2}[A-Z][a-z]*";
-            if (!System.Text.RegularExpressions.Regex.IsMatch(newNameTxtBox.Text, pattern))
+            foreach(char c in newNameTxtBox.Text)
+            {
+                if (!char.IsLetter(c) && c != ' ' && c != '\'' && c != '-')
+                {
+                    errorProvider.SetError(newNameTxtBox, "Please enter a valid name!");
+                    return;
+                }
+            }
+            string[] names = newNameTxtBox.Text.Split(' ');
+            if (names.Length < 2)
+            {
+                errorProvider.SetError(newNameTxtBox, "Please enter a valid name!");
+                return;
+            }
+            string pattern = @"\b([A-Z]{1}[a-z]{1,30}[- ]{0,1}|[A-Z]{1}[- \']{1}[A-Z]{0,1}  
+    [a-z]{1,30}[- ]{0,1}|[a-z]{1,2}[ -\']{1}[A-Z]{1}[a-z]{1,30}){2,5}";
+            if (!Regex.IsMatch(newNameTxtBox.Text, pattern))
             {
                 errorProvider.SetError(newNameTxtBox, "Please enter a valid name!");
                 return;
             }
             errorProvider.Clear();
+        }
+
+        private void newNameTxtBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                newNameTxtBox_Validating(sender, new CancelEventArgs());
+                submitBtn_Click(sender, e); 
+            }
         }
     }
 }

@@ -38,11 +38,17 @@ namespace Proiect_C_.Forms
         private void emailTxtBox_Validating(object sender, CancelEventArgs e)
         {
             string errorMsg;
-            this.errorProvider.Clear();
             if (!isValidMail(emailTxtBox.Text, out errorMsg))
             {
                 emailTxtBox.Select(0, emailTxtBox.Text.Length);
                 this.errorProvider.SetError(emailTxtBox, errorMsg);
+                if (this.ActiveControl != backBtn)
+                    e.Cancel = true;
+            }
+            else
+            {
+                errorProvider.Clear();
+                e.Cancel = false;
             }
         }
         private bool isValidMail(string email, out string errorMsg)
@@ -64,10 +70,16 @@ namespace Proiect_C_.Forms
         private void firstPwdTxtBox_Validating(object sender, CancelEventArgs e)
         {
             string errorMsg;
-            this.errorProvider.Clear();
             if (!IsValidPassword(firstPwdTxtBox.Text, out errorMsg))
             {
                 this.errorProvider.SetError(firstPwdTxtBox, errorMsg);
+                if (this.ActiveControl != backBtn && this.ActiveControl != showPwdChkBox)
+                    e.Cancel = true;
+            }
+            else
+            {
+                errorProvider.Clear();
+                e.Cancel = false;
             }
         }
         private bool IsValidPassword(string password, out string errorMsg)
@@ -124,10 +136,16 @@ namespace Proiect_C_.Forms
         private void secondPwdTxtBox_Validating(object sender, CancelEventArgs e)
         {
             string errorMsg;
-            this.errorProvider.Clear();
             if (!PasswordsMatch(secondPwdTxtBox.Text, out errorMsg))
             {
                 this.errorProvider.SetError(secondPwdTxtBox, errorMsg);
+                if (this.ActiveControl != backBtn && this.ActiveControl != showPwdChkBox)
+                    e.Cancel = true;
+            }
+            else
+            {
+                errorProvider.Clear();
+                e.Cancel = false;
             }
         }
 
@@ -148,11 +166,17 @@ namespace Proiect_C_.Forms
         private void firstNameTxtBox_Validating(object sender, CancelEventArgs e)
         {
             string errorMsg;
-            this.errorProvider.Clear();
             if (!isNameValid(firstNameTxtBox.Text, out errorMsg))
             {
                 firstNameTxtBox.Select(0, firstNameTxtBox.Text.Length);
                 this.errorProvider.SetError(firstNameTxtBox, errorMsg);
+                if (this.ActiveControl != backBtn)
+                    e.Cancel = true;
+            }
+            else
+            {
+                errorProvider.Clear();
+                e.Cancel = false;
             }
         }
 
@@ -175,11 +199,17 @@ namespace Proiect_C_.Forms
         private void lastNameTxtBox_Validating(object sender, CancelEventArgs e)
         {
             string errorMsg;
-            this.errorProvider.Clear();
             if (!isNameValid(lastNameTxtBox.Text, out errorMsg))
             {
                 lastNameTxtBox.Select(0, lastNameTxtBox.Text.Length);
                 this.errorProvider.SetError(lastNameTxtBox, errorMsg);
+                if (this.ActiveControl != backBtn)
+                    e.Cancel = true;
+            }
+            else
+            {
+                errorProvider.Clear();
+                e.Cancel = false;
             }
         }
 
@@ -187,11 +217,17 @@ namespace Proiect_C_.Forms
         private void phoneTxtBox_Validating(object sender, CancelEventArgs e)
         {
             string errorMsg;
-            this.errorProvider.Clear();
             if (!isPhoneValid(phoneTxtBox.Text, out errorMsg))
             {
                 phoneTxtBox.Select(0, phoneTxtBox.Text.Length);
                 this.errorProvider.SetError(phoneTxtBox, errorMsg);
+                if (this.ActiveControl != backBtn)
+                    e.Cancel = true;
+            }
+            else
+            {
+                errorProvider.Clear();
+                e.Cancel = false;
             }
         }
 
@@ -230,6 +266,11 @@ namespace Proiect_C_.Forms
 
         private void submitBtn_Click(object sender, EventArgs e)
         {
+            if(!ValidateChildren())
+            {
+                MessageBox.Show("Please fill in all the fields correctly!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             if (this.errorProvider.GetError(emailTxtBox)=="" && this.errorProvider.GetError(firstPwdTxtBox) == "" && this.errorProvider.GetError(secondPwdTxtBox) == "" && this.errorProvider.GetError(firstNameTxtBox) == "" && this.errorProvider.GetError(lastNameTxtBox) == "" && this.errorProvider.GetError(phoneTxtBox) == "")
             {
                 try

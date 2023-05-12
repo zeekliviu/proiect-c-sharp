@@ -43,7 +43,7 @@ namespace Proiect_C_
 
         private void logInBtn_Click(object sender, EventArgs e)
         {
-            var LogInForm = new LogInForm(pwd) // pentru a putea trimite mail cu fisier .csv sau .txt intr-o viitoare versiune
+            var LogInForm = new LogInForm(pwd)
             {
                 StartPosition = FormStartPosition.CenterScreen
             };
@@ -55,7 +55,6 @@ namespace Proiect_C_
                 {
                     var bookForm = new BookForm(personalForm);
                     bookForm.ShowDialog();
-                    // bookForm.ShowDialog(); cand o sa fie gata implementarea cu temp_bookings din BD
                 }
             }
             this.Show();
@@ -68,7 +67,7 @@ namespace Proiect_C_
 
         private void bgBox_Paint(object sender, PaintEventArgs e)
         {
-            ImageAnimator.UpdateFrames(global::Proiect_C_.Properties.Resources.hotel);
+            ImageAnimator.UpdateFrames(Properties.Resources.hotel);
         }
     }
 }

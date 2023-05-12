@@ -60,7 +60,6 @@ namespace Proiect_C_.Forms
 
         private void logInBtn_Click(object sender, EventArgs e)
         {
-            // if error provider is not empty, then there are errors
             if(this.errorProvider.GetError(emailTxtBox)=="")
                 if (this.pwdTxtBox.Text == "")
                     { MessageBox.Show("Enter a password first!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); return; }

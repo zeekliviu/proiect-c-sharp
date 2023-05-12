@@ -114,7 +114,6 @@ namespace Proiect_C_.Forms
                     }
                 }
             }
-            // show a message box with Yes and No buttons and store the result
             DialogResult sendToMail = MessageBox.Show("Do you want to send the CSV file to your email?", "Send to email", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (sendToMail == DialogResult.Yes)
             {
@@ -174,7 +173,6 @@ namespace Proiect_C_.Forms
             using (var writer = new StreamWriter(output_file))
                 foreach(var element in datedBookings)
                     writer.WriteLine("You got a booking from "+ element.CheckIn.ToString("d")+" to " + element.CheckOut.ToString("d")+". The booking is in "+element.Location+", at "+element.Building+". The room is of type "+Enum.GetName(typeof(RoomType),element.RoomType) + (element.HasBalcony ? " and it does have a balcony." : " and it does not have a balcony.") + " The total cost of this booking was " + element.TotalCost.ToString("C", new CultureInfo("ro-RO")) +".");
-            // show a message box with Yes and No buttons and store the result
             DialogResult sendToMail = MessageBox.Show("Do you want to send the TXT file to your email?", "Send to email", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (sendToMail == DialogResult.Yes)
             {
@@ -367,9 +365,7 @@ namespace Proiect_C_.Forms
             string totalCost = $"Grand Total: {Bookings.Sum(b => b.TotalCost).ToString("C", new CultureInfo("ro-RO"))}";
             RectangleF textCostRect = new RectangleF(centerX3 - (totalCostRectWidth / 2), centerY3 - (totalCostRectHeight / 2), totalCostRectWidth, totalCostRectHeight);
             e.Graphics.DrawString(totalCost, font, brush, textCostRect, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center});
-            // Draw the "Hope you had a good time!" string
-            //Font largeFont = new Font("Script MT Bold", 36);
-            
+            // Draw the "Hope you had a good time!" string with a custom font
             PrivateFontCollection pfc = new PrivateFontCollection();
             pfc.AddFontFile(string.Format("{0}Resources\\CoffeCake.ttf", Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\"))));
             Font largeFont = new Font(pfc.Families[0], 36f);

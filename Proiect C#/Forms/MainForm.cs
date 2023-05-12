@@ -54,11 +54,8 @@ namespace Proiect_C_
                 while(personalForm.ShowDialog() != DialogResult.Abort)
                 {
                     var bookForm = new BookForm(personalForm);
-                    if(bookForm.ShowDialog() == DialogResult.Cancel)
-                    {
-                        personalForm.bookFormBookings = bookForm.bookings;
-                    }
-                    else personalForm.bookFormBookings = new Entities.Booking[0];
+                    bookForm.ShowDialog();
+                    // bookForm.ShowDialog(); cand o sa fie gata implementarea cu temp_bookings din BD
                 }
             }
             this.Show();

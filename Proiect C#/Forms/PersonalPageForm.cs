@@ -146,11 +146,14 @@ namespace Proiect_C_.Forms
         {
             var changeMail = new ChangeMail(Client, pwd);
             changeMail.ShowDialog();
+            Client = changeMail.Client;
         }
 
         private void changeNameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ChangeName(Client, pwd).ShowDialog();
+            var changeName = new ChangeName(Client, pwd);
+            changeName.ShowDialog();
+            Client = changeName.client;
             welcomeLabel.Text = "Welcome, " + Client.FirstName + " " + Client.LastName + "!";
             float fontSize = welcomeLabel.Font.Size;
             float newWidth = TextRenderer.MeasureText(welcomeLabel.Text, new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style)).Width;

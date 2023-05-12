@@ -346,6 +346,7 @@ namespace Proiect_C_.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "SignUpForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Join us!";
             this.Load += new System.EventHandler(this.SignUpForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();

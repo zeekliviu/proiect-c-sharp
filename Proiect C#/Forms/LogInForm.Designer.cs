@@ -179,6 +179,7 @@ namespace Proiect_C_.Forms
             this.Icon = global::Proiect_C_.Properties.Resources.icon;
             this.MaximizeBox = false;
             this.Name = "LogInForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Log In";
             this.Load += new System.EventHandler(this.LogInForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();

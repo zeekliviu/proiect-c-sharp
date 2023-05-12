@@ -18,7 +18,7 @@ namespace Proiect_C_.Forms
 {
     public partial class ChangeMail : Form
     {
-        Client Client;
+        public Client Client;
         string pwd;
 
         public ChangeMail()
@@ -131,9 +131,7 @@ namespace Proiect_C_.Forms
                 client.Send(msg);
                 client.Disconnect(true);
             }
-            var verifyEmailForm = new VerificationForm(code, email);
-            var result = verifyEmailForm.ShowDialog();
-            if(result == DialogResult.OK)
+            if(new VerificationForm(code, email).ShowDialog() == DialogResult.OK)
             {
                 try
                 {
@@ -142,14 +140,31 @@ namespace Proiect_C_.Forms
                     {
                         connection.Open();
                         // update the email
-                        string query = "UPDATE Users SET Email = :Email WHERE Email = :ClientEmail";
+                        string query = "update users set email = :newmail where email = :oldmail";
                         using (OracleCommand command = new OracleCommand(query, connection))
                         {
-                            command.Parameters.Add(":Email", email);
-                            command.Parameters.Add(":ClientEmail", Client.Email);
+                            command.Parameters.Add(":newmail", email);
+                            command.Parameters.Add(":oldmail", Client.Email);
+                            command.ExecuteNonQuery();
+                        }
+                        // update the bookings 
+                        query = "update bookings set clientemail = :newmail where clientemail = :oldmail";
+                        using (OracleCommand command = new OracleCommand(query, connection))
+                        {
+                            command.Parameters.Add(":newmail", email);
+                            command.Parameters.Add(":oldmail", Client.Email);
+                            command.ExecuteNonQuery();
+                        }
+                        // update the temp_bookings
+                        query = "update temp_bookings set clientemail = :newmail where clientemail = :oldmail";
+                        using (OracleCommand command = new OracleCommand(query, connection))
+                        {
+                            command.Parameters.Add(":newmail", email);
+                            command.Parameters.Add(":oldmail", Client.Email);
                             command.ExecuteNonQuery();
                         }
                     }
+                Client.Email = email;
                 }
                 catch (Exception ex)
                 {

@@ -365,6 +365,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BookForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Book Now!";
             this.Load += new System.EventHandler(this.BookForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bgBox)).EndInit();

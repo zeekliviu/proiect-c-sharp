@@ -29,6 +29,5 @@ namespace Proiect_C_.Entities
             Phone = phone;
             Password = password;
         }
-
     }
 }

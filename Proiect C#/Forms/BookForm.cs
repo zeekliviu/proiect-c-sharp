@@ -23,6 +23,7 @@ namespace Proiect_C_.Forms
     {
         public JObject json;
         public Booking[] bookings = new Booking[0];
+        string pwd;
         bool listViewHeadersSet = false;
         public PersonalPageForm personalPageForm;
 
@@ -40,25 +41,35 @@ namespace Proiect_C_.Forms
         public BookForm(PersonalPageForm ppf): this()
         {
             personalPageForm = ppf;
-            if (ppf.bookFormBookings.Length > 0)
+            using(var connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, ppf.pwd)))
             {
-                listViewHeadersSet = true;
-                foreach (var prop in typeof(Room).GetProperties())
-                    yourCartListView.Columns.Add(prop.Name);
-                yourCartListView.Columns.Add("Days");
-                yourCartListView.Columns.Add("Price");
-                foreach (var booking in ppf.bookFormBookings)
+                connection.Open();
+                var command = new OracleCommand("select * from temp_bookings where ClientEmail = :email", connection);
+                command.Parameters.Add(new OracleParameter("email", ppf.Client.Email));
+                var reader = command.ExecuteReader();
+                if(reader.HasRows)
                 {
-                    var room = new Room(booking.RoomNumber, booking.RoomType, booking.PricePerNight, booking.Floor, booking.HasBalcony);
-                    var days = (int)Math.Round((booking.CheckOut - booking.CheckIn).TotalDays);
-                    var price = days * room.PricePerNight;
-                    var item = new ListViewItem(new string[] { booking.RoomNumber.ToString(), booking.RoomType.ToString(), booking.PricePerNight.ToString("C", new CultureInfo("ro-RO")), booking.Floor.ToString(), booking.HasBalcony == true ? "Yes" : "No", days.ToString(), price.ToString("C", new CultureInfo("ro-RO")) });
-                    yourCartListView.Items.Add(item);
-                    Array.Resize(ref bookings, bookings.Length+1);
-                    bookings[bookings.Length - 1] = booking;
+                    listViewHeadersSet = true;
+                    foreach (var prop in typeof(Room).GetProperties())
+                        yourCartListView.Columns.Add(prop.Name);
+                    yourCartListView.Columns.Add("Days");
+                    yourCartListView.Columns.Add("Price");
+                    while (reader.Read())
+                    {
+                        var room = new Room(reader.GetInt32(2), (RoomType)Enum.Parse(typeof(RoomType),reader.GetString(8)), reader.GetDecimal(11), reader.GetInt32(9), reader.GetBoolean(10));
+                        var checkIn = reader.GetDateTime(0);
+                        var checkOut = reader.GetDateTime(1);
+                        var days = (int)Math.Round((checkOut - checkIn).TotalDays);
+                        var price = days * room.PricePerNight;
+                        var item = new ListViewItem(new string[] { room.Number.ToString(), room.Type.ToString(), room.PricePerNight.ToString("C", new CultureInfo("ro-RO")), room.Floor.ToString(), room.HasBalcony ? "Yes" : "No", days.ToString(), price.ToString("C", new CultureInfo("ro-RO")) });
+                        yourCartListView.Items.Add(item);
+                        Array.Resize(ref bookings, bookings.Length + 1);
+                        bookings[bookings.Length - 1] = new Booking(ppf.Client, checkIn, checkOut, room, reader.GetString(5), reader.GetString(6), reader.GetString(7));
+                    }
+                    yourCartListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
                 }
-                yourCartListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             }
+            pwd = ppf.pwd;
         }
         private void bgTimer_Tick(object sender, EventArgs e)
         {
@@ -136,6 +147,13 @@ namespace Proiect_C_.Forms
         {
             try
             {
+                using(var connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd)))
+                {
+                    connection.Open();
+                    var command = new OracleCommand("delete from temp_bookings where ClientEmail = :email", connection);
+                    command.Parameters.Add(new OracleParameter("email", personalPageForm.Client.Email));
+                    command.ExecuteNonQuery();
+                }
                 yourCartListView.Clear();
                 listViewHeadersSet = false;
                 bookings = new Booking[0];
@@ -209,6 +227,35 @@ namespace Proiect_C_.Forms
         private void backBtn_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+            using (var connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd)))
+            {
+                connection.Open();
+                using(OracleCommand command = new OracleCommand("delete from temp_bookings where ClientEmail = :email", connection))
+                {
+                    command.Parameters.Add(new OracleParameter("email", personalPageForm.Client.Email));
+                    command.ExecuteNonQuery();
+                }
+                for (int i = 0; i < bookings.Length; i++)
+                {
+                    string query = "INSERT INTO temp_bookings (CheckIn, CheckOut, RoomNumber, TotalCost, ClientEmail, Location, Place, Building, RoomType, Floor, HasBalcony, PricePerNight) VALUES (:StartDate, :EndDate, :RoomNumber, :TotalCost, :ClientEmail, :Location, :Place, :Building, :RoomType, :Floor, :HasBalcony, :PricePerNight)";
+                    using (OracleCommand command = new OracleCommand(query, connection))
+                    {
+                        command.Parameters.Add(":StartDate", bookings[i].CheckIn);
+                        command.Parameters.Add(":EndDate", bookings[i].CheckOut);
+                        command.Parameters.Add(":RoomNumber", bookings[i].RoomNumber);
+                        command.Parameters.Add(":TotalCost", decimal.Round(bookings[i].TotalCost, 2));
+                        command.Parameters.Add(":ClientEmail", bookings[i].EmailOfClient);
+                        command.Parameters.Add(":Location", bookings[i].Location);
+                        command.Parameters.Add(":Place", bookings[i].Place);
+                        command.Parameters.Add(":Building", bookings[i].Building);
+                        command.Parameters.Add(":RoomType", Enum.GetName(typeof(RoomType), bookings[i].RoomType));
+                        command.Parameters.Add(":Floor", bookings[i].Floor);
+                        command.Parameters.Add(":HasBalcony", Convert.ToInt32(bookings[i].HasBalcony));
+                        command.Parameters.Add(":PricePerNight", decimal.Round(bookings[i].PricePerNight, 2));
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
             Close();
         }
 
@@ -243,6 +290,11 @@ namespace Proiect_C_.Forms
                             command.Parameters.Add(":PricePerNight", decimal.Round(bookings[i].PricePerNight, 2));
                             command.ExecuteNonQuery();
                         }
+                    }
+                    using(OracleCommand command = new OracleCommand("DELETE FROM temp_bookings WHERE ClientEmail = :Email", connection))
+                    {
+                        command.Parameters.Add(":Email", personalPageForm.Client.Email);
+                        command.ExecuteNonQuery();
                     }
                 }
                 MessageBox.Show("Your booking was successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

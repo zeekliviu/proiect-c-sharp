@@ -16,7 +16,7 @@ namespace Proiect_C_.Forms
     public partial class ChangeName : Form
     {
         string pwd;
-        Client client;
+        public Client client;
         public ChangeName()
         {
             InitializeComponent();

@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
+using Google.Authenticator;
 
 namespace Proiect_C_.Forms
 {
@@ -90,10 +91,15 @@ namespace Proiect_C_.Forms
                                         return;
                                     }
                                 }
+                                if (reader["TwoFactor"].ToString() == "Y")
+                                {
+                                    var tfa = new TwoFactorAuthenticator();
+                                    // TO DO
+                                }
                                 this.DialogResult = DialogResult.OK;
                                 this.emailTxtBox.Text = "";
                                 this.pwdTxtBox.Text = "";
-                                this.Client = new Client(reader["FirstName"].ToString(), reader["LastName"].ToString(), (byte[])reader["Photo"], reader["Email"].ToString(), reader["Phone"].ToString(), reader["Password"].ToString());
+                                this.Client = new Client(reader["FirstName"].ToString(), reader["LastName"].ToString(), (byte[])reader["Photo"], reader["Email"].ToString(), reader["Phone"].ToString());
                             }
                             else
                             {

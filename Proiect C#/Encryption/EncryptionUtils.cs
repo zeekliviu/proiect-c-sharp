@@ -37,5 +37,32 @@ namespace Proiect_C_.Encryption
                 }
             }
         }
+        internal static string EncryptString(string text, string password)
+        {
+            byte[] plainTextBytes = Encoding.UTF8.GetBytes(text);
+
+            using (var aes = Aes.Create())
+            {
+                var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 1000, HashAlgorithmName.SHA512);
+                aes.Key = pbkdf2.GetBytes(32);
+                aes.IV = pbkdf2.GetBytes(16);
+
+                using (var encryptor = aes.CreateEncryptor())
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        using (var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
+                        {
+                            cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
+                            cryptoStream.FlushFinalBlock();
+
+                            byte[] cipherTextBytes = memoryStream.ToArray();
+
+                            return Convert.ToBase64String(cipherTextBytes);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

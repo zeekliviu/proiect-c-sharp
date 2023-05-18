@@ -166,18 +166,18 @@ namespace Proiect_C_.Forms
             // 
             this.firstPwdTxtBox.Location = new System.Drawing.Point(110, 139);
             this.firstPwdTxtBox.Name = "firstPwdTxtBox";
-            this.firstPwdTxtBox.PasswordChar = '*';
             this.firstPwdTxtBox.Size = new System.Drawing.Size(191, 20);
             this.firstPwdTxtBox.TabIndex = 9;
+            this.firstPwdTxtBox.UseSystemPasswordChar = true;
             this.firstPwdTxtBox.Validating += new System.ComponentModel.CancelEventHandler(this.firstPwdTxtBox_Validating);
             // 
             // secondPwdTxtBox
             // 
             this.secondPwdTxtBox.Location = new System.Drawing.Point(110, 174);
             this.secondPwdTxtBox.Name = "secondPwdTxtBox";
-            this.secondPwdTxtBox.PasswordChar = '*';
             this.secondPwdTxtBox.Size = new System.Drawing.Size(191, 20);
             this.secondPwdTxtBox.TabIndex = 10;
+            this.secondPwdTxtBox.UseSystemPasswordChar = true;
             this.secondPwdTxtBox.Validating += new System.ComponentModel.CancelEventHandler(this.secondPwdTxtBox_Validating);
             // 
             // firstNameTxtBox
@@ -346,6 +346,7 @@ namespace Proiect_C_.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "SignUpForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Join us!";
             this.Load += new System.EventHandler(this.SignUpForm_Load);

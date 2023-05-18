@@ -11,6 +11,7 @@ using System.Data;
 using System.IO;
 using System.Drawing.Drawing2D;
 using Oracle.ManagedDataAccess.Client;
+using Google.Authenticator;
 
 namespace Proiect_C_.Forms
 {
@@ -253,14 +254,13 @@ namespace Proiect_C_.Forms
         {
             if (showPwdChkBox.Checked)
             {
-                firstPwdTxtBox.PasswordChar = '\0';
-                secondPwdTxtBox.PasswordChar =
-                    '\0';
+                firstNameTxtBox.UseSystemPasswordChar = false;
+                lastNameTxtBox.UseSystemPasswordChar = false;
             }
             else
             {
-                firstPwdTxtBox.PasswordChar = '*';
-                secondPwdTxtBox.PasswordChar = '*';
+                firstPwdTxtBox.UseSystemPasswordChar = true;
+                secondPwdTxtBox.UseSystemPasswordChar = true;
             }
         }
 
@@ -327,7 +327,6 @@ namespace Proiect_C_.Forms
                         // if the email is not verified, then redirect to the register form and ask the user to enter the email again
                         if (result == DialogResult.OK)
                         {
-                            // if the email doesn't exist, then add it to the database
                             query = "INSERT INTO Users (Email, Password, FirstName, LastName, Phone, Photo) VALUES (:Email, :Password, :FirstName, :LastName, :Phone, :Photo)"; // cand se foloseste SQL Oracle, nu se folosesc parametrii cu @, ci cu :, la SQL Server se folosesc parametrii cu @
                             using (OracleCommand command = new OracleCommand(query, connection))
                             {
@@ -358,7 +357,7 @@ namespace Proiect_C_.Forms
                             MessageBox.Show("Your account has been registered and added to the database!", "Succes!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             this.Close();
                         }
-                        else if (result == DialogResult.Cancel)
+                        else
                         {
                             MessageBox.Show("You canceled! The account has been not added to database. You may change your mail and try again.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.Show();

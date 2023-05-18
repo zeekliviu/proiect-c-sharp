@@ -40,6 +40,9 @@
             this.removePhotosetToDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeEmailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enable2FAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.disable2FAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.welcomeLabel = new System.Windows.Forms.Label();
             this.profileMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.photoBox)).BeginInit();
@@ -111,37 +114,60 @@
             this.changePhotoToolStripMenuItem,
             this.removePhotosetToDefaultToolStripMenuItem,
             this.changeEmailToolStripMenuItem,
-            this.changeNameToolStripMenuItem});
+            this.changeNameToolStripMenuItem,
+            this.changePasswordToolStripMenuItem,
+            this.enable2FAToolStripMenuItem,
+            this.disable2FAToolStripMenuItem});
             this.photoChangeContextMenuStrip.Name = "photoChangeContextMenuStrip";
-            this.photoChangeContextMenuStrip.Size = new System.Drawing.Size(233, 92);
+            this.photoChangeContextMenuStrip.Size = new System.Drawing.Size(242, 180);
             // 
             // changePhotoToolStripMenuItem
             // 
             this.changePhotoToolStripMenuItem.Name = "changePhotoToolStripMenuItem";
-            this.changePhotoToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.changePhotoToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.changePhotoToolStripMenuItem.Text = "Change Photo...";
             this.changePhotoToolStripMenuItem.Click += new System.EventHandler(this.changePhotoToolStripMenuItem_Click);
             // 
             // removePhotosetToDefaultToolStripMenuItem
             // 
             this.removePhotosetToDefaultToolStripMenuItem.Name = "removePhotosetToDefaultToolStripMenuItem";
-            this.removePhotosetToDefaultToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
-            this.removePhotosetToDefaultToolStripMenuItem.Text = "Remove Photo (set to default)";
+            this.removePhotosetToDefaultToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.removePhotosetToDefaultToolStripMenuItem.Text = "Remove Photo (set to default)...";
             this.removePhotosetToDefaultToolStripMenuItem.Click += new System.EventHandler(this.removePhotosetToDefaultToolStripMenuItem_Click);
             // 
             // changeEmailToolStripMenuItem
             // 
             this.changeEmailToolStripMenuItem.Name = "changeEmailToolStripMenuItem";
-            this.changeEmailToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.changeEmailToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.changeEmailToolStripMenuItem.Text = "Change Email...";
             this.changeEmailToolStripMenuItem.Click += new System.EventHandler(this.changeEmailToolStripMenuItem_Click);
             // 
             // changeNameToolStripMenuItem
             // 
             this.changeNameToolStripMenuItem.Name = "changeNameToolStripMenuItem";
-            this.changeNameToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.changeNameToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.changeNameToolStripMenuItem.Text = "Change Name...";
             this.changeNameToolStripMenuItem.Click += new System.EventHandler(this.changeNameToolStripMenuItem_Click);
+            // 
+            // changePasswordToolStripMenuItem
+            // 
+            this.changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
+            this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.changePasswordToolStripMenuItem.Text = "Change Password...";
+            this.changePasswordToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
+            // 
+            // enable2FAToolStripMenuItem
+            // 
+            this.enable2FAToolStripMenuItem.Name = "enable2FAToolStripMenuItem";
+            this.enable2FAToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.enable2FAToolStripMenuItem.Text = "Enable 2FA...";
+            this.enable2FAToolStripMenuItem.Click += new System.EventHandler(this.enable2FAToolStripMenuItem_Click);
+            // 
+            // disable2FAToolStripMenuItem
+            // 
+            this.disable2FAToolStripMenuItem.Name = "disable2FAToolStripMenuItem";
+            this.disable2FAToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.disable2FAToolStripMenuItem.Text = "Disable 2FA...";
             // 
             // welcomeLabel
             // 
@@ -166,6 +192,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.profileMenuStrip;
             this.Name = "PersonalPageForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Your Profile";
             this.profileMenuStrip.ResumeLayout(false);
@@ -190,5 +217,8 @@
         private System.Windows.Forms.ToolStripMenuItem removePhotosetToDefaultToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changeEmailToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changeNameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem enable2FAToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem disable2FAToolStripMenuItem;
     }
 }

@@ -12,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Google.Authenticator;
+using System.Transactions;
 
 namespace Proiect_C_.Forms
 {
@@ -129,7 +131,7 @@ namespace Proiect_C_.Forms
                 photoBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                 Client.ProfilePicture = ms.ToArray();
             }
-            using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection,pwd)))
+            using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection, pwd)))
             {
                 string query = "UPDATE Users SET Photo = :ProfilePicture WHERE Email = :EmailClient";
                 using (OracleCommand command = new OracleCommand(query, connection))
@@ -146,28 +148,96 @@ namespace Proiect_C_.Forms
         {
             var changeMail = new ChangeMail(Client, pwd);
             changeMail.ShowDialog();
-            Client = changeMail.Client;
+            if (changeMail.DialogResult == DialogResult.OK)
+                Client = changeMail.Client;
         }
 
         private void changeNameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var changeName = new ChangeName(Client, pwd);
             changeName.ShowDialog();
-            Client = changeName.client;
-            welcomeLabel.Text = "Welcome, " + Client.FirstName + " " + Client.LastName + "!";
-            float fontSize = welcomeLabel.Font.Size;
-            float newWidth = TextRenderer.MeasureText(welcomeLabel.Text, new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style)).Width;
-            while(welcomeLabel.Left + newWidth > welcomeLabel.Parent.Width - 30)
+            if (changeName.DialogResult == DialogResult.OK)
             {
-                fontSize -= 0.25f;
-                newWidth = TextRenderer.MeasureText(welcomeLabel.Text, new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style)).Width;
+                Client = changeName.client;
+                welcomeLabel.Text = "Welcome, " + Client.FirstName + " " + Client.LastName + "!";
+                float fontSize = welcomeLabel.Font.Size;
+                float newWidth = TextRenderer.MeasureText(welcomeLabel.Text, new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style)).Width;
+                while (welcomeLabel.Left + newWidth > welcomeLabel.Parent.Width - 30)
+                {
+                    fontSize -= 0.25f;
+                    newWidth = TextRenderer.MeasureText(welcomeLabel.Text, new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style)).Width;
+                }
+                while (welcomeLabel.Left + newWidth < welcomeLabel.Parent.Width - 30)
+                {
+                    fontSize += 0.25f;
+                    newWidth = TextRenderer.MeasureText(welcomeLabel.Text, new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style)).Width;
+                }
+                welcomeLabel.Font = new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style);
             }
-            while(welcomeLabel.Left + newWidth < welcomeLabel.Parent.Width - 30)
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var changePassword = new ChangePassword(pwd, Client);
+            changePassword.ShowDialog();
+            if (changePassword.DialogResult == DialogResult.OK)
             {
-                fontSize += 0.25f;
-                newWidth = TextRenderer.MeasureText(welcomeLabel.Text, new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style)).Width;
+                MessageBox.Show("Password changed successfully! Please log in again with your new password!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                logOutToolStripMenuItem_Click(sender, e);
             }
-            welcomeLabel.Font = new Font(welcomeLabel.Font.FontFamily, fontSize, welcomeLabel.Font.Style);
+        }
+
+        private void enable2FAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var query = "select twofactor from users where email = :email";
+            var connString = Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection, pwd);
+            var result = "";
+            using (OracleConnection connection = new OracleConnection(connString))
+            {
+                connection.Open();
+                using (var command = new OracleCommand(query, connection))
+                {
+                    command.Parameters.Add(":email", Client.Email);
+                    var reader = command.ExecuteReader();
+                    reader.Read();
+                    result = reader["twofactor"].ToString();
+                }
+
+                if (result == "Y")
+                {
+                    MessageBox.Show("2FA is already enabled!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    Guid guid = Guid.NewGuid();
+                    var secret_key = guid.ToString().Replace("-", "").Substring(0, 10);
+                    var enable2FA = new Enable2FA(secret_key, Client.Email);
+                    enable2FA.ShowDialog();
+                    if (enable2FA.DialogResult == DialogResult.OK)
+                    {
+                        query = "update users set twofactor = 'Y' where email = :email";
+                        using (OracleCommand command2 = new OracleCommand(query, connection))
+                        {
+                            command2.Parameters.Add(":email", Client.Email);
+                            command2.ExecuteNonQuery();
+                        }
+                        query = "update users set private_key = :key where email = :email";
+                        using (OracleCommand command2 = new OracleCommand(query, connection))
+                        {
+                            command2.Parameters.Add(":key", Encryption.EncryptionUtils.EncryptString(secret_key, pwd));
+                            command2.Parameters.Add(":email", Client.Email);
+                            command2.ExecuteNonQuery();
+                        }
+                        MessageBox.Show("2FA enabled successfully! Please log in again!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        logOutToolStripMenuItem_Click(sender, e);
+                    }
+                    else
+                    {
+                        MessageBox.Show("2FA not enabled!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
     }
 }

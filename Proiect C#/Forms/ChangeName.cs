@@ -48,6 +48,7 @@ namespace Proiect_C_.Forms
                     command.Parameters.Add(":email", client.Email);
                     command.ExecuteNonQuery();
                 }
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
         }
@@ -96,6 +97,12 @@ namespace Proiect_C_.Forms
                 newNameTxtBox_Validating(sender, new CancelEventArgs());
                 submitBtn_Click(sender, e); 
             }
+        }
+
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Abort;
+            Close();
         }
     }
 }

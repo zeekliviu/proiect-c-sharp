@@ -172,6 +172,11 @@ namespace Proiect_C_.Forms
                     return;
                 }
                 MessageBox.Show("Email changed successfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                MessageBox.Show("Email change cancelled!", "Cancelled!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             this.Close();
         }
@@ -183,6 +188,12 @@ namespace Proiect_C_.Forms
                 emailTxtBox_Validating(sender, new CancelEventArgs());
                 submitBtn_Click(sender, e);
             }
+        }
+
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Abort;
+            Close();
         }
     }
 }

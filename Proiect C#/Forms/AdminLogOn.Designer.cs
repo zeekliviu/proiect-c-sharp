@@ -32,15 +32,16 @@
             this.pwdBox = new System.Windows.Forms.TextBox();
             this.InputLbl = new System.Windows.Forms.Label();
             this.submitBtn = new Proiect_C_.Custom_Controls.CustomButton();
+            this.cancelBtn = new Proiect_C_.Custom_Controls.CustomButton();
             this.SuspendLayout();
             // 
             // pwdBox
             // 
             this.pwdBox.Location = new System.Drawing.Point(15, 41);
             this.pwdBox.Name = "pwdBox";
-            this.pwdBox.PasswordChar = '*';
             this.pwdBox.Size = new System.Drawing.Size(313, 20);
             this.pwdBox.TabIndex = 0;
+            this.pwdBox.UseSystemPasswordChar = true;
             this.pwdBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pwdBox_KeyDown);
             // 
             // InputLbl
@@ -62,14 +63,33 @@
             this.submitBtn.FlatAppearance.BorderSize = 0;
             this.submitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.submitBtn.ForeColor = System.Drawing.Color.White;
-            this.submitBtn.Location = new System.Drawing.Point(90, 67);
+            this.submitBtn.Location = new System.Drawing.Point(224, 67);
             this.submitBtn.Name = "submitBtn";
-            this.submitBtn.Size = new System.Drawing.Size(180, 33);
+            this.submitBtn.Size = new System.Drawing.Size(104, 33);
             this.submitBtn.TabIndex = 2;
             this.submitBtn.Text = "Submit";
             this.submitBtn.TextColor = System.Drawing.Color.White;
             this.submitBtn.UseVisualStyleBackColor = false;
             this.submitBtn.Click += new System.EventHandler(this.submitBtn_Click);
+            // 
+            // cancelBtn
+            // 
+            this.cancelBtn.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.cancelBtn.BackgroundColor = System.Drawing.Color.MediumSlateBlue;
+            this.cancelBtn.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.cancelBtn.BorderRadius = 20;
+            this.cancelBtn.BorderSize = 0;
+            this.cancelBtn.FlatAppearance.BorderSize = 0;
+            this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cancelBtn.ForeColor = System.Drawing.Color.White;
+            this.cancelBtn.Location = new System.Drawing.Point(15, 67);
+            this.cancelBtn.Name = "cancelBtn";
+            this.cancelBtn.Size = new System.Drawing.Size(104, 33);
+            this.cancelBtn.TabIndex = 3;
+            this.cancelBtn.Text = "Cancel";
+            this.cancelBtn.TextColor = System.Drawing.Color.White;
+            this.cancelBtn.UseVisualStyleBackColor = false;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // AdminLogOn
             // 
@@ -77,12 +97,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(340, 112);
             this.ControlBox = false;
+            this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.submitBtn);
             this.Controls.Add(this.InputLbl);
             this.Controls.Add(this.pwdBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AdminLogOn";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Enter the password...";
             this.ResumeLayout(false);
@@ -95,5 +117,6 @@
         private System.Windows.Forms.TextBox pwdBox;
         private System.Windows.Forms.Label InputLbl;
         private Custom_Controls.CustomButton submitBtn;
+        private Custom_Controls.CustomButton cancelBtn;
     }
 }

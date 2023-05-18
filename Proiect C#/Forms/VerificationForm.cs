@@ -44,5 +44,11 @@ namespace Proiect_C_.Forms
             this.verifyLabel.Parent = this.bgBox;
             this.verifyLabel.BackColor = Color.Transparent;
         }
+
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Abort;
+            Close();
+        }
     }
 }

@@ -23,11 +23,13 @@ namespace Proiect_C_
             logoBox.Region = new Region(path);
             var AdminLogOnForm = new AdminLogOn();
             this.Hide();
-            if(AdminLogOnForm.ShowDialog() == DialogResult.OK)
+            if (AdminLogOnForm.ShowDialog() == DialogResult.OK)
             {
                 pwd = AdminLogOnForm.pwd;
                 this.Show();
             }
+            else
+                this.Close();
         }
 
         private void signUpBtn_Click(object sender, EventArgs e)

@@ -83,9 +83,9 @@ namespace Proiect_C_.Forms
             // 
             this.pwdTxtBox.Location = new System.Drawing.Point(106, 246);
             this.pwdTxtBox.Name = "pwdTxtBox";
-            this.pwdTxtBox.PasswordChar = '*';
             this.pwdTxtBox.Size = new System.Drawing.Size(278, 20);
             this.pwdTxtBox.TabIndex = 4;
+            this.pwdTxtBox.UseSystemPasswordChar = true;
             // 
             // logoBox
             // 
@@ -179,6 +179,7 @@ namespace Proiect_C_.Forms
             this.Icon = global::Proiect_C_.Properties.Resources.icon;
             this.MaximizeBox = false;
             this.Name = "LogInForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Log In";
             this.Load += new System.EventHandler(this.LogInForm_Load);

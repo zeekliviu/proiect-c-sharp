@@ -13,13 +13,12 @@ namespace Proiect_C_.Entities
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public string Password { get; set; }
         public byte[] ProfilePicture { get; set; }
         
         public Client()
         {
         }
-        public Client(string firstName, string lastName, byte[] photo, string email, string phone, string password): this()
+        public Client(string firstName, string lastName, byte[] photo, string email, string phone): this()
         {
             FirstName = firstName;
             LastName = lastName;
@@ -27,7 +26,6 @@ namespace Proiect_C_.Entities
             Array.Copy(photo, ProfilePicture, photo.Length);
             Email = email;
             Phone = phone;
-            Password = password;
         }
     }
 }

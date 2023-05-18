@@ -34,6 +34,7 @@
             this.emailTxtBox = new System.Windows.Forms.TextBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.submitBtn = new Proiect_C_.Custom_Controls.CustomButton();
+            this.cancelBtn = new Proiect_C_.Custom_Controls.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,7 +72,7 @@
             this.submitBtn.FlatAppearance.BorderSize = 0;
             this.submitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.submitBtn.ForeColor = System.Drawing.Color.White;
-            this.submitBtn.Location = new System.Drawing.Point(129, 96);
+            this.submitBtn.Location = new System.Drawing.Point(223, 96);
             this.submitBtn.Name = "submitBtn";
             this.submitBtn.Size = new System.Drawing.Size(134, 30);
             this.submitBtn.TabIndex = 2;
@@ -79,6 +80,25 @@
             this.submitBtn.TextColor = System.Drawing.Color.White;
             this.submitBtn.UseVisualStyleBackColor = false;
             this.submitBtn.Click += new System.EventHandler(this.submitBtn_Click);
+            // 
+            // cancelBtn
+            // 
+            this.cancelBtn.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.cancelBtn.BackgroundColor = System.Drawing.Color.MediumSlateBlue;
+            this.cancelBtn.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.cancelBtn.BorderRadius = 20;
+            this.cancelBtn.BorderSize = 0;
+            this.cancelBtn.FlatAppearance.BorderSize = 0;
+            this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cancelBtn.ForeColor = System.Drawing.Color.White;
+            this.cancelBtn.Location = new System.Drawing.Point(32, 96);
+            this.cancelBtn.Name = "cancelBtn";
+            this.cancelBtn.Size = new System.Drawing.Size(134, 30);
+            this.cancelBtn.TabIndex = 3;
+            this.cancelBtn.Text = "Cancel";
+            this.cancelBtn.TextColor = System.Drawing.Color.White;
+            this.cancelBtn.UseVisualStyleBackColor = false;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // ChangeMail
             // 
@@ -88,12 +108,14 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(388, 138);
             this.ControlBox = false;
+            this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.submitBtn);
             this.Controls.Add(this.emailTxtBox);
             this.Controls.Add(this.emailLbl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ChangeMail";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Change mail";
             this.Load += new System.EventHandler(this.ChangeMail_Load);
@@ -109,5 +131,6 @@
         private System.Windows.Forms.TextBox emailTxtBox;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private Custom_Controls.CustomButton submitBtn;
+        private Custom_Controls.CustomButton cancelBtn;
     }
 }

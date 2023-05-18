@@ -94,6 +94,7 @@ namespace Proiect_C_.Forms
             this.cancelBtn.Text = "Cancel";
             this.cancelBtn.TextColor = System.Drawing.Color.White;
             this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // bgBox
             // 
@@ -121,6 +122,7 @@ namespace Proiect_C_.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "VerificationForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Account confirmation";
             this.Load += new System.EventHandler(this.VerificationForm_Load);

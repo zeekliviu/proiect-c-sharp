@@ -38,5 +38,11 @@ namespace Proiect_C_.Forms
             if(e.KeyCode == Keys.Enter)
                 submitBtn_Click(sender, e);
         }
+
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Abort;
+            Close();
+        }
     }
 }

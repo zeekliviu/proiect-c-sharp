@@ -44,6 +44,7 @@ namespace Proiect_C_.Forms
             this.backBtn = new Proiect_C_.Custom_Controls.CustomButton();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.bgBox = new System.Windows.Forms.PictureBox();
+            this.forgotPwdLbl = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bgBox)).BeginInit();
@@ -160,12 +161,24 @@ namespace Proiect_C_.Forms
             this.bgBox.TabIndex = 9;
             this.bgBox.TabStop = false;
             // 
+            // forgotPwdLbl
+            // 
+            this.forgotPwdLbl.AutoSize = true;
+            this.forgotPwdLbl.Location = new System.Drawing.Point(293, 269);
+            this.forgotPwdLbl.Name = "forgotPwdLbl";
+            this.forgotPwdLbl.Size = new System.Drawing.Size(91, 13);
+            this.forgotPwdLbl.TabIndex = 10;
+            this.forgotPwdLbl.TabStop = true;
+            this.forgotPwdLbl.Text = "Forgot password?";
+            this.forgotPwdLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.forgotPwdLbl_LinkClicked);
+            // 
             // LogInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(447, 349);
             this.ControlBox = false;
+            this.Controls.Add(this.forgotPwdLbl);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.logInBtn);
             this.Controls.Add(this.welcomeLabel);
@@ -202,5 +215,6 @@ namespace Proiect_C_.Forms
         private CustomButton backBtn;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.PictureBox bgBox;
+        private System.Windows.Forms.LinkLabel forgotPwdLbl;
     }
 }

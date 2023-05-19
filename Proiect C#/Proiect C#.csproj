@@ -189,6 +189,12 @@
     <Compile Include="Forms\VerificationForm.Designer.cs">
       <DependentUpon>VerificationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Verify2FA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Verify2FA.Designer.cs">
+      <DependentUpon>Verify2FA.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\YourBookings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\VerificationForm.resx">
       <DependentUpon>VerificationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Verify2FA.resx">
+      <DependentUpon>Verify2FA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\YourBookings.resx">
       <DependentUpon>YourBookings.cs</DependentUpon>

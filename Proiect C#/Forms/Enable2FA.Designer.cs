@@ -49,7 +49,7 @@
             // instructionsLbl1
             // 
             this.instructionsLbl1.AutoSize = true;
-            this.instructionsLbl1.Font = new System.Drawing.Font("Roboto Medium", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.instructionsLbl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.instructionsLbl1.Location = new System.Drawing.Point(58, 29);
             this.instructionsLbl1.Name = "instructionsLbl1";
             this.instructionsLbl1.Size = new System.Drawing.Size(102, 25);
@@ -59,13 +59,14 @@
             // googleAuthLbl
             // 
             this.googleAuthLbl.AutoSize = true;
-            this.googleAuthLbl.Font = new System.Drawing.Font("Roboto", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.googleAuthLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.googleAuthLbl.Location = new System.Drawing.Point(166, 29);
             this.googleAuthLbl.Name = "googleAuthLbl";
-            this.googleAuthLbl.Size = new System.Drawing.Size(214, 25);
+            this.googleAuthLbl.Size = new System.Drawing.Size(234, 25);
             this.googleAuthLbl.TabIndex = 3;
             this.googleAuthLbl.TabStop = true;
             this.googleAuthLbl.Text = "Google Authenticator";
+            this.googleAuthLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.googleAuthLbl_LinkClicked);
             // 
             // QRCodeBox
             // 
@@ -78,84 +79,84 @@
             // scanLbl
             // 
             this.scanLbl.AutoSize = true;
-            this.scanLbl.Font = new System.Drawing.Font("Roboto Medium", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scanLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.scanLbl.Location = new System.Drawing.Point(67, 70);
             this.scanLbl.Name = "scanLbl";
-            this.scanLbl.Size = new System.Drawing.Size(297, 25);
+            this.scanLbl.Size = new System.Drawing.Size(309, 25);
             this.scanLbl.TabIndex = 5;
             this.scanLbl.Text = "2. Scan the QR Code below:";
             // 
             // manualEntryKeyLbl
             // 
             this.manualEntryKeyLbl.AutoSize = true;
-            this.manualEntryKeyLbl.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.manualEntryKeyLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manualEntryKeyLbl.Location = new System.Drawing.Point(98, 275);
             this.manualEntryKeyLbl.Name = "manualEntryKeyLbl";
-            this.manualEntryKeyLbl.Size = new System.Drawing.Size(153, 13);
+            this.manualEntryKeyLbl.Size = new System.Drawing.Size(174, 13);
             this.manualEntryKeyLbl.TabIndex = 6;
             this.manualEntryKeyLbl.Text = "or enter this key in your app: ";
             // 
             // enterTheCodeLbl
             // 
             this.enterTheCodeLbl.AutoSize = true;
-            this.enterTheCodeLbl.Font = new System.Drawing.Font("Roboto Medium", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.enterTheCodeLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.enterTheCodeLbl.Location = new System.Drawing.Point(12, 299);
             this.enterTheCodeLbl.Name = "enterTheCodeLbl";
-            this.enterTheCodeLbl.Size = new System.Drawing.Size(461, 24);
+            this.enterTheCodeLbl.Size = new System.Drawing.Size(449, 25);
             this.enterTheCodeLbl.TabIndex = 7;
             this.enterTheCodeLbl.Text = "3. Enter the 6-digit code from your app below:";
             // 
             // firstDigitTxtBox
             // 
-            this.firstDigitTxtBox.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.firstDigitTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.firstDigitTxtBox.Location = new System.Drawing.Point(37, 335);
             this.firstDigitTxtBox.Name = "firstDigitTxtBox";
-            this.firstDigitTxtBox.Size = new System.Drawing.Size(36, 33);
+            this.firstDigitTxtBox.Size = new System.Drawing.Size(36, 31);
             this.firstDigitTxtBox.TabIndex = 8;
             this.firstDigitTxtBox.TextChanged += new System.EventHandler(this.firstDigitTxtBox_TextChanged);
             // 
             // secondDigitTxtBox
             // 
-            this.secondDigitTxtBox.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.secondDigitTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.secondDigitTxtBox.Location = new System.Drawing.Point(112, 335);
             this.secondDigitTxtBox.Name = "secondDigitTxtBox";
-            this.secondDigitTxtBox.Size = new System.Drawing.Size(36, 33);
+            this.secondDigitTxtBox.Size = new System.Drawing.Size(36, 31);
             this.secondDigitTxtBox.TabIndex = 9;
             this.secondDigitTxtBox.TextChanged += new System.EventHandler(this.secondDigitTxtBox_TextChanged);
             // 
             // thirdDigitTxtBox
             // 
-            this.thirdDigitTxtBox.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.thirdDigitTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.thirdDigitTxtBox.Location = new System.Drawing.Point(188, 335);
             this.thirdDigitTxtBox.Name = "thirdDigitTxtBox";
-            this.thirdDigitTxtBox.Size = new System.Drawing.Size(36, 33);
+            this.thirdDigitTxtBox.Size = new System.Drawing.Size(36, 31);
             this.thirdDigitTxtBox.TabIndex = 10;
             this.thirdDigitTxtBox.TextChanged += new System.EventHandler(this.thirdDigitTxtBox_TextChanged);
             // 
             // fourthDigitTxtBox
             // 
-            this.fourthDigitTxtBox.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fourthDigitTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fourthDigitTxtBox.Location = new System.Drawing.Point(265, 335);
             this.fourthDigitTxtBox.Name = "fourthDigitTxtBox";
-            this.fourthDigitTxtBox.Size = new System.Drawing.Size(36, 33);
+            this.fourthDigitTxtBox.Size = new System.Drawing.Size(36, 31);
             this.fourthDigitTxtBox.TabIndex = 11;
             this.fourthDigitTxtBox.TextChanged += new System.EventHandler(this.fourthDigitTxtBox_TextChanged);
             // 
             // fifthDigitTxtBox
             // 
-            this.fifthDigitTxtBox.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fifthDigitTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fifthDigitTxtBox.Location = new System.Drawing.Point(344, 335);
             this.fifthDigitTxtBox.Name = "fifthDigitTxtBox";
-            this.fifthDigitTxtBox.Size = new System.Drawing.Size(36, 33);
+            this.fifthDigitTxtBox.Size = new System.Drawing.Size(36, 31);
             this.fifthDigitTxtBox.TabIndex = 12;
             this.fifthDigitTxtBox.TextChanged += new System.EventHandler(this.fifthDigitTxtBox_TextChanged);
             // 
             // sixthDigitTxtBox
             // 
-            this.sixthDigitTxtBox.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sixthDigitTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sixthDigitTxtBox.Location = new System.Drawing.Point(416, 335);
             this.sixthDigitTxtBox.Name = "sixthDigitTxtBox";
-            this.sixthDigitTxtBox.Size = new System.Drawing.Size(36, 33);
+            this.sixthDigitTxtBox.Size = new System.Drawing.Size(36, 31);
             this.sixthDigitTxtBox.TabIndex = 13;
             this.sixthDigitTxtBox.TextChanged += new System.EventHandler(this.sixthDigitTxtBox_TextChanged);
             // 

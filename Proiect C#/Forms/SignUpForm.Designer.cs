@@ -53,12 +53,15 @@ namespace Proiect_C_.Forms
             this.submitBtn = new Proiect_C_.Custom_Controls.CustomButton();
             this.backBtn = new Proiect_C_.Custom_Controls.CustomButton();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.showPwdChkBox = new System.Windows.Forms.CheckBox();
             this.photoLabel = new System.Windows.Forms.Label();
             this.openImage = new System.Windows.Forms.OpenFileDialog();
             this.selectImageBtn = new System.Windows.Forms.Button();
             this.imageBox = new System.Windows.Forms.PictureBox();
             this.bgBox = new System.Windows.Forms.PictureBox();
+            this.showFirstPwdBtn = new System.Windows.Forms.Button();
+            this.hideFirstPwdBtn = new System.Windows.Forms.Button();
+            this.showSecondPwdBtn = new System.Windows.Forms.Button();
+            this.hideSecondPwdBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox)).BeginInit();
@@ -255,19 +258,6 @@ namespace Proiect_C_.Forms
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // showPwdChkBox
-            // 
-            this.showPwdChkBox.AutoSize = true;
-            this.showPwdChkBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showPwdChkBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.showPwdChkBox.Location = new System.Drawing.Point(2, 158);
-            this.showPwdChkBox.Name = "showPwdChkBox";
-            this.showPwdChkBox.Size = new System.Drawing.Size(105, 16);
-            this.showPwdChkBox.TabIndex = 17;
-            this.showPwdChkBox.Text = "Show Password";
-            this.showPwdChkBox.UseVisualStyleBackColor = true;
-            this.showPwdChkBox.CheckedChanged += new System.EventHandler(this.showPwdChkBox_CheckedChanged);
-            // 
             // photoLabel
             // 
             this.photoLabel.AutoSize = true;
@@ -314,17 +304,78 @@ namespace Proiect_C_.Forms
             this.bgBox.TabIndex = 21;
             this.bgBox.TabStop = false;
             // 
+            // showFirstPwdBtn
+            // 
+            this.showFirstPwdBtn.BackColor = System.Drawing.Color.White;
+            this.showFirstPwdBtn.BackgroundImage = global::Proiect_C_.Properties.Resources.closed_eye;
+            this.showFirstPwdBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.showFirstPwdBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.showFirstPwdBtn.ForeColor = System.Drawing.Color.Black;
+            this.showFirstPwdBtn.Location = new System.Drawing.Point(269, 139);
+            this.showFirstPwdBtn.Name = "showFirstPwdBtn";
+            this.showFirstPwdBtn.Size = new System.Drawing.Size(32, 20);
+            this.showFirstPwdBtn.TabIndex = 22;
+            this.showFirstPwdBtn.UseVisualStyleBackColor = false;
+            this.showFirstPwdBtn.Click += new System.EventHandler(this.showFirstPwdBtn_Click);
+            // 
+            // hideFirstPwdBtn
+            // 
+            this.hideFirstPwdBtn.BackColor = System.Drawing.Color.White;
+            this.hideFirstPwdBtn.BackgroundImage = global::Proiect_C_.Properties.Resources.eye;
+            this.hideFirstPwdBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.hideFirstPwdBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hideFirstPwdBtn.ForeColor = System.Drawing.Color.Black;
+            this.hideFirstPwdBtn.Location = new System.Drawing.Point(269, 139);
+            this.hideFirstPwdBtn.Name = "hideFirstPwdBtn";
+            this.hideFirstPwdBtn.Size = new System.Drawing.Size(32, 20);
+            this.hideFirstPwdBtn.TabIndex = 23;
+            this.hideFirstPwdBtn.UseVisualStyleBackColor = false;
+            this.hideFirstPwdBtn.Visible = false;
+            this.hideFirstPwdBtn.Click += new System.EventHandler(this.hideFirstPwdBtn_Click);
+            // 
+            // showSecondPwdBtn
+            // 
+            this.showSecondPwdBtn.BackColor = System.Drawing.Color.White;
+            this.showSecondPwdBtn.BackgroundImage = global::Proiect_C_.Properties.Resources.closed_eye;
+            this.showSecondPwdBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.showSecondPwdBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.showSecondPwdBtn.ForeColor = System.Drawing.Color.Black;
+            this.showSecondPwdBtn.Location = new System.Drawing.Point(269, 174);
+            this.showSecondPwdBtn.Name = "showSecondPwdBtn";
+            this.showSecondPwdBtn.Size = new System.Drawing.Size(32, 20);
+            this.showSecondPwdBtn.TabIndex = 24;
+            this.showSecondPwdBtn.UseVisualStyleBackColor = false;
+            this.showSecondPwdBtn.Click += new System.EventHandler(this.showSecondPwdBtn_Click);
+            // 
+            // hideSecondPwdBtn
+            // 
+            this.hideSecondPwdBtn.BackColor = System.Drawing.Color.White;
+            this.hideSecondPwdBtn.BackgroundImage = global::Proiect_C_.Properties.Resources.eye;
+            this.hideSecondPwdBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.hideSecondPwdBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hideSecondPwdBtn.ForeColor = System.Drawing.Color.Black;
+            this.hideSecondPwdBtn.Location = new System.Drawing.Point(269, 174);
+            this.hideSecondPwdBtn.Name = "hideSecondPwdBtn";
+            this.hideSecondPwdBtn.Size = new System.Drawing.Size(32, 20);
+            this.hideSecondPwdBtn.TabIndex = 25;
+            this.hideSecondPwdBtn.UseVisualStyleBackColor = false;
+            this.hideSecondPwdBtn.Visible = false;
+            this.hideSecondPwdBtn.Click += new System.EventHandler(this.hideSecondPwdBtn_Click);
+            // 
             // SignUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(383, 345);
             this.ControlBox = false;
+            this.Controls.Add(this.hideSecondPwdBtn);
+            this.Controls.Add(this.showSecondPwdBtn);
+            this.Controls.Add(this.hideFirstPwdBtn);
+            this.Controls.Add(this.showFirstPwdBtn);
             this.Controls.Add(this.reqLabel);
             this.Controls.Add(this.imageBox);
             this.Controls.Add(this.selectImageBtn);
             this.Controls.Add(this.photoLabel);
-            this.Controls.Add(this.showPwdChkBox);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.submitBtn);
             this.Controls.Add(this.logoBox);
@@ -379,11 +430,14 @@ namespace Proiect_C_.Forms
         private CustomButton submitBtn;
         private CustomButton backBtn;
         private System.Windows.Forms.ErrorProvider errorProvider;
-        private System.Windows.Forms.CheckBox showPwdChkBox;
         private System.Windows.Forms.Button selectImageBtn;
         private System.Windows.Forms.Label photoLabel;
         private System.Windows.Forms.OpenFileDialog openImage;
         private System.Windows.Forms.PictureBox imageBox;
         private System.Windows.Forms.PictureBox bgBox;
+        private System.Windows.Forms.Button hideFirstPwdBtn;
+        private System.Windows.Forms.Button showFirstPwdBtn;
+        private System.Windows.Forms.Button hideSecondPwdBtn;
+        private System.Windows.Forms.Button showSecondPwdBtn;
     }
 }

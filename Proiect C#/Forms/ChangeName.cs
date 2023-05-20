@@ -1,14 +1,8 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using Proiect_C_.Entities;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Proiect_C_.Forms
@@ -32,11 +26,11 @@ namespace Proiect_C_.Forms
             if(errorProvider.GetError(newNameTxtBox)=="")
             {
                 var new_name = newNameTxtBox.Text.Split(' ');
-                client.FirstName = new_name[0];
-                client.LastName = "";
-                for(int i = 1; i < new_name.Length; i++)
-                    client.LastName += new_name[i] + " ";
-                client.LastName = client.LastName.Trim();
+                client.LastName = new_name[new_name.Length-1];
+                client.FirstName = "";
+                for(int i = 0; i < new_name.Length-1; i++)
+                    client.FirstName += new_name[i] + " ";
+                client.FirstName = client.FirstName.Trim();
                 MessageBox.Show("Name changed successfully!");
                 using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection, pwd)))
                 {

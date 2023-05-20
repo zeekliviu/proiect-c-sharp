@@ -45,6 +45,8 @@ namespace Proiect_C_.Forms
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.bgBox = new System.Windows.Forms.PictureBox();
             this.forgotPwdLbl = new System.Windows.Forms.LinkLabel();
+            this.hideFirstPwdBtn = new System.Windows.Forms.Button();
+            this.showSecondPwdBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bgBox)).BeginInit();
@@ -163,14 +165,46 @@ namespace Proiect_C_.Forms
             // 
             // forgotPwdLbl
             // 
+            this.forgotPwdLbl.ActiveLinkColor = System.Drawing.Color.Red;
             this.forgotPwdLbl.AutoSize = true;
-            this.forgotPwdLbl.Location = new System.Drawing.Point(293, 269);
+            this.forgotPwdLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.forgotPwdLbl.LinkColor = System.Drawing.Color.White;
+            this.forgotPwdLbl.Location = new System.Drawing.Point(253, 269);
             this.forgotPwdLbl.Name = "forgotPwdLbl";
-            this.forgotPwdLbl.Size = new System.Drawing.Size(91, 13);
+            this.forgotPwdLbl.Size = new System.Drawing.Size(131, 16);
             this.forgotPwdLbl.TabIndex = 10;
             this.forgotPwdLbl.TabStop = true;
             this.forgotPwdLbl.Text = "Forgot password?";
             this.forgotPwdLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.forgotPwdLbl_LinkClicked);
+            // 
+            // hideFirstPwdBtn
+            // 
+            this.hideFirstPwdBtn.BackColor = System.Drawing.Color.White;
+            this.hideFirstPwdBtn.BackgroundImage = global::Proiect_C_.Properties.Resources.eye;
+            this.hideFirstPwdBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.hideFirstPwdBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hideFirstPwdBtn.ForeColor = System.Drawing.Color.Black;
+            this.hideFirstPwdBtn.Location = new System.Drawing.Point(352, 246);
+            this.hideFirstPwdBtn.Name = "hideFirstPwdBtn";
+            this.hideFirstPwdBtn.Size = new System.Drawing.Size(32, 20);
+            this.hideFirstPwdBtn.TabIndex = 24;
+            this.hideFirstPwdBtn.UseVisualStyleBackColor = false;
+            this.hideFirstPwdBtn.Visible = false;
+            this.hideFirstPwdBtn.Click += new System.EventHandler(this.hideFirstPwdBtn_Click);
+            // 
+            // showSecondPwdBtn
+            // 
+            this.showSecondPwdBtn.BackColor = System.Drawing.Color.White;
+            this.showSecondPwdBtn.BackgroundImage = global::Proiect_C_.Properties.Resources.closed_eye;
+            this.showSecondPwdBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.showSecondPwdBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.showSecondPwdBtn.ForeColor = System.Drawing.Color.Black;
+            this.showSecondPwdBtn.Location = new System.Drawing.Point(352, 246);
+            this.showSecondPwdBtn.Name = "showSecondPwdBtn";
+            this.showSecondPwdBtn.Size = new System.Drawing.Size(32, 20);
+            this.showSecondPwdBtn.TabIndex = 25;
+            this.showSecondPwdBtn.UseVisualStyleBackColor = false;
+            this.showSecondPwdBtn.Click += new System.EventHandler(this.showSecondPwdBtn_Click);
             // 
             // LogInForm
             // 
@@ -178,6 +212,8 @@ namespace Proiect_C_.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(447, 349);
             this.ControlBox = false;
+            this.Controls.Add(this.showSecondPwdBtn);
+            this.Controls.Add(this.hideFirstPwdBtn);
             this.Controls.Add(this.forgotPwdLbl);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.logInBtn);
@@ -216,5 +252,7 @@ namespace Proiect_C_.Forms
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.PictureBox bgBox;
         private System.Windows.Forms.LinkLabel forgotPwdLbl;
+        private System.Windows.Forms.Button hideFirstPwdBtn;
+        private System.Windows.Forms.Button showSecondPwdBtn;
     }
 }

@@ -80,5 +80,32 @@ namespace Proiect_C_.Properties {
                 return ((string)(this["DbConnection"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("OAz/N7v6Tvf/LRKD0nmaW4xpHo2YwJlm/Ek+d35ttJK68i+fLQ/FXDj/ZxusGjog")]
+        public string TwilioSID {
+            get {
+                return ((string)(this["TwilioSID"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("pIbXWZmvRyjuTpC3rC2zFIhDItcIc6tmcQIatPbgvE4m+SHxxSXe3ZDMfisch4R0")]
+        public string TwilioAuthToken {
+            get {
+                return ((string)(this["TwilioAuthToken"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("6xYQlhQJoqHgw1LPzaKbkQ==")]
+        public string PhoneNumber {
+            get {
+                return ((string)(this["PhoneNumber"]));
+            }
+        }
     }
 }

@@ -42,55 +42,55 @@
             // 
             // firstDigitTxtBox
             // 
-            this.firstDigitTxtBox.Font = new System.Drawing.Font("Roboto Mono Medium", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.firstDigitTxtBox.Location = new System.Drawing.Point(30, 103);
+            this.firstDigitTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.firstDigitTxtBox.Location = new System.Drawing.Point(33, 54);
             this.firstDigitTxtBox.Name = "firstDigitTxtBox";
-            this.firstDigitTxtBox.Size = new System.Drawing.Size(41, 33);
+            this.firstDigitTxtBox.Size = new System.Drawing.Size(41, 29);
             this.firstDigitTxtBox.TabIndex = 0;
             this.firstDigitTxtBox.TextChanged += new System.EventHandler(this.firstDigitTxtBox_TextChanged);
             // 
             // secondDigitTxtBox
             // 
-            this.secondDigitTxtBox.Font = new System.Drawing.Font("Roboto Mono Medium", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.secondDigitTxtBox.Location = new System.Drawing.Point(96, 103);
+            this.secondDigitTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.secondDigitTxtBox.Location = new System.Drawing.Point(99, 54);
             this.secondDigitTxtBox.Name = "secondDigitTxtBox";
-            this.secondDigitTxtBox.Size = new System.Drawing.Size(41, 33);
+            this.secondDigitTxtBox.Size = new System.Drawing.Size(41, 29);
             this.secondDigitTxtBox.TabIndex = 1;
             this.secondDigitTxtBox.TextChanged += new System.EventHandler(this.secondDigitTxtBox_TextChanged);
             // 
             // thirdDigitTxtBox
             // 
-            this.thirdDigitTxtBox.Font = new System.Drawing.Font("Roboto Mono Medium", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.thirdDigitTxtBox.Location = new System.Drawing.Point(161, 103);
+            this.thirdDigitTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.thirdDigitTxtBox.Location = new System.Drawing.Point(164, 54);
             this.thirdDigitTxtBox.Name = "thirdDigitTxtBox";
-            this.thirdDigitTxtBox.Size = new System.Drawing.Size(41, 33);
+            this.thirdDigitTxtBox.Size = new System.Drawing.Size(41, 29);
             this.thirdDigitTxtBox.TabIndex = 2;
             this.thirdDigitTxtBox.TextChanged += new System.EventHandler(this.thirdDigitTxtBox_TextChanged);
             // 
             // fourthDigitTxtBox
             // 
-            this.fourthDigitTxtBox.Font = new System.Drawing.Font("Roboto Mono Medium", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fourthDigitTxtBox.Location = new System.Drawing.Point(228, 103);
+            this.fourthDigitTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fourthDigitTxtBox.Location = new System.Drawing.Point(231, 54);
             this.fourthDigitTxtBox.Name = "fourthDigitTxtBox";
-            this.fourthDigitTxtBox.Size = new System.Drawing.Size(41, 33);
+            this.fourthDigitTxtBox.Size = new System.Drawing.Size(41, 29);
             this.fourthDigitTxtBox.TabIndex = 3;
             this.fourthDigitTxtBox.TextChanged += new System.EventHandler(this.fourthDigitTxtBox_TextChanged);
             // 
             // fifthDigitTxtBox
             // 
-            this.fifthDigitTxtBox.Font = new System.Drawing.Font("Roboto Mono Medium", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fifthDigitTxtBox.Location = new System.Drawing.Point(294, 103);
+            this.fifthDigitTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fifthDigitTxtBox.Location = new System.Drawing.Point(297, 54);
             this.fifthDigitTxtBox.Name = "fifthDigitTxtBox";
-            this.fifthDigitTxtBox.Size = new System.Drawing.Size(41, 33);
+            this.fifthDigitTxtBox.Size = new System.Drawing.Size(41, 29);
             this.fifthDigitTxtBox.TabIndex = 4;
             this.fifthDigitTxtBox.TextChanged += new System.EventHandler(this.fifthDigitTxtBox_TextChanged);
             // 
             // sixthDigitTxtBox
             // 
-            this.sixthDigitTxtBox.Font = new System.Drawing.Font("Roboto Mono Medium", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sixthDigitTxtBox.Location = new System.Drawing.Point(356, 103);
+            this.sixthDigitTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sixthDigitTxtBox.Location = new System.Drawing.Point(359, 54);
             this.sixthDigitTxtBox.Name = "sixthDigitTxtBox";
-            this.sixthDigitTxtBox.Size = new System.Drawing.Size(41, 33);
+            this.sixthDigitTxtBox.Size = new System.Drawing.Size(41, 29);
             this.sixthDigitTxtBox.TabIndex = 5;
             this.sixthDigitTxtBox.TextChanged += new System.EventHandler(this.sixthDigitTxtBox_TextChanged);
             // 
@@ -104,7 +104,7 @@
             this.verifyBtn.FlatAppearance.BorderSize = 0;
             this.verifyBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.verifyBtn.ForeColor = System.Drawing.Color.White;
-            this.verifyBtn.Location = new System.Drawing.Point(247, 155);
+            this.verifyBtn.Location = new System.Drawing.Point(250, 106);
             this.verifyBtn.Name = "verifyBtn";
             this.verifyBtn.Size = new System.Drawing.Size(150, 40);
             this.verifyBtn.TabIndex = 6;
@@ -123,7 +123,7 @@
             this.cancelBtn.FlatAppearance.BorderSize = 0;
             this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelBtn.ForeColor = System.Drawing.Color.White;
-            this.cancelBtn.Location = new System.Drawing.Point(30, 155);
+            this.cancelBtn.Location = new System.Drawing.Point(33, 106);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(150, 40);
             this.cancelBtn.TabIndex = 7;
@@ -135,10 +135,10 @@
             // userTxtLbl
             // 
             this.userTxtLbl.AutoSize = true;
-            this.userTxtLbl.Font = new System.Drawing.Font("Roboto Mono Medium", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userTxtLbl.Location = new System.Drawing.Point(25, 28);
+            this.userTxtLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userTxtLbl.Location = new System.Drawing.Point(54, 9);
             this.userTxtLbl.Name = "userTxtLbl";
-            this.userTxtLbl.Size = new System.Drawing.Size(372, 25);
+            this.userTxtLbl.Size = new System.Drawing.Size(306, 24);
             this.userTxtLbl.TabIndex = 8;
             this.userTxtLbl.Text = "Enter the code from your GAuth";
             // 
@@ -146,7 +146,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 217);
+            this.ClientSize = new System.Drawing.Size(437, 163);
             this.ControlBox = false;
             this.Controls.Add(this.userTxtLbl);
             this.Controls.Add(this.cancelBtn);

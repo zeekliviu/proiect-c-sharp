@@ -1,17 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using MimeKit;
 using MailKit.Net.Smtp;
 using System.Drawing;
-using System.Data;
 using System.IO;
 using System.Drawing.Drawing2D;
 using Oracle.ManagedDataAccess.Client;
-using Google.Authenticator;
 
 namespace Proiect_C_.Forms
 {
@@ -25,6 +22,7 @@ namespace Proiect_C_.Forms
             GraphicsPath path = new GraphicsPath();
             path.AddEllipse(0, 0, logoBox.Width, logoBox.Height);
             logoBox.Region = new Region(path);
+            firstPwdTxtBox.MaxLength = secondPwdTxtBox.MaxLength = 20;
         }
         public SignUpForm(string pwd):this()
         {
@@ -74,7 +72,7 @@ namespace Proiect_C_.Forms
             if (!IsValidPassword(firstPwdTxtBox.Text, out errorMsg))
             {
                 this.errorProvider.SetError(firstPwdTxtBox, errorMsg);
-                if (this.ActiveControl != backBtn && this.ActiveControl != showPwdChkBox)
+                if (this.ActiveControl != backBtn && this.ActiveControl != showFirstPwdBtn && this.ActiveControl != hideFirstPwdBtn)
                     e.Cancel = true;
             }
             else
@@ -140,7 +138,7 @@ namespace Proiect_C_.Forms
             if (!PasswordsMatch(secondPwdTxtBox.Text, out errorMsg))
             {
                 this.errorProvider.SetError(secondPwdTxtBox, errorMsg);
-                if (this.ActiveControl != backBtn && this.ActiveControl != showPwdChkBox)
+                if (this.ActiveControl != backBtn && this.ActiveControl != showSecondPwdBtn && this.ActiveControl != hideSecondPwdBtn)
                     e.Cancel = true;
             }
             else
@@ -245,22 +243,6 @@ namespace Proiect_C_.Forms
             {
                 errorMsg = "Please enter a valid phone number!";
                 return false;
-            }
-        }
-
-
-
-        private void showPwdChkBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (showPwdChkBox.Checked)
-            {
-                firstNameTxtBox.UseSystemPasswordChar = false;
-                lastNameTxtBox.UseSystemPasswordChar = false;
-            }
-            else
-            {
-                firstPwdTxtBox.UseSystemPasswordChar = true;
-                secondPwdTxtBox.UseSystemPasswordChar = true;
             }
         }
 
@@ -397,7 +379,6 @@ namespace Proiect_C_.Forms
             RetypePwdLabel.Parent = bgBox;
             PhoneLabel.Parent = bgBox;
             photoLabel.Parent = bgBox;
-            showPwdChkBox.Parent = bgBox;
             welcomeLabel.BackColor = Color.Transparent;
             reqLabel.BackColor = Color.Transparent;
             FirstNameLabel.BackColor = Color.Transparent;
@@ -407,7 +388,34 @@ namespace Proiect_C_.Forms
             RetypePwdLabel.BackColor = Color.Transparent;
             PhoneLabel.BackColor = Color.Transparent;
             photoLabel.BackColor = Color.Transparent;
-            showPwdChkBox.BackColor = Color.Transparent;
+        }
+
+        private void showFirstPwdBtn_Click(object sender, EventArgs e)
+        {
+            firstPwdTxtBox.UseSystemPasswordChar = !firstPwdTxtBox.UseSystemPasswordChar;
+            showFirstPwdBtn.Visible = !showFirstPwdBtn.Visible;
+            hideFirstPwdBtn.Visible = !hideFirstPwdBtn.Visible;
+        }
+
+        private void hideFirstPwdBtn_Click(object sender, EventArgs e)
+        {
+            firstPwdTxtBox.UseSystemPasswordChar = !firstPwdTxtBox.UseSystemPasswordChar;
+            hideFirstPwdBtn.Visible = !hideFirstPwdBtn.Visible;
+            showFirstPwdBtn.Visible = !showFirstPwdBtn.Visible;
+        }
+
+        private void showSecondPwdBtn_Click(object sender, EventArgs e)
+        {
+            secondPwdTxtBox.UseSystemPasswordChar = !secondPwdTxtBox.UseSystemPasswordChar;
+            showSecondPwdBtn.Visible = !showSecondPwdBtn.Visible;
+            hideSecondPwdBtn.Visible = !hideSecondPwdBtn.Visible;
+        }
+
+        private void hideSecondPwdBtn_Click(object sender, EventArgs e)
+        {
+            secondPwdTxtBox.UseSystemPasswordChar = !secondPwdTxtBox.UseSystemPasswordChar;
+            hideSecondPwdBtn.Visible = !hideSecondPwdBtn.Visible;
+            showSecondPwdBtn.Visible = !showSecondPwdBtn.Visible;
         }
     }
 }

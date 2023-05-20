@@ -24,5 +24,14 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">y5TnSORBOih1Mw0frWgvAOF1VmIIW+8VsmT0TbINJyRCj6gW4pa7GQ3ID0564HIZ5Yc4IkNLtF/SLKgJ1b50GIE5xCic/2gMgUAt37FmQa9DlsChPsES3Y2hs2jsfbhVZ0Dsedr4kkCQxGsTaQK64ZcT1my8envZwP6a8WtmpeeJaNxaHbMZOUUD+Atb5LP9hu++lEzB1DsFG7kh3SkRDKm0auUBZu02WXAmFOapruw=</Value>
     </Setting>
+    <Setting Name="TwilioSID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">OAz/N7v6Tvf/LRKD0nmaW4xpHo2YwJlm/Ek+d35ttJK68i+fLQ/FXDj/ZxusGjog</Value>
+    </Setting>
+    <Setting Name="TwilioAuthToken" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">pIbXWZmvRyjuTpC3rC2zFIhDItcIc6tmcQIatPbgvE4m+SHxxSXe3ZDMfisch4R0</Value>
+    </Setting>
+    <Setting Name="PhoneNumber" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">6xYQlhQJoqHgw1LPzaKbkQ==</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

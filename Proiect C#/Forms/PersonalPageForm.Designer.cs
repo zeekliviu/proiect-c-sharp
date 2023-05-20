@@ -168,6 +168,7 @@
             this.disable2FAToolStripMenuItem.Name = "disable2FAToolStripMenuItem";
             this.disable2FAToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.disable2FAToolStripMenuItem.Text = "Disable 2FA...";
+            this.disable2FAToolStripMenuItem.Click += new System.EventHandler(this.disable2FAToolStripMenuItem_Click);
             // 
             // welcomeLabel
             // 

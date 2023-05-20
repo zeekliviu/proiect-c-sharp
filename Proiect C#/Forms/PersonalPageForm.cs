@@ -2,18 +2,11 @@
 using Proiect_C_.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Google.Authenticator;
-using System.Transactions;
+using Proiect_C_.Properties;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace Proiect_C_.Forms
 {
@@ -70,7 +63,7 @@ namespace Proiect_C_.Forms
 
         private void yourBookingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection, pwd)))
+            using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd)))
             {
                 string query = "SELECT * FROM Bookings WHERE ClientEmail = :ClientEmail";
                 using (OracleCommand command = new OracleCommand(query, connection))
@@ -109,7 +102,7 @@ namespace Proiect_C_.Forms
                     photoBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                     Client.ProfilePicture = ms.ToArray();
                 }
-                using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection, pwd)))
+                using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd)))
                 {
                     string query = "UPDATE Users SET Photo = :ProfilePicture WHERE Email = :EmailClient";
                     using (OracleCommand command = new OracleCommand(query, connection))
@@ -125,13 +118,13 @@ namespace Proiect_C_.Forms
 
         private void removePhotosetToDefaultToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            photoBox.Image = Properties.Resources.default_avatar;
+            photoBox.Image = Resources.default_avatar;
             using (var ms = new System.IO.MemoryStream())
             {
                 photoBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                 Client.ProfilePicture = ms.ToArray();
             }
-            using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection, pwd)))
+            using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd)))
             {
                 string query = "UPDATE Users SET Photo = :ProfilePicture WHERE Email = :EmailClient";
                 using (OracleCommand command = new OracleCommand(query, connection))
@@ -178,6 +171,45 @@ namespace Proiect_C_.Forms
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            using (var conexiune = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd)))
+            {
+                var query = "select * from users where email = :email";
+                using (var command = new OracleCommand(query, conexiune))
+                {
+                    command.Parameters.Add(":email", Client.Email);
+                    conexiune.Open();
+                    var reader = command.ExecuteReader();
+                    reader.Read();
+                    if (reader["twofactor"].ToString() == "Y")
+                    {
+                        var verifyTFA = new Verify2FA(Encryption.EncryptionUtils.DecryptString(reader["private_key"].ToString(), pwd));
+                        if (verifyTFA.ShowDialog() != DialogResult.OK)
+                        {
+                            MessageBox.Show("2FA not verified! Try again!", "2FA code not verified!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        var accountSid = Encryption.EncryptionUtils.DecryptString(Settings.Default.TwilioSID, pwd);
+                        var authToken = Encryption.EncryptionUtils.DecryptString(Settings.Default.TwilioAuthToken, pwd);
+                        var phoneNumber = Encryption.EncryptionUtils.DecryptString(Settings.Default.PhoneNumber, pwd);
+                        TwilioClient.Init(accountSid, authToken);
+                        var code = new Random().Next(0, 1000000).ToString("D6");
+                        var message = MessageResource.Create(
+                            body: $"Enter this code to change your password: {code}",
+                            from: new Twilio.Types.PhoneNumber(phoneNumber),
+                            to: new Twilio.Types.PhoneNumber("+4" + reader["phone"].ToString())
+                        );
+                        var verifySMS = new VerifySMS(code);
+                        if (verifySMS.ShowDialog() != DialogResult.OK)
+                        {
+                            MessageBox.Show("SMS not verified! Try again!", "Wrong SMS code!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
+                }
+            }
             var changePassword = new ChangePassword(pwd, Client);
             changePassword.ShowDialog();
             if (changePassword.DialogResult == DialogResult.OK)
@@ -190,7 +222,7 @@ namespace Proiect_C_.Forms
         private void enable2FAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var query = "select twofactor from users where email = :email";
-            var connString = Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection, pwd);
+            var connString = Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd);
             var result = "";
             using (OracleConnection connection = new OracleConnection(connString))
             {
@@ -237,6 +269,60 @@ namespace Proiect_C_.Forms
                         MessageBox.Show("2FA not enabled!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+            }
+        }
+
+        private void disable2FAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var query = "select * from users where email = :email";
+            var connString = Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd);
+            var TwoFAstatus = "";
+            string number;
+            using(var conexiune = new OracleConnection(connString))
+            {
+                conexiune.Open();
+                using (var command = new OracleCommand(query, conexiune))
+                {
+                    command.Parameters.Add(":email", Client.Email);
+                    var reader = command.ExecuteReader();
+                    reader.Read();
+                    TwoFAstatus = reader["twofactor"].ToString();
+                    number = reader["phone"].ToString();
+                }
+                if(TwoFAstatus == "N")
+                {
+                    MessageBox.Show("2FA is already disabled!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                var accountSid = Encryption.EncryptionUtils.DecryptString(Settings.Default.TwilioSID, pwd);
+                var authToken = Encryption.EncryptionUtils.DecryptString(Settings.Default.TwilioAuthToken, pwd);
+                var phoneNumber = Encryption.EncryptionUtils.DecryptString(Settings.Default.PhoneNumber, pwd);
+                TwilioClient.Init(accountSid, authToken);
+                var code = new Random().Next(0, 1000000).ToString("D6");
+                var message = MessageResource.Create(
+                    body: $"Enter this code to disable 2FA: {code}",
+                    from: new Twilio.Types.PhoneNumber(phoneNumber),
+                    to: new Twilio.Types.PhoneNumber("+4" + number)
+                );
+                var verifySMS = new VerifySMS(code);
+                if (verifySMS.ShowDialog() != DialogResult.OK)
+                {
+                    MessageBox.Show("SMS not verified! Try again!", "Wrong SMS code!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                query = "update users set twofactor = 'N' where email = :email";
+                using (OracleCommand command = new OracleCommand(query, conexiune))
+                {
+                    command.Parameters.Add(":email", Client.Email);
+                    command.ExecuteNonQuery();
+                }
+                query = "update users set private_key = null where email = :email";
+                using (OracleCommand command = new OracleCommand(query, conexiune))
+                {
+                    command.Parameters.Add(":email", Client.Email);
+                    command.ExecuteNonQuery();
+                }
+                MessageBox.Show("2FA disabled successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

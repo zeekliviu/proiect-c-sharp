@@ -36,10 +36,15 @@
             this.oldPwdTxtBox = new System.Windows.Forms.TextBox();
             this.newPwdTxtBox = new System.Windows.Forms.TextBox();
             this.retypePwdTxtBox = new System.Windows.Forms.TextBox();
-            this.showPwdChkBox = new System.Windows.Forms.CheckBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.cancelBtn = new Proiect_C_.Custom_Controls.CustomButton();
             this.submitBtn = new Proiect_C_.Custom_Controls.CustomButton();
+            this.hideOldPwdBtn = new System.Windows.Forms.Button();
+            this.showOldPwdBtn = new System.Windows.Forms.Button();
+            this.hideNewPwdBtn = new System.Windows.Forms.Button();
+            this.showNewPwdBtn = new System.Windows.Forms.Button();
+            this.hideNewRetypedPwdBtn = new System.Windows.Forms.Button();
+            this.showNewRetypedPwdBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,17 +101,6 @@
             this.retypePwdTxtBox.UseSystemPasswordChar = true;
             this.retypePwdTxtBox.Validating += new System.ComponentModel.CancelEventHandler(this.retypePwdTxtBox_Validating);
             // 
-            // showPwdChkBox
-            // 
-            this.showPwdChkBox.AutoSize = true;
-            this.showPwdChkBox.Location = new System.Drawing.Point(116, 97);
-            this.showPwdChkBox.Name = "showPwdChkBox";
-            this.showPwdChkBox.Size = new System.Drawing.Size(102, 17);
-            this.showPwdChkBox.TabIndex = 6;
-            this.showPwdChkBox.Text = "Show Password";
-            this.showPwdChkBox.UseVisualStyleBackColor = true;
-            this.showPwdChkBox.CheckedChanged += new System.EventHandler(this.showPwdChkBox_CheckedChanged);
-            // 
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
@@ -149,15 +143,107 @@
             this.submitBtn.UseVisualStyleBackColor = false;
             this.submitBtn.Click += new System.EventHandler(this.submitBtn_Click);
             // 
+            // hideOldPwdBtn
+            // 
+            this.hideOldPwdBtn.BackColor = System.Drawing.Color.White;
+            this.hideOldPwdBtn.BackgroundImage = global::Proiect_C_.Properties.Resources.eye;
+            this.hideOldPwdBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.hideOldPwdBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hideOldPwdBtn.ForeColor = System.Drawing.Color.Black;
+            this.hideOldPwdBtn.Location = new System.Drawing.Point(301, 18);
+            this.hideOldPwdBtn.Name = "hideOldPwdBtn";
+            this.hideOldPwdBtn.Size = new System.Drawing.Size(32, 20);
+            this.hideOldPwdBtn.TabIndex = 25;
+            this.hideOldPwdBtn.UseVisualStyleBackColor = false;
+            this.hideOldPwdBtn.Visible = false;
+            this.hideOldPwdBtn.Click += new System.EventHandler(this.hideOldPwdBtn_Click);
+            // 
+            // showOldPwdBtn
+            // 
+            this.showOldPwdBtn.BackColor = System.Drawing.Color.White;
+            this.showOldPwdBtn.BackgroundImage = global::Proiect_C_.Properties.Resources.closed_eye;
+            this.showOldPwdBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.showOldPwdBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.showOldPwdBtn.ForeColor = System.Drawing.Color.Black;
+            this.showOldPwdBtn.Location = new System.Drawing.Point(301, 18);
+            this.showOldPwdBtn.Name = "showOldPwdBtn";
+            this.showOldPwdBtn.Size = new System.Drawing.Size(32, 20);
+            this.showOldPwdBtn.TabIndex = 24;
+            this.showOldPwdBtn.UseVisualStyleBackColor = false;
+            this.showOldPwdBtn.Click += new System.EventHandler(this.showOldPwdBtn_Click);
+            // 
+            // hideNewPwdBtn
+            // 
+            this.hideNewPwdBtn.BackColor = System.Drawing.Color.White;
+            this.hideNewPwdBtn.BackgroundImage = global::Proiect_C_.Properties.Resources.eye;
+            this.hideNewPwdBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.hideNewPwdBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hideNewPwdBtn.ForeColor = System.Drawing.Color.Black;
+            this.hideNewPwdBtn.Location = new System.Drawing.Point(301, 71);
+            this.hideNewPwdBtn.Name = "hideNewPwdBtn";
+            this.hideNewPwdBtn.Size = new System.Drawing.Size(32, 20);
+            this.hideNewPwdBtn.TabIndex = 27;
+            this.hideNewPwdBtn.UseVisualStyleBackColor = false;
+            this.hideNewPwdBtn.Visible = false;
+            this.hideNewPwdBtn.Click += new System.EventHandler(this.hideNewPwdBtn_Click);
+            // 
+            // showNewPwdBtn
+            // 
+            this.showNewPwdBtn.BackColor = System.Drawing.Color.White;
+            this.showNewPwdBtn.BackgroundImage = global::Proiect_C_.Properties.Resources.closed_eye;
+            this.showNewPwdBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.showNewPwdBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.showNewPwdBtn.ForeColor = System.Drawing.Color.Black;
+            this.showNewPwdBtn.Location = new System.Drawing.Point(301, 71);
+            this.showNewPwdBtn.Name = "showNewPwdBtn";
+            this.showNewPwdBtn.Size = new System.Drawing.Size(32, 20);
+            this.showNewPwdBtn.TabIndex = 26;
+            this.showNewPwdBtn.UseVisualStyleBackColor = false;
+            this.showNewPwdBtn.Click += new System.EventHandler(this.showNewPwdBtn_Click);
+            // 
+            // hideNewRetypedPwdBtn
+            // 
+            this.hideNewRetypedPwdBtn.BackColor = System.Drawing.Color.White;
+            this.hideNewRetypedPwdBtn.BackgroundImage = global::Proiect_C_.Properties.Resources.eye;
+            this.hideNewRetypedPwdBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.hideNewRetypedPwdBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hideNewRetypedPwdBtn.ForeColor = System.Drawing.Color.Black;
+            this.hideNewRetypedPwdBtn.Location = new System.Drawing.Point(301, 120);
+            this.hideNewRetypedPwdBtn.Name = "hideNewRetypedPwdBtn";
+            this.hideNewRetypedPwdBtn.Size = new System.Drawing.Size(32, 20);
+            this.hideNewRetypedPwdBtn.TabIndex = 29;
+            this.hideNewRetypedPwdBtn.UseVisualStyleBackColor = false;
+            this.hideNewRetypedPwdBtn.Visible = false;
+            this.hideNewRetypedPwdBtn.Click += new System.EventHandler(this.hideNewRetypedPwdBtn_Click);
+            // 
+            // showNewRetypedPwdBtn
+            // 
+            this.showNewRetypedPwdBtn.BackColor = System.Drawing.Color.White;
+            this.showNewRetypedPwdBtn.BackgroundImage = global::Proiect_C_.Properties.Resources.closed_eye;
+            this.showNewRetypedPwdBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.showNewRetypedPwdBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.showNewRetypedPwdBtn.ForeColor = System.Drawing.Color.Black;
+            this.showNewRetypedPwdBtn.Location = new System.Drawing.Point(301, 120);
+            this.showNewRetypedPwdBtn.Name = "showNewRetypedPwdBtn";
+            this.showNewRetypedPwdBtn.Size = new System.Drawing.Size(32, 20);
+            this.showNewRetypedPwdBtn.TabIndex = 28;
+            this.showNewRetypedPwdBtn.UseVisualStyleBackColor = false;
+            this.showNewRetypedPwdBtn.Click += new System.EventHandler(this.showNewRetypedPwdBtn_Click);
+            // 
             // ChangePassword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 207);
             this.ControlBox = false;
+            this.Controls.Add(this.hideNewRetypedPwdBtn);
+            this.Controls.Add(this.showNewRetypedPwdBtn);
+            this.Controls.Add(this.hideNewPwdBtn);
+            this.Controls.Add(this.showNewPwdBtn);
+            this.Controls.Add(this.hideOldPwdBtn);
+            this.Controls.Add(this.showOldPwdBtn);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.submitBtn);
-            this.Controls.Add(this.showPwdChkBox);
             this.Controls.Add(this.retypePwdTxtBox);
             this.Controls.Add(this.newPwdTxtBox);
             this.Controls.Add(this.oldPwdTxtBox);
@@ -183,9 +269,14 @@
         private System.Windows.Forms.TextBox oldPwdTxtBox;
         private System.Windows.Forms.TextBox newPwdTxtBox;
         private System.Windows.Forms.TextBox retypePwdTxtBox;
-        private System.Windows.Forms.CheckBox showPwdChkBox;
         private Custom_Controls.CustomButton submitBtn;
         private Custom_Controls.CustomButton cancelBtn;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Button hideOldPwdBtn;
+        private System.Windows.Forms.Button showOldPwdBtn;
+        private System.Windows.Forms.Button hideNewPwdBtn;
+        private System.Windows.Forms.Button showNewPwdBtn;
+        private System.Windows.Forms.Button hideNewRetypedPwdBtn;
+        private System.Windows.Forms.Button showNewRetypedPwdBtn;
     }
 }

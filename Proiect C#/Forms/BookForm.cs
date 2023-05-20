@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using Oracle.ManagedDataAccess.Client;
@@ -268,7 +261,7 @@ namespace Proiect_C_.Forms
             }
             else
             {
-                using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection, personalPageForm.pwd)))
+                using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, personalPageForm.pwd)))
                 {
                     connection.Open();
                     for (int i = 0; i < bookings.Length; i++)

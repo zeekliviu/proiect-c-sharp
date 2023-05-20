@@ -1,20 +1,15 @@
 ﻿using Proiect_C_.Entities;
 using Proiect_C_.Properties;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
-using MimeKit;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace Proiect_C_.Forms
 {
@@ -135,7 +130,7 @@ namespace Proiect_C_.Forms
             this.welcomeLabel.BackColor = Color.Transparent;
             this.emailLabel.BackColor = Color.Transparent;
             this.passwordLabel.BackColor = Color.Transparent;
-            this.forgotPwdLbl.BackColor = Color.Transparent;
+            this.forgotPwdLbl.BackColor = Color.Black;
         }
 
         private void forgotPwdLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -145,55 +140,117 @@ namespace Proiect_C_.Forms
                 MessageBox.Show("Enter an email first!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+            if(errorProvider.GetError(emailTxtBox)!="")
+            {
+                MessageBox.Show("Enter a valid email first!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             else
             {
-                using (var conexiunea = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd)))
+                using (var conexiune = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd)))
                 {
-                    var query = "select twofactor from users where email = :email";
-                    using (var comanda = new OracleCommand(query, conexiunea))
+                    var query = "select * from users where email = :email";
+                    using (var comanda = new OracleCommand(query, conexiune))
                     {
+                        conexiune.Open();
                         comanda.Parameters.Add(":email", emailTxtBox.Text);
                         var reader = comanda.ExecuteReader();
                         reader.Read();
+                        if (!reader.HasRows)
+                        {
+                            MessageBox.Show("Email not found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
                         if (reader["twofactor"].ToString()=="Y")
                         {
-
+                            var verifyTFA = new Verify2FA(Encryption.EncryptionUtils.DecryptString(reader["private_key"].ToString(), pwd));
+                            if (verifyTFA.ShowDialog() != DialogResult.OK)
+                            {
+                                MessageBox.Show("2FA not verified! Try again!", "Wrong 2FA code!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            var resetPwd = new ResetPassword();
+                            if (resetPwd.ShowDialog() != DialogResult.OK)
+                            {
+                                MessageBox.Show("Password not reset!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            query = "update users set password = :password where email = :email";
+                            using (var comanda2 = new OracleCommand(query, conexiune))
+                            {
+                                byte[] salt;
+                                new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+                                var pbkdf2 = new Rfc2898DeriveBytes(resetPwd.GetNewPassword(), salt, 10000, HashAlgorithmName.MD5);
+                                byte[] hash = pbkdf2.GetBytes(20);
+                                byte[] hashBytes = new byte[36];
+                                Array.Copy(salt, 0, hashBytes, 0, 16);
+                                Array.Copy(hash, 0, hashBytes, 16, 20);
+                                string savedPasswordHash = Convert.ToBase64String(hashBytes);
+                                comanda2.Parameters.Add(":password", savedPasswordHash);
+                                comanda2.Parameters.Add(":email", emailTxtBox.Text);
+                                comanda2.ExecuteNonQuery();
+                            }
+                            MessageBox.Show("Password reset!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
-                            //var answer = MessageBox.Show("User does not have 2FA enabled! Send verification code to mail?", "Error!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                            //if(answer==DialogResult.Yes)
-                            //{
-                            //    var code = new Random().Next(0, 1000000).ToString("D6");
-                            //    string email = emailTxtBox.Text;
-                            //    string subject = "Recover your mail @ Bookify™ 📓";
-                            //    string body = $"Hello, a reset password request has been made from your email address! 😉\n\nIf you request it, your verification code is: " + code.ToString();
-                            //    var msg = new MimeMessage();
-                            //    msg.From.Add(new MailboxAddress("Bookify Verification Service", Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.Email, pwd)));
-                            //    msg.To.Add(new MailboxAddress(firstNameTxtBox.Text + " " + lastNameTxtBox.Text, email));
-                            //    msg.Subject = subject;
-                            //    msg.Body = new TextPart("plain")
-                            //    {
-                            //        Text = body
-                            //    };
-                            //    using (var client = new SmtpClient())
-                            //    {
-                            //        var mail = Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.Email, pwd);
-                            //        var password = Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.Password, pwd);
-                            //        var smtpaddr = Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.SmtpAddress, pwd);
-                            //        var smtpport = int.Parse(Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.SmtpPort, pwd));
-                            //        client.Connect(smtpaddr, smtpport, true);
-                            //        client.Authenticate(mail, password);
-                            //        client.Send(msg);
-                            //        client.Disconnect(true);
-                            //    }
-                            //    var verification = new VerificationForm();
-                            //}
+                            var accountSid = Encryption.EncryptionUtils.DecryptString(Settings.Default.TwilioSID, pwd);
+                            var authToken = Encryption.EncryptionUtils.DecryptString(Settings.Default.TwilioAuthToken, pwd);
+                            var phoneNumber = Encryption.EncryptionUtils.DecryptString(Settings.Default.PhoneNumber, pwd);
+                            TwilioClient.Init(accountSid, authToken);
+                            var code = new Random().Next(0, 1000000).ToString("D6");
+                            var message = MessageResource.Create(
+                                body: $"Enter this code to bypass login by password: {code}",
+                                from: new Twilio.Types.PhoneNumber(phoneNumber),
+                                to: new Twilio.Types.PhoneNumber("+4"+reader["phone"].ToString())
+                            );
+                            var verifySMS = new VerifySMS(code);
+                            if (verifySMS.ShowDialog() != DialogResult.OK)
+                            {
+                                MessageBox.Show("SMS not verified! Try again!", "Wrong SMS code!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            var resetPwd = new ResetPassword();
+                            if (resetPwd.ShowDialog() != DialogResult.OK)
+                            {
+                                MessageBox.Show("Password not reset!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            query = "update users set password = :password where email = :email";
+                            using (var comanda2 = new OracleCommand(query, conexiune))
+                            {
+                                byte[] salt;
+                                new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+                                var pbkdf2 = new Rfc2898DeriveBytes(resetPwd.GetNewPassword(), salt, 10000, HashAlgorithmName.MD5);
+                                byte[] hash = pbkdf2.GetBytes(20);
+                                byte[] hashBytes = new byte[36];
+                                Array.Copy(salt, 0, hashBytes, 0, 16);
+                                Array.Copy(hash, 0, hashBytes, 16, 20);
+                                string savedPasswordHash = Convert.ToBase64String(hashBytes);
+                                comanda2.Parameters.Add(":password", savedPasswordHash);
+                                comanda2.Parameters.Add(":email", emailTxtBox.Text);
+                                comanda2.ExecuteNonQuery();
+                            }
+                            MessageBox.Show("Password reset!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }
 
             }
+        }
+
+        private void hideFirstPwdBtn_Click(object sender, EventArgs e)
+        {
+            pwdTxtBox.UseSystemPasswordChar = !pwdTxtBox.UseSystemPasswordChar;
+            hideFirstPwdBtn.Visible = !hideFirstPwdBtn.Visible;
+            showSecondPwdBtn.Visible = !showSecondPwdBtn.Visible;
+        }
+
+        private void showSecondPwdBtn_Click(object sender, EventArgs e)
+        {
+            pwdTxtBox.UseSystemPasswordChar = !pwdTxtBox.UseSystemPasswordChar;
+            showSecondPwdBtn.Visible = !showSecondPwdBtn.Visible;
+            hideFirstPwdBtn.Visible = !hideFirstPwdBtn.Visible;
         }
     }
 }

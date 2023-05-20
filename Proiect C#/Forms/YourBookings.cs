@@ -1,24 +1,19 @@
 ﻿using Proiect_C_.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CsvHelper;
 using System.IO;
 using Proiect_C_.Properties;
 using System.Drawing.Drawing2D;
-using Org.BouncyCastle.Utilities;
 using MimeKit;
 using MailKit.Net.Smtp;
 using System.Collections.Specialized;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 using System.Collections;
 
 namespace Proiect_C_.Forms

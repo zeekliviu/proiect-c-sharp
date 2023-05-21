@@ -244,7 +244,7 @@ namespace Proiect_C_.Forms
                 {
                     Guid guid = Guid.NewGuid();
                     var secret_key = guid.ToString().Replace("-", "").Substring(0, 10);
-                    var enable2FA = new Enable2FA(secret_key, Client.Email);
+                    var enable2FA = new Enable2FA(secret_key, Client.Email, pwd, Client.Phone);
                     enable2FA.ShowDialog();
                     if (enable2FA.DialogResult == DialogResult.OK)
                     {

@@ -1,10 +1,13 @@
 ﻿using Google.Authenticator;
+using Proiect_C_.Properties;
 using System;
 using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace Proiect_C_.Forms
 {
@@ -12,6 +15,8 @@ namespace Proiect_C_.Forms
     {
         string private_key;
         TwoFactorAuthenticator tfa;
+        string pwd;
+        string phone;
         public Enable2FA()
         {
             InitializeComponent();
@@ -20,8 +25,10 @@ namespace Proiect_C_.Forms
             QRCodeBox.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
-        public Enable2FA(string private_key, string email):this()
+        public Enable2FA(string private_key, string email, string pwd, string phone):this()
         {
+            this.pwd = pwd;
+            this.phone = phone;
             this.private_key = private_key;
             tfa = new TwoFactorAuthenticator();
             var setupInfo = tfa.GenerateSetupCode("Bookify App", email, Encoding.ASCII.GetBytes(private_key));
@@ -140,14 +147,30 @@ namespace Proiect_C_.Forms
 
         private void googleAuthLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var device = MessageBox.Show("Do you have Android? If you click No, you will be redirected to the App Store.", "Android or iOS?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var device = MessageBox.Show("Do you have Android? If you click No, you will be sent the link to the App Store.", "Android or iOS?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if(device == DialogResult.Yes)
             {
-                System.Diagnostics.Process.Start("https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en");
+                var accountSid = Encryption.EncryptionUtils.DecryptString(Settings.Default.TwilioSID, pwd);
+                var authToken = Encryption.EncryptionUtils.DecryptString(Settings.Default.TwilioAuthToken, pwd);
+                var phoneNumber = Encryption.EncryptionUtils.DecryptString(Settings.Default.PhoneNumber, pwd);
+                TwilioClient.Init(accountSid, authToken);
+                MessageResource.Create(
+                    body: $"Install Google Authenticator from Play Store: https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en",
+                    from: new Twilio.Types.PhoneNumber(phoneNumber),
+                    to: new Twilio.Types.PhoneNumber("+4" + phone)
+                );
             }
             else
             {
-                System.Diagnostics.Process.Start("https://apps.apple.com/us/app/google-authenticator/id388497605");
+                var accountSid = Encryption.EncryptionUtils.DecryptString(Settings.Default.TwilioSID, pwd);
+                var authToken = Encryption.EncryptionUtils.DecryptString(Settings.Default.TwilioAuthToken, pwd);
+                var phoneNumber = Encryption.EncryptionUtils.DecryptString(Settings.Default.PhoneNumber, pwd);
+                TwilioClient.Init(accountSid, authToken);
+                MessageResource.Create(
+                    body: $"Install Google Authenticator from App Store: https://apps.apple.com/us/app/google-authenticator/id388497605",
+                    from: new Twilio.Types.PhoneNumber(phoneNumber),
+                    to: new Twilio.Types.PhoneNumber("+4" + phone)
+                );
             }
         }
     }

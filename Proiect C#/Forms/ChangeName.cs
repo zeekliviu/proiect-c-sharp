@@ -32,6 +32,7 @@ namespace Proiect_C_.Forms
                     client.FirstName += new_name[i] + " ";
                 client.FirstName = client.FirstName.Trim();
                 MessageBox.Show("Name changed successfully!");
+                DBUtils.DBUtils.UnzipArchive(pwd);
                 using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection, pwd)))
                 {
                     connection.Open();
@@ -41,6 +42,7 @@ namespace Proiect_C_.Forms
                     command.Parameters.Add(":lastname", client.LastName);
                     command.Parameters.Add(":email", client.Email);
                     command.ExecuteNonQuery();
+                    DBUtils.DBUtils.DeleteFiles();
                 }
                 this.DialogResult = DialogResult.OK;
                 this.Close();

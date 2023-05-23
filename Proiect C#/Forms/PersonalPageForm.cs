@@ -63,6 +63,7 @@ namespace Proiect_C_.Forms
 
         private void yourBookingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DBUtils.DBUtils.UnzipArchive(pwd);
             using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd)))
             {
                 string query = "SELECT * FROM Bookings WHERE ClientEmail = :ClientEmail";
@@ -87,6 +88,7 @@ namespace Proiect_C_.Forms
                         }
                     }
                 }
+                DBUtils.DBUtils.DeleteFiles();
             }
         }
 
@@ -102,6 +104,7 @@ namespace Proiect_C_.Forms
                     photoBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                     Client.ProfilePicture = ms.ToArray();
                 }
+                DBUtils.DBUtils.UnzipArchive(pwd);
                 using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd)))
                 {
                     string query = "UPDATE Users SET Photo = :ProfilePicture WHERE Email = :EmailClient";
@@ -112,6 +115,7 @@ namespace Proiect_C_.Forms
                         connection.Open();
                         command.ExecuteNonQuery();
                     }
+                    DBUtils.DBUtils.DeleteFiles();
                 }
             }
         }
@@ -124,7 +128,8 @@ namespace Proiect_C_.Forms
                 photoBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                 Client.ProfilePicture = ms.ToArray();
             }
-            using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd)))
+            DBUtils.DBUtils.UnzipArchive(pwd);
+            using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.OldDbConnection, pwd)))
             {
                 string query = "UPDATE Users SET Photo = :ProfilePicture WHERE Email = :EmailClient";
                 using (OracleCommand command = new OracleCommand(query, connection))
@@ -134,6 +139,7 @@ namespace Proiect_C_.Forms
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
+                DBUtils.DBUtils.DeleteFiles();
             }
         }
 
@@ -171,6 +177,7 @@ namespace Proiect_C_.Forms
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DBUtils.DBUtils.UnzipArchive(pwd);
             using (var conexiune = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd)))
             {
                 var query = "select * from users where email = :email";
@@ -209,6 +216,7 @@ namespace Proiect_C_.Forms
                         }
                     }
                 }
+                DBUtils.DBUtils.DeleteFiles();
             }
             var changePassword = new ChangePassword(pwd, Client);
             changePassword.ShowDialog();
@@ -222,6 +230,7 @@ namespace Proiect_C_.Forms
         private void enable2FAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var query = "select twofactor from users where email = :email";
+            DBUtils.DBUtils.UnzipArchive(pwd);
             var connString = Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd);
             var result = "";
             using (OracleConnection connection = new OracleConnection(connString))
@@ -269,12 +278,14 @@ namespace Proiect_C_.Forms
                         MessageBox.Show("2FA not enabled!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                DBUtils.DBUtils.DeleteFiles();
             }
         }
 
         private void disable2FAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var query = "select * from users where email = :email";
+            DBUtils.DBUtils.UnzipArchive(pwd);
             var connString = Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd);
             var TwoFAstatus = "";
             string number;
@@ -323,6 +334,7 @@ namespace Proiect_C_.Forms
                     command.ExecuteNonQuery();
                 }
                 MessageBox.Show("2FA disabled successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DBUtils.DBUtils.DeleteFiles();
             }
         }
     }

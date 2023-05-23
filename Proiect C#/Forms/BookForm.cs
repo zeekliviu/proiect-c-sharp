@@ -34,6 +34,7 @@ namespace Proiect_C_.Forms
         public BookForm(PersonalPageForm ppf): this()
         {
             personalPageForm = ppf;
+            DBUtils.DBUtils.UnzipArchive(pwd);
             using(var connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, ppf.pwd)))
             {
                 connection.Open();
@@ -61,6 +62,7 @@ namespace Proiect_C_.Forms
                     }
                     yourCartListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
                 }
+                DBUtils.DBUtils.DeleteFiles();
             }
             pwd = ppf.pwd;
         }
@@ -140,12 +142,14 @@ namespace Proiect_C_.Forms
         {
             try
             {
+                DBUtils.DBUtils.UnzipArchive(pwd);
                 using(var connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd)))
                 {
                     connection.Open();
                     var command = new OracleCommand("delete from temp_bookings where ClientEmail = :email", connection);
                     command.Parameters.Add(new OracleParameter("email", personalPageForm.Client.Email));
                     command.ExecuteNonQuery();
+                    DBUtils.DBUtils.DeleteFiles();
                 }
                 yourCartListView.Clear();
                 listViewHeadersSet = false;
@@ -220,6 +224,7 @@ namespace Proiect_C_.Forms
         private void backBtn_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+            DBUtils.DBUtils.UnzipArchive(pwd);
             using (var connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd)))
             {
                 connection.Open();
@@ -248,6 +253,7 @@ namespace Proiect_C_.Forms
                         command.ExecuteNonQuery();
                     }
                 }
+                DBUtils.DBUtils.DeleteFiles();
             }
             Close();
         }
@@ -261,6 +267,7 @@ namespace Proiect_C_.Forms
             }
             else
             {
+                DBUtils.DBUtils.UnzipArchive(pwd);
                 using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, personalPageForm.pwd)))
                 {
                     connection.Open();
@@ -289,6 +296,7 @@ namespace Proiect_C_.Forms
                         command.Parameters.Add(":Email", personalPageForm.Client.Email);
                         command.ExecuteNonQuery();
                     }
+                    DBUtils.DBUtils.DeleteFiles();
                 }
                 MessageBox.Show("Your booking was successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;

@@ -20,9 +20,9 @@
     <Setting Name="DbConnection" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;ConnectionString&gt;y5TnSORBOih1Mw0frWgvAOF1VmIIW+8VsmT0TbINJyRCj6gW4pa7GQ3ID0564HIZ5Yc4IkNLtF/SLKgJ1b50GIE5xCic/2gMgUAt37FmQa9DlsChPsES3Y2hs2jsfbhVZ0Dsedr4kkCQxGsTaQK64ZcT1my8envZwP6a8WtmpeeJaNxaHbMZOUUD+Atb5LP9hu++lEzB1DsFG7kh3SkRDKm0auUBZu02WXAmFOapruw=&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;b0bZ0tUZQ3Porm4zXtMp+N0GzlOuaMgTlYClhwvTLYocrBTdkYRCQkUYVggNP3agAbvMKaM31sysT1MMimUaGQ==&lt;/ConnectionString&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">y5TnSORBOih1Mw0frWgvAOF1VmIIW+8VsmT0TbINJyRCj6gW4pa7GQ3ID0564HIZ5Yc4IkNLtF/SLKgJ1b50GIE5xCic/2gMgUAt37FmQa9DlsChPsES3Y2hs2jsfbhVZ0Dsedr4kkCQxGsTaQK64ZcT1my8envZwP6a8WtmpeeJaNxaHbMZOUUD+Atb5LP9hu++lEzB1DsFG7kh3SkRDKm0auUBZu02WXAmFOapruw=</Value>
+      <Value Profile="(Default)">b0bZ0tUZQ3Porm4zXtMp+N0GzlOuaMgTlYClhwvTLYocrBTdkYRCQkUYVggNP3agAbvMKaM31sysT1MMimUaGQ==</Value>
     </Setting>
     <Setting Name="TwilioSID" Type="System.String" Scope="Application">
       <Value Profile="(Default)">OAz/N7v6Tvf/LRKD0nmaW4xpHo2YwJlm/Ek+d35ttJK68i+fLQ/FXDj/ZxusGjog</Value>
@@ -32,6 +32,9 @@
     </Setting>
     <Setting Name="PhoneNumber" Type="System.String" Scope="Application">
       <Value Profile="(Default)">6xYQlhQJoqHgw1LPzaKbkQ==</Value>
+    </Setting>
+    <Setting Name="OldDbConnection" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">y5TnSORBOih1Mw0frWgvAOF1VmIIW+8VsmT0TbINJyRCj6gW4pa7GQ3ID0564HIZ5Yc4IkNLtF/SLKgJ1b50GIE5xCic/2gMgUAt37FmQa9DlsChPsES3Y2hs2jsfbhVZ0Dsedr4kkCQxGsTaQK64ZcT1my8envZwP6a8WtmpeeJaNxaHbMZOUUD+Atb5LP9hu++lEzB1DsFG7kh3SkRDKm0auUBZu02WXAmFOapruw=</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -80,6 +80,7 @@ namespace Proiect_C_.Forms
             }
             try
             {
+                DBUtils.DBUtils.UnzipArchive(pwd);
                 string connectionString = Settings.Default.DbConnection;
                 using (OracleConnection connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(connectionString, pwd)))
                 {
@@ -255,6 +256,7 @@ namespace Proiect_C_.Forms
                             }
                         }
                     }
+                    DBUtils.DBUtils.DeleteFiles();
                 }
             }
             catch (Exception ex)

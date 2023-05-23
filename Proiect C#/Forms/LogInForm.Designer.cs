@@ -89,6 +89,7 @@ namespace Proiect_C_.Forms
             this.pwdTxtBox.Size = new System.Drawing.Size(278, 20);
             this.pwdTxtBox.TabIndex = 4;
             this.pwdTxtBox.UseSystemPasswordChar = true;
+            this.pwdTxtBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pwdTxtBox_KeyDown);
             // 
             // logoBox
             // 

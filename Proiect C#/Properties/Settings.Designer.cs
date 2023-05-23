@@ -72,9 +72,8 @@ namespace Proiect_C_.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("y5TnSORBOih1Mw0frWgvAOF1VmIIW+8VsmT0TbINJyRCj6gW4pa7GQ3ID0564HIZ5Yc4IkNLtF/SLKgJ1" +
-            "b50GIE5xCic/2gMgUAt37FmQa9DlsChPsES3Y2hs2jsfbhVZ0Dsedr4kkCQxGsTaQK64ZcT1my8envZw" +
-            "P6a8WtmpeeJaNxaHbMZOUUD+Atb5LP9hu++lEzB1DsFG7kh3SkRDKm0auUBZu02WXAmFOapruw=")]
+        [global::System.Configuration.DefaultSettingValueAttribute("b0bZ0tUZQ3Porm4zXtMp+N0GzlOuaMgTlYClhwvTLYocrBTdkYRCQkUYVggNP3agAbvMKaM31sysT1MMi" +
+            "mUaGQ==")]
         public string DbConnection {
             get {
                 return ((string)(this["DbConnection"]));
@@ -105,6 +104,17 @@ namespace Proiect_C_.Properties {
         public string PhoneNumber {
             get {
                 return ((string)(this["PhoneNumber"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("y5TnSORBOih1Mw0frWgvAOF1VmIIW+8VsmT0TbINJyRCj6gW4pa7GQ3ID0564HIZ5Yc4IkNLtF/SLKgJ1" +
+            "b50GIE5xCic/2gMgUAt37FmQa9DlsChPsES3Y2hs2jsfbhVZ0Dsedr4kkCQxGsTaQK64ZcT1my8envZw" +
+            "P6a8WtmpeeJaNxaHbMZOUUD+Atb5LP9hu++lEzB1DsFG7kh3SkRDKm0auUBZu02WXAmFOapruw=")]
+        public string OldDbConnection {
+            get {
+                return ((string)(this["OldDbConnection"]));
             }
         }
     }

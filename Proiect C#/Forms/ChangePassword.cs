@@ -144,6 +144,7 @@ namespace Proiect_C_.Forms
             }
             try
             {
+                DBUtils.DBUtils.UnzipArchive(pwd);
                 using (var connection = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection, pwd)))
                 {
                     connection.Open();
@@ -175,6 +176,7 @@ namespace Proiect_C_.Forms
                     cmd.Parameters.Add("password", Convert.ToBase64String(hashBytes));
                     cmd.Parameters.Add("email", Client.Email);
                     cmd.ExecuteNonQuery();
+                    DBUtils.DBUtils.DeleteFiles();
                 }
             }
             catch (Exception ex)

@@ -61,6 +61,7 @@ namespace Proiect_C_.Forms
                     { MessageBox.Show("Enter a password first!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); return; }
             if(this.errorProvider.GetError(emailTxtBox)=="")
             {
+                DBUtils.DBUtils.UnzipArchive(pwd);
                 string connectionString = Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd);
                 using (OracleConnection connection = new OracleConnection(connectionString))
                 {
@@ -106,7 +107,7 @@ namespace Proiect_C_.Forms
                             }
                         }
                     }
-                    connection.Close();
+                    DBUtils.DBUtils.DeleteFiles();
                 }
             }
             else
@@ -147,6 +148,7 @@ namespace Proiect_C_.Forms
             }
             else
             {
+                DBUtils.DBUtils.UnzipArchive(pwd);
                 using (var conexiune = new OracleConnection(Encryption.EncryptionUtils.DecryptString(Settings.Default.DbConnection, pwd)))
                 {
                     var query = "select * from users where email = :email";
@@ -234,6 +236,7 @@ namespace Proiect_C_.Forms
                             MessageBox.Show("Password reset!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
+                    DBUtils.DBUtils.DeleteFiles();
                 }
 
             }
@@ -251,6 +254,14 @@ namespace Proiect_C_.Forms
             pwdTxtBox.UseSystemPasswordChar = !pwdTxtBox.UseSystemPasswordChar;
             showSecondPwdBtn.Visible = !showSecondPwdBtn.Visible;
             hideFirstPwdBtn.Visible = !hideFirstPwdBtn.Visible;
+        }
+
+        private void pwdTxtBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                logInBtn_Click(sender, e);
+            }
         }
     }
 }

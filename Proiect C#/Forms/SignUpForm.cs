@@ -257,6 +257,7 @@ namespace Proiect_C_.Forms
             {
                 try
                 {
+                    DBUtils.DBUtils.UnzipArchive(pwd);
                     string connectionString = Encryption.EncryptionUtils.DecryptString(Properties.Settings.Default.DbConnection, pwd);
                     using (OracleConnection connection = new OracleConnection(connectionString))
                     {
@@ -344,6 +345,7 @@ namespace Proiect_C_.Forms
                             MessageBox.Show("You canceled! The account has been not added to database. You may change your mail and try again.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.Show();
                         }
+                        DBUtils.DBUtils.DeleteFiles();
                     }
                 }
                 catch (Exception ex)

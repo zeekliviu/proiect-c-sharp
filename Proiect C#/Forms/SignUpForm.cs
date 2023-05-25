@@ -72,7 +72,7 @@ namespace Proiect_C_.Forms
             if (!IsValidPassword(firstPwdTxtBox.Text, out errorMsg))
             {
                 this.errorProvider.SetError(firstPwdTxtBox, errorMsg);
-                if (this.ActiveControl != backBtn && this.ActiveControl != showFirstPwdBtn && this.ActiveControl != hideFirstPwdBtn)
+                if (this.ActiveControl != backBtn && this.ActiveControl != showFirstPwdBtn && this.ActiveControl != hideFirstPwdBtn && this.ActiveControl != showSecondPwdBtn && this.ActiveControl != hideSecondPwdBtn)
                     e.Cancel = true;
             }
             else
@@ -138,7 +138,7 @@ namespace Proiect_C_.Forms
             if (!PasswordsMatch(secondPwdTxtBox.Text, out errorMsg))
             {
                 this.errorProvider.SetError(secondPwdTxtBox, errorMsg);
-                if (this.ActiveControl != backBtn && this.ActiveControl != showSecondPwdBtn && this.ActiveControl != hideSecondPwdBtn)
+                if (this.ActiveControl != backBtn && this.ActiveControl != showFirstPwdBtn && this.ActiveControl != hideFirstPwdBtn && this.ActiveControl != showSecondPwdBtn && this.ActiveControl != hideSecondPwdBtn)
                     e.Cancel = true;
             }
             else
